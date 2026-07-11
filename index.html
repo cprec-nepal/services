@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CPREC Nepal — Emergency & Social Safety Tool</title>
+<script>function logAct(type,detail){const l=JSON.parse(localStorage.getItem('sn_log')||'[]');l.unshift({t:type,d:detail,time:new Date().toISOString(),ts:Date.now()});if(l.length>300)l.length=300;localStorage.setItem('sn_log',JSON.stringify(l))}</script>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
