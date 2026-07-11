@@ -145,7 +145,7 @@ input[type="text"],input[type="tel"],input[type="number"],textarea,select{backgr
     <div class="stitle"><i class="fa-solid fa-phone" style="color:var(--green)"></i>Emergency Services</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:12px">
       <a href="tel:100" class="sc" style="text-align:center;text-decoration:none;color:var(--text);display:flex;flex-direction:column;align-items:center;gap:3px"><div style="width:36px;height:36px;border-radius:50%;background:rgba(239,68,68,.12);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-shield-halved" style="color:var(--red);font-size:14px"></i></div><div style="font-weight:600;font-size:11px">Police</div><div class="mono" style="color:var(--red);font-size:16px;font-weight:700">100</div></a>
-      <a href="tel:102" class="sc" style="text-align:center;text-decoration:none;color:var(--text);display:flex;flex-direction:column;align-items:center;gap:3px"><div style="width:36px;height:36px;border-radius:50%;background:rgba(16,185,129,.12);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-truck-medical" style="color:var(--green);font-size:14px"></i></div><div style="font-weight:600;font-size:11px">Ambulance</div><div class="mono" style="color:var(--green);font-size:16px;font-weight:700">101</div></a>
+      <a href="tel:102" class="sc" style="text-align:center;text-decoration:none;color:var(--text);display:flex;flex-direction:column;align-items:center;gap:3px"><div style="width:36px;height:36px;border-radius:50%;background:rgba(16,185,129,.12);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-truck-medical" style="color:var(--green);font-size:14px"></i></div><div style="font-weight:600;font-size:11px">Ambulance</div><div class="mono" style="color:var(--green);font-size:16px;font-weight:700">102</div></a>
       <a href="tel:102" class="sc" style="text-align:center;text-decoration:none;color:var(--text);display:flex;flex-direction:column;align-items:center;gap:3px"><div style="width:36px;height:36px;border-radius:50%;background:var(--amber-glow);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-fire-extinguisher" style="color:var(--amber);font-size:14px"></i></div><div style="font-weight:600;font-size:11px">Fire</div><div class="mono" style="color:var(--amber);font-size:16px;font-weight:700">102</div></a>
       <a href="tel:112" class="sc" style="text-align:center;text-decoration:none;color:var(--text);display:flex;flex-direction:column;align-items:center;gap:3px"><div style="width:36px;height:36px;border-radius:50%;background:rgba(167,139,250,.12);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-triangle-exclamation" style="color:var(--purple);font-size:14px"></i></div><div style="font-weight:600;font-size:11px">Emergency</div><div class="mono" style="color:var(--purple);font-size:16px;font-weight:700">112</div></a>
     </div>
@@ -253,7 +253,7 @@ const HL=[
 {cat:"Women Safety",icon:"fa-venus",color:"#e91e63",items:[{name:"Women Helpline (WPS)",num:"1145",desc:"24/7 GoN"},{name:"Nepal Police Women Cell",num:"01-4221765",desc:"Kathmandu"},{name:"Sathi Nepal",num:"01-4228040",desc:"Anti-trafficking"},{name:"ABC Nepal",num:"01-4382296",desc:"Women & child rights"},{name:"WOREC Nepal",num:"01-5003542",desc:"Rehabilitation"}]},
 {cat:"Child Protection",icon:"fa-child",color:"#f59e0b",items:[{name:"Child Helpline",num:"1098",desc:"24/7 toll-free"},{name:"CWIN Nepal",num:"01-4270504",desc:"Child workers"},{name:"Kopila Nepal",num:"01-4285750",desc:"Abuse support"}]},
 {cat:"Mental Health",icon:"fa-brain",color:"#a78bfa",items:[{name:"Koshish Nepal",num:"1660-01-020050",desc:"Mental health"},{name:"TPO Nepal",num:"01-5545868",desc:"Psychosocial"},{name:"LifeLine Nepal",num:"1660-01-010005",desc:"Crisis counseling"}]},
-{cat:"Disaster & Rescue",icon:"fa-house-crack",color:"#ef4444",items:[{name:"Nepal Police",num:"100",desc:"Emergency"},{name:"Ambulance",num:"101",desc:"Medical"},{name:"Fire Service",num:"102",desc:"Fire & rescue"},{name:"NDRRMA",num:"01-4211050",desc:"Disaster authority"},{name:"Nepal Army Rescue",num:"01-4200116",desc:"Rescue ops"},{name:"NRCS",num:"01-4228097",desc:"Red Cross"}]},
+{cat:"Disaster & Rescue",icon:"fa-house-crack",color:"#ef4444",items:[{name:"Nepal Police",num:"100",desc:"Emergency"},{name:"Ambulance",num:"102",desc:"Medical"},{name:"Fire Service",num:"102",desc:"Fire & rescue"},{name:"NDRRMA",num:"01-4211050",desc:"Disaster authority"},{name:"Nepal Army Rescue",num:"01-4200116",desc:"Rescue ops"},{name:"NRCS",num:"01-4228097",desc:"Red Cross"}]},
 {cat:"Senior Citizens",icon:"fa-person-cane",color:"#06b6d4",items:[{name:"Senior Helpline",num:"1155",desc:"Elderly welfare"},{name:"Ageing Nepal",num:"01-5521859",desc:"Elderly care"}]},
 {cat:"Legal Aid",icon:"fa-scale-balanced",color:"#10b981",items:[{name:"Legal Aid Commission",num:"01-4265365",desc:"Free legal"},{name:"Advocacy Forum",num:"01-4265456",desc:"Human rights"},{name:"FWLD",num:"01-5003546",desc:"Women's rights"}]},
 {cat:"Human Rights",icon:"fa-hand-fist",color:"#f97316",items:[{name:"NHRC Nepal",num:"01-4265549",desc:"Human Rights Commission"},{name:"INSEC",num:"01-4270525",desc:"HR documentation"}]},
@@ -262,7 +262,7 @@ const HL=[
 
 // ===== AMBULANCE =====
 const AMB=[
-{name:"Govt Ambulance",num:"101",desc:"Free — all districts",tag:"Govt"},{name:"Red Cross Ambulance",num:"01-4228097",desc:"Kathmandu Valley",tag:"Govt"},
+{name:"Govt Ambulance",num:"102",desc:"Free — all districts",tag:"Govt"},{name:"Red Cross Ambulance",num:"01-4228097",desc:"Kathmandu Valley",tag:"Govt"},
 {name:"Bir Hospital",num:"01-4221049",desc:"Kathmandu",tag:"Govt"},{name:"Patan Hospital",num:"01-5522266",desc:"Lalitpur",tag:"Govt"},
 {name:"Bhaktapur Hospital",num:"01-6612630",desc:"Bhaktapur",tag:"Govt"},{name:"B.P. Koirala Hospital",num:"021-621040",desc:"Dharan",tag:"Govt"},
 {name:"Koshi Hospital",num:"021-620246",desc:"Biratnagar",tag:"Govt"},
@@ -275,12 +275,12 @@ const AMB=[
 // ===== FIRST AID =====
 const FA=[
 {title:"CPR",icon:"fa-heart-pulse",color:"var(--red)",anim:'cpr',steps:[
-"Check if person is unresponsive — tap shoulders, shout","Call 101 immediately","Place on back on firm surface",
+"Check if person is unresponsive — tap shoulders, shout","Call 102 immediately","Place on back on firm surface",
 "Heel of one hand on center of chest (lower breastbone)","Other hand on top, interlace fingers",
 "Push hard and fast: 2 inches deep, 100-120 per minute","After 30 compressions, 2 rescue breaths if trained",
 "Continue 30:2 until help arrives or person recovers","Hands-only CPR (no breaths) is still effective","Do NOT stop unless breathing resumes or help arrives"]},
 {title:"Severe Bleeding",icon:"fa-droplet",color:"#ef4444",anim:'bleed',steps:[
-"Call 101 immediately","Apply firm direct pressure with clean cloth","Do NOT remove soaked cloth — add more on top",
+"Call 102 immediately","Apply firm direct pressure with clean cloth","Do NOT remove soaked cloth — add more on top",
 "If possible, raise injured area above heart","If direct pressure fails, press nearest pressure point",
 "Tourniquet ONLY as last resort — note the time","Keep person lying down, warm, calm",
 "Do NOT remove embedded objects — stabilize in place","Watch for shock: pale skin, rapid pulse, confusion","Maintain pressure until help arrives"]},
@@ -288,33 +288,33 @@ const FA=[
 "Cool burn with cool (not cold) running water for 20 minutes","Do NOT use ice, butter, oil, or home remedies",
 "Remove jewelry near burn before swelling starts","Cover with clean non-stick dressing",
 "Do NOT burst blisters","For chemical burns: remove clothing, flush 20+ minutes",
-"For electrical burns: ensure no contact with electricity first","Call 101 if larger than palm, on face/hands, or deep",
+"For electrical burns: ensure no contact with electricity first","Call 102 if larger than palm, on face/hands, or deep",
 "Paracetamol for pain if available and conscious","Watch for signs of shock"]},
 {title:"Choking",icon:"fa-wind",color:"var(--cyan)",anim:'choke',steps:[
 "Ask 'Are you choking?' — if they nod, act","Stand behind, arms around waist",
 "Make fist above navel, thrust inward/upward with J-motion","Repeat until expelled or unconscious",
 "If unconscious, lower to ground, start CPR","For infants: 5 back blows between shoulder blades",
 "Then 5 chest thrusts with 2 fingers on breastbone","Alternate until object expelled",
-"Do NOT slap back while person stands upright","Call 101 in all cases"]},
+"Do NOT slap back while person stands upright","Call 102 in all cases"]},
 {title:"Fractures",icon:"fa-bone",color:"#a78bfa",anim:'frac',steps:[
 "Do NOT try to straighten the bone","Immobilize the area — do not move injured part",
 "Splint with any rigid material + cloth","Pad splint for comfort",
 "For open fractures: cover with clean dressing, do NOT push bone back","Apply ice wrapped in cloth 15-20 min",
 "Elevate injured limb if possible","Check circulation below injury — can they feel/move?",
-"Call 101 — fractures need X-ray","Do NOT give food/drink in case surgery needed"]},
+"Call 102 — fractures need X-ray","Do NOT give food/drink in case surgery needed"]},
 {title:"Snake Bite",icon:"fa-worm",color:"#10b981",anim:'snake',steps:[
-"Keep person calm and still","Call 101 immediately","Immobilize bitten limb with splint",
+"Keep person calm and still","Call 102 immediately","Immobilize bitten limb with splint",
 "Remove rings, watches near bite","Note time and snake appearance if safe",
 "Do NOT cut wound, suck venom, or use tourniquet","Do NOT apply ice",
 "Do NOT try to catch the snake","Photo from safe distance if possible","Anti-venom is only treatment — hospital fast"]},
 {title:"Heart Attack",icon:"fa-heart-crack",color:"#ef4444",anim:'ha',steps:[
-"Call 101 immediately — every minute matters","Sit or lie person comfortably",
+"Call 102 immediately — every minute matters","Sit or lie person comfortably",
 "Help with prescribed nitroglycerin if available","Chew 300mg aspirin if not allergic",
 "Loosen tight clothing","If unconscious and not breathing, start CPR",
 "Do NOT leave alone","Do NOT let them 'wait it out'",
 "Monitor breathing and pulse","Be ready to use AED if available"]},
 {title:"Drowning",icon:"fa-water",color:"var(--cyan)",anim:'drown',steps:[
-"Get person out — reach, throw, row, swim (last resort)","Call 101 immediately",
+"Get person out — reach, throw, row, swim (last resort)","Call 102 immediately",
 "If not breathing: 5 rescue breaths first, then 30:2 CPR","Even if conscious, they need hospital — secondary drowning risk",
 "Remove wet clothing, keep warm","Recovery position if unconscious but breathing",
 "Do NOT use 'water pump' technique — it's dangerous","Triage: treat non-breathing first",
@@ -325,7 +325,7 @@ const FA=[
 const CK=[
 {cat:"Before Earthquake",items:["Identify safe spots in each room","Secure heavy furniture to walls","Prepare go-bag: water, food, flashlight, radio, first-aid, medicines","Know gas/electric/water shutoffs","Plan family meeting point & communication","Keep documents in waterproof bag","Learn first aid and CPR","Identify nearest open space","Everyone knows emergency exits","Keep emergency cash ready"]},
 {cat:"During Earthquake",items:["DROP, COVER, HOLD ON","If no table: crouch against interior wall, protect head","Stay from windows, glass, falling objects","In bed: stay, protect head with pillow","Outdoors: move to clear area","In vehicle: pull over, stay inside","Do NOT run outside during shaking","Near coast after: move to higher ground"]},
-{cat:"After Earthquake",items:["Check for injuries","Check gas leaks — leave if smell, no lighters","Put out small fires","Wear sturdy shoes","Inspect building — evacuate if unsafe","No elevators","Listen to FM 92.4/101.8","Expect aftershocks","Do NOT enter damaged buildings","Help neighbors, text not call","Document damage with photos"]},
+{cat:"After Earthquake",items:["Check for injuries","Check gas leaks — leave if smell, no lighters","Put out small fires","Wear sturdy shoes","Inspect building — evacuate if unsafe","No elevators","Listen to FM 92.4/102.8","Expect aftershocks","Do NOT enter damaged buildings","Help neighbors, text not call","Document damage with photos"]},
 {cat:"Flood & Landslide",items:["Know flood risk zone and landslide-prone slopes","Keep drainage clear","Never sleep near riverbanks in monsoon","Water rises: move to higher ground","Keep items above flood level","Landslide: move perpendicular to slide — not downhill","After flood: boil water before drinking","Watch for displaced animals and snakes"]}
 ];
 
@@ -426,7 +426,7 @@ ha:`<svg viewBox="0 0 320 120" class="ha-anim" style="width:100%;height:100%">
   <polyline class="ecg-line" points="80,50 100,50 110,50 118,50 124,30 130,65 136,40 142,55 148,50 180,50 188,50 194,50 200,30 206,65 212,40 218,55 224,50 310,50"/>
   <text x="130" y="80" fill="var(--red)" font-size="9" font-family="Space Grotesk" font-weight="600">EVERY MINUTE MATTERS</text>
   <rect x="200" y="85" width="100" height="28" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1"/>
-  <text x="210" y="103" fill="var(--green)" font-size="8" font-family="Space Grotesk" font-weight="600">101 → Hospital</text>
+  <text x="210" y="103" fill="var(--green)" font-size="8" font-family="Space Grotesk" font-weight="600">102 → Hospital</text>
   <text x="10" y="100" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Call first, then</text>
   <text x="10" y="112" fill="var(--muted)" font-size="8" font-family="Space Grotesk">aspirin + CPR</text>
 </svg>`,
@@ -563,11 +563,11 @@ document.getElementById('wOut').innerHTML=`<div class="sc" style="margin-bottom:
 function renderHL(){document.getElementById('hlOut').innerHTML=HL.map(cat=>`<div style="margin-bottom:14px"><div class="stitle"><i class="fa-solid ${cat.icon}" style="color:${cat.color}"></i>${cat.cat}</div>${cat.items.map(it=>`<a href="tel:${it.num.replace(/\s/g,'')}" class="hc"><div style="width:34px;height:34px;border-radius:7px;background:${cat.color}15;display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fa-solid ${cat.icon}" style="color:${cat.color};font-size:12px"></i></div><div style="flex:1;min-width:0"><div style="font-size:11px;font-weight:600">${it.name}</div><div style="font-size:9px;color:var(--muted)">${it.desc}</div></div><div style="text-align:right;flex-shrink:0;display:flex;align-items:center;gap:6px"><div class="mono" style="font-size:11px;font-weight:600;color:${cat.color}">${it.num}</div><div class="cbtn" style="width:26px;height:26px"><i class="fa-solid fa-phone" style="font-size:9px"></i></div></div></a>`).join('')}</div>`).join('')}
 
 // ===== AMBULANCE =====
-function renderAmb(){const g=AMB.filter(a=>a.tag==='Govt');const p=AMB.filter(a=>a.tag==='Pvt');document.getElementById('ambOut').innerHTML=`<div class="stitle"><i class="fa-solid fa-landmark" style="color:var(--green)"></i>Government (Free)</div>${g.map(a=>ambC(a,'var(--green)')).join('')}<div class="stitle" style="margin-top:14px"><i class="fa-solid fa-building" style="color:var(--amber)"></i>Private</div>${p.map(a=>ambC(a,'var(--amber)')).join('')}<div style="margin-top:10px;padding:8px 10px;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.15);border-radius:6px;font-size:9px;color:var(--text2);line-height:1.5"><i class="fa-solid fa-circle-info" style="color:var(--green);margin-right:3px"></i><b>Tip:</b> Govt (101) free but slower. Private charges but faster. Keep both saved.</div>`}
+function renderAmb(){const g=AMB.filter(a=>a.tag==='Govt');const p=AMB.filter(a=>a.tag==='Pvt');document.getElementById('ambOut').innerHTML=`<div class="stitle"><i class="fa-solid fa-landmark" style="color:var(--green)"></i>Government (Free)</div>${g.map(a=>ambC(a,'var(--green)')).join('')}<div class="stitle" style="margin-top:14px"><i class="fa-solid fa-building" style="color:var(--amber)"></i>Private</div>${p.map(a=>ambC(a,'var(--amber)')).join('')}<div style="margin-top:10px;padding:8px 10px;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.15);border-radius:6px;font-size:9px;color:var(--text2);line-height:1.5"><i class="fa-solid fa-circle-info" style="color:var(--green);margin-right:3px"></i><b>Tip:</b> Govt (102) free but slower. Private charges but faster. Keep both saved.</div>`}
 function ambC(a,c){return`<a href="tel:${a.num.replace(/\s/g,'')}" class="hc"><div style="width:34px;height:34px;border-radius:7px;background:${c}15;display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fa-solid fa-truck-medical" style="color:${c};font-size:12px"></i></div><div style="flex:1;min-width:0"><div style="font-size:11px;font-weight:600">${a.name}</div><div style="font-size:9px;color:var(--muted)">${a.desc}</div></div><div style="display:flex;align-items:center;gap:6px"><div class="mono" style="font-size:11px;font-weight:600;color:${c}">${a.num}</div><div class="cbtn" style="width:26px;height:26px"><i class="fa-solid fa-phone" style="font-size:9px"></i></div></div></a>`}
 
 // ===== FIRST AID WITH ANIMATED SVGs =====
-function renderFA(){document.getElementById('faOut').innerHTML=FA.map((f,i)=>`<div class="fa-item" id="fa-${i}"><div class="fa-head" onclick="toggleFA(${i})"><div style="width:32px;height:32px;border-radius:7px;background:${f.color}15;display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fa-solid ${f.icon}" style="color:${f.color};font-size:13px"></i></div><div style="font-size:12px;font-weight:600">${f.title}</div><i class="fa-solid fa-chevron-down fa-chevron" style="font-size:11px"></i></div><div class="fa-body"><div class="fa-anim">${faSVG(f.anim)}</div><ol style="padding-left:16px;margin:0">${f.steps.map(s=>`<li style="margin-bottom:5px;font-size:11px;line-height:1.5;color:var(--text2)">${s}</li>`).join('')}</ol><div style="margin-top:8px;padding:7px 10px;background:rgba(239,68,68,.06);border-radius:6px;font-size:9px;color:var(--red)"><i class="fa-solid fa-triangle-exclamation" style="margin-right:3px"></i>Always call 101 alongside first aid. Not a substitute for professional training.</div></div></div>`).join('')}
+function renderFA(){document.getElementById('faOut').innerHTML=FA.map((f,i)=>`<div class="fa-item" id="fa-${i}"><div class="fa-head" onclick="toggleFA(${i})"><div style="width:32px;height:32px;border-radius:7px;background:${f.color}15;display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fa-solid ${f.icon}" style="color:${f.color};font-size:13px"></i></div><div style="font-size:12px;font-weight:600">${f.title}</div><i class="fa-solid fa-chevron-down fa-chevron" style="font-size:11px"></i></div><div class="fa-body"><div class="fa-anim">${faSVG(f.anim)}</div><ol style="padding-left:16px;margin:0">${f.steps.map(s=>`<li style="margin-bottom:5px;font-size:11px;line-height:1.5;color:var(--text2)">${s}</li>`).join('')}</ol><div style="margin-top:8px;padding:7px 10px;background:rgba(239,68,68,.06);border-radius:6px;font-size:9px;color:var(--red)"><i class="fa-solid fa-triangle-exclamation" style="margin-right:3px"></i>Always call 102 alongside first aid. Not a substitute for professional training.</div></div></div>`).join('')}
 function toggleFA(i){document.getElementById(`fa-${i}`).classList.toggle('open')}
 
 // ===== CONTACTS =====
