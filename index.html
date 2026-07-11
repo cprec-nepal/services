@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPREC Nepal — Emergency & Social Safety Tool</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070b14;--bg2:#0d1321;--card:#111827;--card2:#1a2235;--border:#1e2d45;--amber:#f59e0b;--amber-glow:rgba(245,158,11,.12);--red:#ef4444;--red-glow:rgba(239,68,68,.15);--green:#10b981;--green-glow:rgba(16,185,129,.12);--cyan:#06b6d4;--cyan-glow:rgba(6,182,212,.12);--purple:#a78bfa;--pink:#ec4899;--text:#f1f5f9;--text2:#94a3b8;--muted:#475569}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);overflow:hidden;height:100vh}.mono{font-family:'JetBrains Mono',monospace}
+::-webkit-scrollbar{width:4px;height:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--muted);border-radius:10px}
+.leaflet-container{background:var(--bg)!important}.leaflet-tile-pane{filter:saturate(.3)brightness(.35)contrast(1.2)}.leaflet-control-zoom a{background:var(--card)!important;color:var(--amber)!important;border-color:var(--border)!important}.leaflet-control-attribution{display:none!important}
+.leaflet-popup-content-wrapper{background:var(--card)!important;color:var(--text)!important;border:1px solid var(--border)!important;border-radius:10px!important;box-shadow:0 8px 30px rgba(0,0,0,.6)!important}.leaflet-popup-tip{background:var(--card)!important}.leaflet-popup-close-button{color:var(--muted)!important}
+
+.hnav{display:flex;gap:2px;overflow-x:auto;padding:0 10px;scrollbar-width:none;-ms-overflow-style:none}.hnav::-webkit-scrollbar{display:none}
+.htab{display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 9px;border-radius:10px;cursor:pointer;transition:all .2s;color:var(--muted);font-size:8px;font-weight:500;white-space:nowrap;min-width:52px;border:1px solid transparent;flex-shrink:0}.htab:hover{color:var(--text2);background:var(--card)}.htab.active{color:var(--amber);background:var(--amber-glow);border-color:rgba(245,158,11,.2)}.htab i{font-size:15px}
+
+.section{display:none;height:100%;overflow-y:auto;padding:14px 18px}.section.active{display:block}
+.stitle{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:10px;font-weight:600;display:flex;align-items:center;gap:6px}
+.sc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;transition:all .2s}.sc:hover{border-color:rgba(245,158,11,.3)}
+.sos-btn{width:130px;height:130px;border-radius:50%;background:radial-gradient(circle,#ef4444,#991b1b);border:4px solid rgba(239,68,68,.4);color:#fff;font-size:18px;font-weight:700;font-family:inherit;cursor:pointer;transition:all .2s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:0 0 40px var(--red-glow);animation:sp 2s ease-in-out infinite}.sos-btn:hover{transform:scale(1.05)}.sos-btn.ok{background:radial-gradient(circle,#10b981,#065f46);border-color:rgba(16,185,129,.4);box-shadow:0 0 40px var(--green-glow);animation:none}
+@keyframes sp{0%,100%{box-shadow:0 0 40px var(--red-glow)}50%{box-shadow:0 0 60px rgba(239,68,68,.25)}}
+.hc{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:11px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:all .2s;text-decoration:none;color:var(--text);margin-bottom:6px}.hc:hover{border-color:var(--amber);transform:translateY(-1px)}
+.cbtn{width:36px;height:36px;border-radius:50%;background:var(--green);border:none;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;flex-shrink:0}.cbtn:hover{transform:scale(1.1)}
+.qi{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px;cursor:pointer;transition:all .2s;margin-bottom:6px}.qi:hover{border-color:var(--amber);box-shadow:0 0 12px var(--amber-glow)}
+.ni{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px;cursor:pointer;transition:all .2s;margin-bottom:6px}.ni:hover{border-color:var(--cyan);box-shadow:0 0 12px var(--cyan-glow)}
+.fbtn{background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text2);padding:6px 11px;font-family:inherit;font-size:10px;cursor:pointer;transition:all .2s;white-space:nowrap}.fbtn.on{background:var(--green);color:#fff;border-color:var(--green)}.fbtn:hover:not(.on){border-color:var(--muted)}
+.ci{display:flex;align-items:flex-start;gap:9px;padding:8px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:all .15s}.ci:last-child{border-bottom:none}.ci:hover{background:var(--card);margin:0 -5px;padding:8px 5px;border-radius:8px}
+.cb{width:18px;height:18px;border:2px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;transition:all .2s;cursor:pointer}.cb.ck{background:var(--green);border-color:var(--green)}.ct.dn{text-decoration:line-through;color:var(--muted)}
+.fa-item{background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:8px;overflow:hidden;transition:all .3s}.fa-item:hover{border-color:rgba(245,158,11,.3)}.fa-item.open{border-color:rgba(245,158,11,.4);box-shadow:0 0 20px var(--amber-glow)}
+.fa-head{padding:12px 14px;display:flex;align-items:center;gap:12px;cursor:pointer}.fa-body{max-height:0;overflow:hidden;transition:max-height .4s ease-out,padding .3s}.fa-item.open .fa-body{max-height:2000px;padding:0 14px 14px}.fa-chevron{transition:transform .3s;color:var(--muted);margin-left:auto;flex-shrink:0}.fa-item.open .fa-chevron{transform:rotate(180deg)}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--card);border:1px solid var(--amber);border-radius:12px;padding:10px 20px;color:var(--text);font-size:12px;z-index:10000;opacity:0;transition:all .4s cubic-bezier(.4,0,.2,1);box-shadow:0 8px 30px rgba(0,0,0,.5);white-space:nowrap;max-width:90vw;overflow:hidden;text-overflow:ellipsis}.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.sbar{background:var(--bg2);border-top:1px solid var(--border);padding:5px 14px;display:flex;align-items:center;gap:12px;font-size:10px;color:var(--muted);flex-shrink:0}
+.sdot{width:5px;height:5px;border-radius:50%;display:inline-block;margin-right:3px}.sdot.on{background:var(--green);box-shadow:0 0 4px var(--green)}.sdot.off{background:var(--red)}
+.glow{position:fixed;width:400px;height:400px;border-radius:50%;pointer-events:none;z-index:0;filter:blur(80px);opacity:.3}
+.loader{text-align:center;padding:30px;color:var(--muted)}.loader i{font-size:20px;animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+.contact-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:11px;display:flex;align-items:center;gap:10px;margin-bottom:7px}.contact-card .rel{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.miss-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:8px}.miss-card .photo{width:48px;height:48px;border-radius:10px;background:var(--card2);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:18px;flex-shrink:0;overflow:hidden}.miss-card .photo img{width:100%;height:100%;object-fit:cover}
+.aqi-ring{width:90px;height:90px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;border:4px solid}
+input[type="text"],input[type="tel"],input[type="number"],textarea,select{background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:8px 11px;font-family:inherit;font-size:11px;outline:none;width:100%;transition:border-color .2s}input:focus,textarea:focus,select:focus{border-color:var(--amber)}textarea{resize:vertical;min-height:50px}
+
+/* First Aid Animated Illustrations */
+.fa-anim{width:100%;height:120px;border-radius:10px;overflow:hidden;margin-bottom:12px;position:relative;background:var(--bg)}
+
+/* CPR Animation */
+.cpr-anim .heart{fill:var(--red);animation:cprHeart 1.2s ease-in-out infinite}
+.cpr-anim .hand{animation:cprPush 1.2s ease-in-out infinite}
+.cpr-anim .ecg{stroke:var(--green);stroke-width:2;fill:none;stroke-dasharray:200;stroke-dashoffset:200;animation:ecgDraw 2s linear infinite}
+@keyframes cprHeart{0%,100%{transform:scale(1)}30%,50%{transform:scale(.75)}70%{transform:scale(1.05)}}
+@keyframes cprPush{0%,20%{transform:translateY(0)}35%,55%{transform:translateY(6px)}70%,100%{transform:translateY(0)}}
+@keyframes ecgDraw{0%{stroke-dashoffset:200}50%{stroke-dashoffset:0}100%{stroke-dashoffset:-200}}
+
+/* Bleeding Animation */
+.bleed-anim .drop{fill:var(--red);animation:dropFall 1s ease-in infinite}
+.bleed-anim .drop:nth-child(2){animation-delay:.3s}.bleed-anim .drop:nth-child(3){animation-delay:.6s}
+.bleed-anim .hand-press{animation:pressHand 1.5s ease-in-out infinite}
+@keyframes dropFall{0%{opacity:0;transform:translateY(-5px)}30%{opacity:1}100%{opacity:0;transform:translateY(30px)}}
+@keyframes pressHand{0%,100%{transform:translateY(0)}50%{transform:translateY(2px)}}
+
+/* Burn Animation */
+.burn-anim .water-drop{fill:var(--cyan);animation:waterFall .8s ease-in infinite}
+.burn-anim .water-drop:nth-child(2){animation-delay:.2s;left:52%}.burn-anim .water-drop:nth-child(3){animation-delay:.4s;left:48%}
+.burn-anim .flame{fill:var(--amber);animation:flameFlicker .3s ease-in-out infinite alternate}
+.burn-anim .flame:nth-child(2){animation-delay:.1s}
+@keyframes waterFall{0%{opacity:0;transform:translateY(-10px) scale(.8)}40%{opacity:1;transform:translateY(10px) scale(1)}100%{opacity:0;transform:translateY(35px) scale(.6)}}
+@keyframes flameFlicker{0%{transform:scaleX(1) scaleY(1)}100%{transform:scaleX(.85) scaleY(1.1)}}
+
+/* Choking Animation */
+.choke-anim .thrust{animation:thrustMotion 1s ease-in-out infinite}
+.choke-anim .air-arrow{stroke:var(--cyan);stroke-width:2;fill:none;stroke-dasharray:30;stroke-dashoffset:30;animation:airBurst 1s ease-out infinite}
+@keyframes thrustMotion{0%,100%{transform:translateX(0)}40%{transform:translateX(8px)}60%{transform:translateX(8px)}}
+@keyframes airBurst{0%{stroke-dashoffset:30;opacity:0}30%{opacity:1}100%{stroke-dashoffset:-30;opacity:0}}
+
+/* Fracture Animation */
+.frac-anim .crack{stroke:var(--amber);stroke-width:2;stroke-dasharray:5;animation:crackGrow 1.5s ease-out forwards}
+.frac-anim .splint{stroke:var(--green);stroke-width:3;stroke-dasharray:60;stroke-dashoffset:60;animation:splintWrap 2s ease-out .8s forwards}
+@keyframes crackGrow{0%{stroke-dashoffset:20}100%{stroke-dashoffset:0}}
+@keyframes splintWrap{0%{stroke-dashoffset:60}100%{stroke-dashoffset:0}}
+
+/* Snake Animation */
+.snake-anim .snake-body{stroke:var(--green);stroke-width:4;fill:none;stroke-linecap:round;stroke-dasharray:80;stroke-dashoffset:80;animation:snakeSlither 2s ease-in-out infinite}
+.snake-anim .fang{fill:var(--amber);animation:fangStrike 2s ease-in-out infinite}
+@keyframes snakeSlither{0%,100%{stroke-dashoffset:80;transform:translateX(0)}50%{stroke-dashoffset:0;transform:translateX(10px)}}
+@keyframes fangStrike{0%,70%,100%{transform:translateY(0)}80%{transform:translateY(3px)}}
+
+/* Heart Attack Animation */
+.ha-anim .ecg-line{stroke:var(--red);stroke-width:2;fill:none;stroke-dasharray:300;animation:haEcg 1.5s linear infinite}
+.ha-anim .heart-icon{fill:var(--red);animation:haHeart 1.5s ease-in-out infinite}
+@keyframes haEcg{0%{stroke-dashoffset:300}100%{stroke-dashoffset:0}}
+@keyframes haHeart{0%,40%,100%{transform:scale(1)}50%{transform:scale(.85)}55%{transform:scale(1.1)}65%{transform:scale(.9)}}
+
+/* Drowning Animation */
+.drown-anim .wave{fill:var(--cyan);animation:waveMove 2s ease-in-out infinite}
+.drown-anim .wave:nth-child(2){animation-delay:-.5s;opacity:.6}.drown-anim .wave:nth-child(3){animation-delay:-1s;opacity:.3}
+.drown-anim .person-bob{animation:bob 2s ease-in-out infinite}
+.drown-anim .bubble{fill:none;stroke:var(--cyan);stroke-width:1;animation:rise 1.5s ease-in infinite}
+.drown-anim .bubble:nth-child(2){animation-delay:.5s;left:55%}
+@keyframes waveMove{0%,100%{transform:translateX(0) translateY(0)}50%{transform:translateX(-10px) translateY(-3px)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes rise{0%{opacity:0;transform:translateY(10px) scale(.5)}30%{opacity:.8}100%{opacity:0;transform:translateY(-30px) scale(1.2)}}
+
+@media(max-width:768px){.htab{min-width:46px;padding:6px 5px;font-size:7px}.htab i{font-size:13px}.section{padding:12px 14px}.sos-btn{width:110px;height:110px;font-size:15px}.fa-anim{height:100px}}
+@media(prefers-reduced-motion:reduce){.sos-btn{animation:none!important}.fa-anim *{animation:none!important}*{transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div class="glow" style="top:-200px;left:-200px;background:radial-gradient(circle,rgba(245,158,11,.05),transparent 70%)"></div>
+<div id="toast" class="toast"><i class="fa-solid fa-circle-check" style="color:var(--amber);margin-right:6px"></i><span id="toastMsg"></span></div>
+
+<div style="display:flex;flex-direction:column;height:100vh;position:relative;z-index:1">
+<header style="background:var(--bg2);border-bottom:1px solid var(--border);padding:8px 14px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
+  <div style="display:flex;align-items:center;gap:7px"><div style="width:26px;height:26px;background:var(--amber);border-radius:6px;display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-shield-halved" style="color:var(--bg);font-size:12px"></i></div><div><h1 style="font-size:13px;font-weight:700;letter-spacing:-.3px;line-height:1.1">CPREC Nepal</h1><p style="font-size:7px;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px">Emergency & Social Safety</p></div></div>
+  <div id="gpsSt" style="display:flex;align-items:center;gap:5px;font-size:10px;color:var(--muted)"><span class="sdot off" id="gpsD"></span><span id="gpsT">Locating...</span></div>
+</header>
+<nav style="background:var(--bg2);border-bottom:1px solid var(--border);padding:5px 0;flex-shrink:0"><div class="hnav">
+  <div class="htab active" onclick="go('sos')" data-t="sos"><i class="fa-solid fa-phone-volume"></i>SOS</div>
+  <div class="htab" onclick="go('quake')" data-t="quake"><i class="fa-solid fa-house-crack"></i>Quake</div>
+  <div class="htab" onclick="go('nearby')" data-t="nearby"><i class="fa-solid fa-hospital"></i>Nearby</div>
+  <div class="htab" onclick="go('aqi')" data-t="aqi"><i class="fa-solid fa-lungs"></i>Air</div>
+  <div class="htab" onclick="go('weather')" data-t="weather"><i class="fa-solid fa-cloud-sun"></i>Weather</div>
+  <div class="htab" onclick="go('helpline')" data-t="helpline"><i class="fa-solid fa-phone-flip"></i>Help</div>
+  <div class="htab" onclick="go('ambulance')" data-t="ambulance"><i class="fa-solid fa-truck-medical"></i>Ambulance</div>
+  <div class="htab" onclick="go('firstaid')" data-t="firstaid"><i class="fa-solid fa-kit-medical"></i>First Aid</div>
+  <div class="htab" onclick="go('contacts')" data-t="contacts"><i class="fa-solid fa-address-book"></i>Contacts</div>
+  <div class="htab" onclick="go('missing')" data-t="missing"><i class="fa-solid fa-person-circle-question"></i>Missing</div>
+  <div class="htab" onclick="go('checklist')" data-t="checklist"><i class="fa-solid fa-clipboard-check"></i>Ready</div>
+</div></nav>
+
+<div style="flex:1;overflow:hidden;position:relative">
+
+<!-- SOS -->
+<div class="section active" id="sec-sos">
+  <div style="text-align:center;padding:20px 0 14px">
+    <p style="color:var(--red);font-size:10px;text-transform:uppercase;letter-spacing:2px;font-weight:600;margin-bottom:14px">Emergency Alert</p>
+    <button class="sos-btn" id="sosBtn" onclick="doSOS()"><i class="fa-solid fa-exclamation" style="font-size:26px"></i><span>SOS</span></button>
+    <p style="color:var(--muted);font-size:10px;margin-top:12px">Tap to get your real location</p>
+  </div>
+  <div id="sosOut" style="display:none">
+    <div class="stitle"><i class="fa-solid fa-location-crosshairs" style="color:var(--red)"></i>Your Location</div>
+    <div class="sc" style="margin-bottom:12px"><div class="mono" style="font-size:11px;color:var(--amber);margin-bottom:3px" id="sosC">—</div><div style="font-size:11px;color:var(--text2)" id="sosA">Detecting...</div><div style="font-size:9px;color:var(--muted);margin-top:2px" id="sosAc">—</div></div>
+    <div class="stitle"><i class="fa-solid fa-phone" style="color:var(--green)"></i>Emergency Services</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:12px">
+      <a href="tel:100" class="sc" style="text-align:center;text-decoration:none;color:var(--text);display:flex;flex-direction:column;align-items:center;gap:3px"><div style="width:36px;height:36px;border-radius:50%;background:rgba(239,68,68,.12);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-shield-halved" style="color:var(--red);font-size:14px"></i></div><div style="font-weight:600;font-size:11px">Police</div><div class="mono" style="color:var(--red);font-size:16px;font-weight:700">100</div></a>
+      <a href="tel:101" class="sc" style="text-align:center;text-decoration:none;color:var(--text);display:flex;flex-direction:column;align-items:center;gap:3px"><div style="width:36px;height:36px;border-radius:50%;background:rgba(16,185,129,.12);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-truck-medical" style="color:var(--green);font-size:14px"></i></div><div style="font-weight:600;font-size:11px">Ambulance</div><div class="mono" style="color:var(--green);font-size:16px;font-weight:700">101</div></a>
+      <a href="tel:102" class="sc" style="text-align:center;text-decoration:none;color:var(--text);display:flex;flex-direction:column;align-items:center;gap:3px"><div style="width:36px;height:36px;border-radius:50%;background:var(--amber-glow);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-fire-extinguisher" style="color:var(--amber);font-size:14px"></i></div><div style="font-weight:600;font-size:11px">Fire</div><div class="mono" style="color:var(--amber);font-size:16px;font-weight:700">102</div></a>
+      <a href="tel:112" class="sc" style="text-align:center;text-decoration:none;color:var(--text);display:flex;flex-direction:column;align-items:center;gap:3px"><div style="width:36px;height:36px;border-radius:50%;background:rgba(167,139,250,.12);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-triangle-exclamation" style="color:var(--purple);font-size:14px"></i></div><div style="font-weight:600;font-size:11px">Emergency</div><div class="mono" style="color:var(--purple);font-size:16px;font-weight:700">112</div></a>
+    </div>
+    <button onclick="shareLoc()" style="width:100%;padding:10px;background:var(--card);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:inherit;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s" onmouseover="this.style.borderColor='var(--cyan)'" onmouseout="this.style.borderColor='var(--border)'"><i class="fa-solid fa-share-nodes" style="color:var(--cyan)"></i>Share My Location</button>
+  </div>
+</div>
+
+<!-- Quake -->
+<div class="section" id="sec-quake">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div><h2 style="font-size:15px;font-weight:700">Live Earthquakes</h2><p style="font-size:9px;color:var(--muted);margin-top:1px">USGS — Nepal region</p></div><button onclick="loadQuakes()" class="fbtn"><i class="fa-solid fa-rotate" id="qRI"></i> Refresh</button></div>
+  <div id="qList"><div class="loader"><i class="fa-solid fa-spinner"></i><div style="margin-top:6px">Loading...</div></div></div>
+  <div id="qMap" style="height:240px;border-radius:12px;overflow:hidden;margin-top:12px;border:1px solid var(--border)"></div>
+  <p style="font-size:8px;color:var(--muted);margin-top:5px;text-align:center">Auto-refresh 60s</p>
+</div>
+
+<!-- Nearby -->
+<div class="section" id="sec-nearby">
+  <h2 style="font-size:15px;font-weight:700;margin-bottom:2px">Nearby Help</h2>
+  <p style="font-size:9px;color:var(--muted);margin-bottom:10px">Real places from OpenStreetMap</p>
+  <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px" id="nF">
+    <button class="fbtn on" onclick="loadNearby('hospital',this)"><i class="fa-solid fa-hospital"></i> Hospitals</button>
+    <button class="fbtn" onclick="loadNearby('blood_bank',this)"><i class="fa-solid fa-droplet"></i> Blood</button>
+    <button class="fbtn" onclick="loadNearby('pharmacy',this)"><i class="fa-solid fa-pills"></i> Pharmacy</button>
+    <button class="fbtn" onclick="loadNearby('police',this)"><i class="fa-solid fa-shield-halved"></i> Police</button>
+    <button class="fbtn" onclick="loadNearby('shelter',this)"><i class="fa-solid fa-tent"></i> Shelter</button>
+  </div>
+  <div id="nList"><div class="loader"><i class="fa-solid fa-spinner"></i><div style="margin-top:6px">Need GPS — tap SOS first</div></div></div>
+  <div id="nMap" style="height:240px;border-radius:12px;overflow:hidden;margin-top:12px;border:1px solid var(--border)"></div>
+</div>
+
+<!-- AQI -->
+<div class="section" id="sec-aqi">
+  <h2 style="font-size:15px;font-weight:700;margin-bottom:2px">Air Quality Index</h2>
+  <p style="font-size:9px;color:var(--muted);margin-bottom:12px">Open-Meteo Air Quality API</p>
+  <div id="aqiOut"><div class="loader"><i class="fa-solid fa-spinner"></i><div style="margin-top:6px">Loading...</div></div></div>
+</div>
+
+<!-- Weather -->
+<div class="section" id="sec-weather">
+  <h2 style="font-size:15px;font-weight:700;margin-bottom:2px">Weather</h2>
+  <p style="font-size:9px;color:var(--muted);margin-bottom:12px">Open-Meteo</p>
+  <div id="wOut"><div class="loader"><i class="fa-solid fa-spinner"></i><div style="margin-top:6px">Loading...</div></div></div>
+</div>
+
+<!-- Helplines -->
+<div class="section" id="sec-helpline">
+  <h2 style="font-size:15px;font-weight:700;margin-bottom:2px">Helplines</h2>
+  <p style="font-size:9px;color:var(--muted);margin-bottom:12px">Real Nepal numbers — tap to call</p>
+  <div id="hlOut"></div>
+</div>
+
+<!-- Ambulance -->
+<div class="section" id="sec-ambulance">
+  <h2 style="font-size:15px;font-weight:700;margin-bottom:2px">Ambulance Services</h2>
+  <p style="font-size:9px;color:var(--muted);margin-bottom:12px">Govt & private — all real numbers</p>
+  <div id="ambOut"></div>
+</div>
+
+<!-- First Aid -->
+<div class="section" id="sec-firstaid">
+  <h2 style="font-size:15px;font-weight:700;margin-bottom:2px">First Aid Guide</h2>
+  <p style="font-size:9px;color:var(--muted);margin-bottom:12px">Real medical instructions with visual guides</p>
+  <div id="faOut"></div>
+</div>
+
+<!-- Contacts -->
+<div class="section" id="sec-contacts">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div><h2 style="font-size:15px;font-weight:700">My Contacts</h2><p style="font-size:9px;color:var(--muted);margin-top:1px">Saved on device only</p></div><button onclick="document.getElementById('cF').style.display=document.getElementById('cF').style.display==='none'?'block':'none'" class="fbtn" style="background:var(--amber);color:var(--bg);border-color:var(--amber)"><i class="fa-solid fa-plus"></i> Add</button></div>
+  <div id="cF" style="display:none" class="sc">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:6px"><div><label style="font-size:9px;color:var(--muted);display:block;margin-bottom:2px">Name</label><input type="text" id="cN" placeholder="Full name"></div><div><label style="font-size:9px;color:var(--muted);display:block;margin-bottom:2px">Phone</label><input type="tel" id="cP" placeholder="98XXXXXXXX"></div></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px"><div><label style="font-size:9px;color:var(--muted);display:block;margin-bottom:2px">Relation</label><select id="cR"><option>Family</option><option>Friend</option><option>Doctor</option><option>Lawyer</option><option>Other</option></select></div><div style="display:flex;align-items:flex-end"><button onclick="saveC()" style="width:100%;padding:8px;background:var(--green);color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:11px;font-weight:600;cursor:pointer"><i class="fa-solid fa-check"></i> Save</button></div></div>
+  </div>
+  <div id="cL"></div>
+</div>
+
+<!-- Missing -->
+<div class="section" id="sec-missing">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div><h2 style="font-size:15px;font-weight:700">Missing Person</h2><p style="font-size:9px;color:var(--muted);margin-top:1px">Local record — share with police</p></div><button onclick="document.getElementById('mF').style.display=document.getElementById('mF').style.display==='none'?'block':'none'" class="fbtn" style="background:var(--red);color:#fff;border-color:var(--red)"><i class="fa-solid fa-plus"></i> Report</button></div>
+  <div id="mF" style="display:none" class="sc">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:6px"><div><label style="font-size:9px;color:var(--muted);display:block;margin-bottom:2px">Name</label><input type="text" id="mN" placeholder="Full name"></div><div><label style="font-size:9px;color:var(--muted);display:block;margin-bottom:2px">Age</label><input type="number" id="mA" placeholder="Age" min="1" max="120"></div></div>
+    <div style="margin-bottom:6px"><label style="font-size:9px;color:var(--muted);display:block;margin-bottom:2px">Last Seen Location</label><input type="text" id="mL" placeholder="Place, district"></div>
+    <div style="margin-bottom:6px"><label style="font-size:9px;color:var(--muted);display:block;margin-bottom:2px">Description</label><textarea id="mD" placeholder="Height, clothing, features..."></textarea></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px"><div><label style="font-size:9px;color:var(--muted);display:block;margin-bottom:2px">Your Number</label><input type="tel" id="mC" placeholder="Your number"></div><div><label style="font-size:9px;color:var(--muted);display:block;margin-bottom:2px">Photo</label><input type="file" id="mPh" accept="image/*" style="font-size:10px;color:var(--text2)"></div></div>
+    <button onclick="saveM()" style="width:100%;padding:8px;background:var(--red);color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:11px;font-weight:600;cursor:pointer"><i class="fa-solid fa-floppy-disk"></i> Save Report</button>
+  </div>
+  <div id="mL2"></div>
+</div>
+
+<!-- Checklist -->
+<div class="section" id="sec-checklist">
+  <h2 style="font-size:15px;font-weight:700;margin-bottom:2px">Disaster Ready</h2>
+  <p style="font-size:9px;color:var(--muted);margin-bottom:12px">Progress saved on device</p>
+  <div id="ckO"></div>
+</div>
+
+</div>
+<div class="sbar"><span><span class="sdot" id="netD"></span><span id="netT">—</span></span><span class="mono" id="clock">—</span><span style="margin-left:auto" id="lastR">—</span></div>
+</div>
+
+<script>
+let uLat=null,uLng=null,uAcc=null,gpsOk=false,qMap=null,nMap=null,nType='hospital';
+
+// ===== HELPLINES =====
+const HL=[
+{cat:"Women Safety",icon:"fa-venus",color:"#e91e63",items:[{name:"Women Helpline (WPS)",num:"1145",desc:"24/7 GoN"},{name:"Nepal Police Women Cell",num:"01-4221765",desc:"Kathmandu"},{name:"Sathi Nepal",num:"01-4228040",desc:"Anti-trafficking"},{name:"ABC Nepal",num:"01-4382296",desc:"Women & child rights"},{name:"WOREC Nepal",num:"01-5003542",desc:"Rehabilitation"}]},
+{cat:"Child Protection",icon:"fa-child",color:"#f59e0b",items:[{name:"Child Helpline",num:"1098",desc:"24/7 toll-free"},{name:"CWIN Nepal",num:"01-4270504",desc:"Child workers"},{name:"Kopila Nepal",num:"01-4285750",desc:"Abuse support"}]},
+{cat:"Mental Health",icon:"fa-brain",color:"#a78bfa",items:[{name:"Koshish Nepal",num:"1660-01-020050",desc:"Mental health"},{name:"TPO Nepal",num:"01-5545868",desc:"Psychosocial"},{name:"LifeLine Nepal",num:"1660-01-010005",desc:"Crisis counseling"}]},
+{cat:"Disaster & Rescue",icon:"fa-house-crack",color:"#ef4444",items:[{name:"Nepal Police",num:"100",desc:"Emergency"},{name:"Ambulance",num:"101",desc:"Medical"},{name:"Fire Service",num:"102",desc:"Fire & rescue"},{name:"NDRRMA",num:"01-4211050",desc:"Disaster authority"},{name:"Nepal Army Rescue",num:"01-4200116",desc:"Rescue ops"},{name:"NRCS",num:"01-4228097",desc:"Red Cross"}]},
+{cat:"Senior Citizens",icon:"fa-person-cane",color:"#06b6d4",items:[{name:"Senior Helpline",num:"1155",desc:"Elderly welfare"},{name:"Ageing Nepal",num:"01-5521859",desc:"Elderly care"}]},
+{cat:"Legal Aid",icon:"fa-scale-balanced",color:"#10b981",items:[{name:"Legal Aid Commission",num:"01-4265365",desc:"Free legal"},{name:"Advocacy Forum",num:"01-4265456",desc:"Human rights"},{name:"FWLD",num:"01-5003546",desc:"Women's rights"}]},
+{cat:"Human Rights",icon:"fa-hand-fist",color:"#f97316",items:[{name:"NHRC Nepal",num:"01-4265549",desc:"Human Rights Commission"},{name:"INSEC",num:"01-4270525",desc:"HR documentation"}]},
+{cat:"Anti-Corruption",icon:"fa-eye",color:"#8b5cf6",items:[{name:"CIAA",num:"01-4221409",desc:"Abuse of Authority"},{name:"CIAA Hotline",num:"1100",desc:"Toll-free"}]}
+];
+
+// ===== AMBULANCE =====
+const AMB=[
+{name:"Govt Ambulance",num:"101",desc:"Free — all districts",tag:"Govt"},{name:"Red Cross Ambulance",num:"01-4228097",desc:"Kathmandu Valley",tag:"Govt"},
+{name:"Bir Hospital",num:"01-4221049",desc:"Kathmandu",tag:"Govt"},{name:"Patan Hospital",num:"01-5522266",desc:"Lalitpur",tag:"Govt"},
+{name:"Bhaktapur Hospital",num:"01-6612630",desc:"Bhaktapur",tag:"Govt"},{name:"B.P. Koirala Hospital",num:"021-621040",desc:"Dharan",tag:"Govt"},
+{name:"Koshi Hospital",num:"021-620246",desc:"Biratnagar",tag:"Govt"},
+{name:"Sewa Ambulance",num:"01-4261795",desc:"KTM 24/7",tag:"Pvt"},{name:"Shanker Ambulance",num:"01-4261933",desc:"KTM 24/7",tag:"Pvt"},
+{name:"Pashupati Ambulance",num:"01-4379100",desc:"KTM",tag:"Pvt"},{name:"Life Care Ambulance",num:"01-4382494",desc:"KTM",tag:"Pvt"},
+{name:"Green Cross Ambulance",num:"01-4371192",desc:"KTM",tag:"Pvt"},{name:"B & B Ambulance",num:"01-4357700",desc:"KTM",tag:"Pvt"},
+{name:"Pokhara Academy Ambulance",num:"061-562098",desc:"Pokhara",tag:"Pvt"},{name:"Chitwan Medical Ambulance",num:"056-527155",desc:"Bharatpur",tag:"Pvt"}
+];
+
+// ===== FIRST AID =====
+const FA=[
+{title:"CPR",icon:"fa-heart-pulse",color:"var(--red)",anim:'cpr',steps:[
+"Check if person is unresponsive — tap shoulders, shout","Call 101 immediately","Place on back on firm surface",
+"Heel of one hand on center of chest (lower breastbone)","Other hand on top, interlace fingers",
+"Push hard and fast: 2 inches deep, 100-120 per minute","After 30 compressions, 2 rescue breaths if trained",
+"Continue 30:2 until help arrives or person recovers","Hands-only CPR (no breaths) is still effective","Do NOT stop unless breathing resumes or help arrives"]},
+{title:"Severe Bleeding",icon:"fa-droplet",color:"#ef4444",anim:'bleed',steps:[
+"Call 101 immediately","Apply firm direct pressure with clean cloth","Do NOT remove soaked cloth — add more on top",
+"If possible, raise injured area above heart","If direct pressure fails, press nearest pressure point",
+"Tourniquet ONLY as last resort — note the time","Keep person lying down, warm, calm",
+"Do NOT remove embedded objects — stabilize in place","Watch for shock: pale skin, rapid pulse, confusion","Maintain pressure until help arrives"]},
+{title:"Burns",icon:"fa-fire",color:"var(--amber)",anim:'burn',steps:[
+"Cool burn with cool (not cold) running water for 20 minutes","Do NOT use ice, butter, oil, or home remedies",
+"Remove jewelry near burn before swelling starts","Cover with clean non-stick dressing",
+"Do NOT burst blisters","For chemical burns: remove clothing, flush 20+ minutes",
+"For electrical burns: ensure no contact with electricity first","Call 101 if larger than palm, on face/hands, or deep",
+"Paracetamol for pain if available and conscious","Watch for signs of shock"]},
+{title:"Choking",icon:"fa-wind",color:"var(--cyan)",anim:'choke',steps:[
+"Ask 'Are you choking?' — if they nod, act","Stand behind, arms around waist",
+"Make fist above navel, thrust inward/upward with J-motion","Repeat until expelled or unconscious",
+"If unconscious, lower to ground, start CPR","For infants: 5 back blows between shoulder blades",
+"Then 5 chest thrusts with 2 fingers on breastbone","Alternate until object expelled",
+"Do NOT slap back while person stands upright","Call 101 in all cases"]},
+{title:"Fractures",icon:"fa-bone",color:"#a78bfa",anim:'frac',steps:[
+"Do NOT try to straighten the bone","Immobilize the area — do not move injured part",
+"Splint with any rigid material + cloth","Pad splint for comfort",
+"For open fractures: cover with clean dressing, do NOT push bone back","Apply ice wrapped in cloth 15-20 min",
+"Elevate injured limb if possible","Check circulation below injury — can they feel/move?",
+"Call 101 — fractures need X-ray","Do NOT give food/drink in case surgery needed"]},
+{title:"Snake Bite",icon:"fa-worm",color:"#10b981",anim:'snake',steps:[
+"Keep person calm and still","Call 101 immediately","Immobilize bitten limb with splint",
+"Remove rings, watches near bite","Note time and snake appearance if safe",
+"Do NOT cut wound, suck venom, or use tourniquet","Do NOT apply ice",
+"Do NOT try to catch the snake","Photo from safe distance if possible","Anti-venom is only treatment — hospital fast"]},
+{title:"Heart Attack",icon:"fa-heart-crack",color:"#ef4444",anim:'ha',steps:[
+"Call 101 immediately — every minute matters","Sit or lie person comfortably",
+"Help with prescribed nitroglycerin if available","Chew 300mg aspirin if not allergic",
+"Loosen tight clothing","If unconscious and not breathing, start CPR",
+"Do NOT leave alone","Do NOT let them 'wait it out'",
+"Monitor breathing and pulse","Be ready to use AED if available"]},
+{title:"Drowning",icon:"fa-water",color:"var(--cyan)",anim:'drown',steps:[
+"Get person out — reach, throw, row, swim (last resort)","Call 101 immediately",
+"If not breathing: 5 rescue breaths first, then 30:2 CPR","Even if conscious, they need hospital — secondary drowning risk",
+"Remove wet clothing, keep warm","Recovery position if unconscious but breathing",
+"Do NOT use 'water pump' technique — it's dangerous","Triage: treat non-breathing first",
+"Continue CPR until help arrives","Every second without oxygen = brain damage"]}
+];
+
+// ===== CHECKLIST =====
+const CK=[
+{cat:"Before Earthquake",items:["Identify safe spots in each room","Secure heavy furniture to walls","Prepare go-bag: water, food, flashlight, radio, first-aid, medicines","Know gas/electric/water shutoffs","Plan family meeting point & communication","Keep documents in waterproof bag","Learn first aid and CPR","Identify nearest open space","Everyone knows emergency exits","Keep emergency cash ready"]},
+{cat:"During Earthquake",items:["DROP, COVER, HOLD ON","If no table: crouch against interior wall, protect head","Stay from windows, glass, falling objects","In bed: stay, protect head with pillow","Outdoors: move to clear area","In vehicle: pull over, stay inside","Do NOT run outside during shaking","Near coast after: move to higher ground"]},
+{cat:"After Earthquake",items:["Check for injuries","Check gas leaks — leave if smell, no lighters","Put out small fires","Wear sturdy shoes","Inspect building — evacuate if unsafe","No elevators","Listen to FM 92.4/101.8","Expect aftershocks","Do NOT enter damaged buildings","Help neighbors, text not call","Document damage with photos"]},
+{cat:"Flood & Landslide",items:["Know flood risk zone and landslide-prone slopes","Keep drainage clear","Never sleep near riverbanks in monsoon","Water rises: move to higher ground","Keep items above flood level","Landslide: move perpendicular to slide — not downhill","After flood: boil water before drinking","Watch for displaced animals and snakes"]}
+];
+
+// ===== SVG ILLUSTRATIONS =====
+function faSVG(type){
+  const svgs={
+cpr:`<svg viewBox="0 0 320 120" class="cpr-anim" style="width:100%;height:100%">
+  <rect x="140" y="10" width="40" height="50" rx="8" fill="var(--card2)" stroke="var(--border)" stroke-width="1"/>
+  <circle cx="160" cy="30" r="8" fill="var(--text2)"/>
+  <path d="M150 50 Q155 55 160 50 Q165 45 170 50" stroke="var(--text2)" fill="none" stroke-width="1.5"/>
+  <rect x="130" y="60" width="60" height="35" rx="5" fill="var(--card2)" stroke="var(--border)" stroke-width="1"/>
+  <g class="hand"><rect x="148" y="55" width="24" height="20" rx="4" fill="var(--amber)" opacity=".8"/><rect x="152" y="50" width="5" height="10" rx="2" fill="var(--amber)" opacity=".6"/><rect x="160" y="50" width="5" height="10" rx="2" fill="var(--amber)" opacity=".6"/></g>
+  <g transform="translate(220,20)" class="heart"><path d="M20 35 C20 25 10 15 10 8 C10 2 15 0 20 5 C25 0 30 2 30 8 C30 15 20 25 20 35Z" opacity=".9"/></g>
+  <polyline class="ecg" points="20,95 50,95 60,95 70,70 80,115 90,80 100,100 110,95 160,95 170,95 180,70 190,115 200,80 210,100 220,95 300,95"/>
+  <text x="10" y="110" fill="var(--muted)" font-size="8" font-family="Space Grotesk">100-120/min</text>
+</svg>`,
+bleed:`<svg viewBox="0 0 320 120" class="bleed-anim" style="width:100%;height:100%">
+  <rect x="100" y="20" width="60" height="80" rx="8" fill="var(--card2)" stroke="var(--border)" stroke-width="1"/>
+  <circle cx="130" cy="40" r="8" fill="var(--text2)"/>
+  <line x1="130" y1="55" x2="130" y2="85" stroke="var(--text2)" stroke-width="1.5"/>
+  <g class="hand-press"><rect x="120" y="62" width="30" height="15" rx="5" fill="var(--red)" opacity=".3"/><rect x="124" y="58" width="6" height="8" rx="2" fill="var(--red)" opacity=".2"/></g>
+  <circle class="drop" cx="140" cy="65" r="3"/><circle class="drop" cx="145" cy="68" r="2.5"/><circle class="drop" cx="138" cy="72" r="2"/>
+  <line x1="80" y1="68" x2="120" y2="68" stroke="var(--red)" stroke-width="1" stroke-dasharray="3" opacity=".4"/>
+  <text x="20" y="70" fill="var(--red)" font-size="9" font-family="Space Grotesk" font-weight="600">PRESSURE</text>
+  <rect x="200" y="25" width="90" height="65" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1"/>
+  <text x="210" y="45" fill="var(--red)" font-size="9" font-family="Space Grotesk" font-weight="600">Do NOT</text>
+  <text x="210" y="58" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Remove cloth</text>
+  <text x="210" y="70" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Apply tourniquet</text>
+  <text x="210" y="82" fill="var(--muted)" font-size="8" font-family="Space Grotesk">early</text>
+</svg>`,
+burn:`<svg viewBox="0 0 320 120" class="burn-anim" style="width:100%;height:100%">
+  <rect x="120" y="40" width="40" height="55" rx="6" fill="var(--card2)" stroke="var(--border)" stroke-width="1"/>
+  <circle cx="140" cy="52" r="6" fill="var(--text2)"/>
+  <g transform="translate(125,70)"><ellipse rx="8" ry="12" fill="var(--red)" opacity=".2"/></g>
+  <g class="flame" transform="translate(125,25)"><path d="M8 15 Q8 5 15 0 Q12 8 15 10 Q18 5 22 0 Q28 8 22 15Z" opacity=".7"/></g>
+  <g class="flame" transform="translate(132,20)"><path d="M5 12 Q5 4 10 0 Q8 6 10 8 Q12 4 15 0 Q20 6 15 12Z" opacity=".5"/></g>
+  <circle class="water-drop" cx="140" cy="35" r="2.5"/><circle class="water-drop" cx="140" cy="30" r="2"/><circle class="water-drop" cx="140" cy="40" r="2"/>
+  <line x1="140" y1="0" x2="140" y2="28" stroke="var(--cyan)" stroke-width="2" stroke-dasharray="4 3" opacity=".6"/>
+  <text x="10" y="15" fill="var(--cyan)" font-size="9" font-family="Space Grotesk" font-weight="600">COOL WATER</text>
+  <text x="10" y="28" fill="var(--muted)" font-size="8" font-family="Space Grotesk">20 minutes</text>
+  <rect x="200" y="20" width="100" height="70" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1"/>
+  <text x="210" y="40" fill="var(--red)" font-size="9" font-family="Space Grotesk" font-weight="600">Do NOT</text>
+  <text x="210" y="55" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Ice, butter, oil</text>
+  <text x="210" y="68" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Toothpaste</text>
+  <text x="210" y="81" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Burst blisters</text>
+</svg>`,
+choke:`<svg viewBox="0 0 320 120" class="choke-anim" style="width:100%;height:100%">
+  <rect x="120" y="15" width="35" height="50" rx="8" fill="var(--card2)" stroke="var(--border)" stroke-width="1"/>
+  <circle cx="137" cy="30" r="7" fill="var(--text2)"/>
+  <line x1="137" y1="42" x2="137" y2="55" stroke="var(--text2)" stroke-width="1.5"/>
+  <rect x="125" y="65" width="25" height="40" rx="4" fill="var(--card2)" stroke="var(--border)" stroke-width="1"/>
+  <g class="thrust"><rect x="155" y="40" width="22" height="14" rx="4" fill="var(--amber)" opacity=".7"/><circle cx="177" cy="47" r="5" fill="var(--amber)" opacity=".5"/></g>
+  <line class="air-arrow" x1="155" y1="47" x2="130" y2="47"/>
+  <line class="air-arrow" x1="155" y1="43" x2="128" y2="38" style="animation-delay:.2s"/>
+  <text x="10" y="50" fill="var(--cyan)" font-size="9" font-family="Space Grotesk" font-weight="600">J-MOTION</text>
+  <text x="10" y="63" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Inward & upward</text>
+  <rect x="200" y="20" width="100" height="75" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1"/>
+  <text x="210" y="38" fill="var(--amber)" font-size="9" font-family="Space Grotesk" font-weight="600">Infants:</text>
+  <text x="210" y="52" fill="var(--muted)" font-size="8" font-family="Space Grotesk">5 back blows</text>
+  <text x="210" y="64" fill="var(--muted)" font-size="8" font-family="Space Grotesk">between shoulder</text>
+  <text x="210" y="76" fill="var(--muted)" font-size="8" font-family="Space Grotesk">blades, then flip</text>
+  <text x="210" y="88" fill="var(--muted)" font-size="8" font-family="Space Grotesk">& 5 chest thrusts</text>
+</svg>`,
+frac:`<svg viewBox="0 0 320 120" class="frac-anim" style="width:100%;height:100%">
+  <line x1="130" y1="20" x2="130" y2="100" stroke="var(--text2)" stroke-width="6" stroke-linecap="round"/>
+  <g class="crack"><path d="M127 55 L133 50 L128 48 L134 44 L129 42" fill="none"/></g>
+  <g class="splint"><rect x="118" y="35" width="24" height="40" rx="3" fill="none"/></g>
+  <line x1="118" y1="45" x2="142" y2="45" stroke="var(--green)" stroke-width="1" opacity=".4"/>
+  <line x1="118" y1="60" x2="142" y2="60" stroke="var(--green)" stroke-width="1" opacity=".4"/>
+  <line x1="118" y1="75" x2="142" y2="75" stroke="var(--green)" stroke-width="1" opacity=".4"/>
+  <text x="160" y="50" fill="var(--green)" font-size="9" font-family="Space Grotesk" font-weight="600">SPLINT</text>
+  <text x="160" y="63" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Immobilize above</text>
+  <text x="160" y="75" fill="var(--muted)" font-size="8" font-family="Space Grotesk">& below the break</text>
+  <rect x="10" y="15" width="80" height="80" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1"/>
+  <text x="20" y="35" fill="var(--red)" font-size="9" font-family="Space Grotesk" font-weight="600">Do NOT</text>
+  <text x="20" y="50" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Straighten</text>
+  <text x="20" y="62" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Push bone back</text>
+  <text x="20" y="74" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Move injured part</text>
+  <text x="20" y="86" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Give food/water</text>
+</svg>`,
+snake:`<svg viewBox="0 0 320 120" class="snake-anim" style="width:100%;height:100%">
+  <path class="snake-body" d="M40,80 Q60,40 90,70 Q120,100 150,60 Q170,30 190,55"/>
+  <circle cx="190" cy="55" r="6" fill="var(--green)"/>
+  <circle cx="192" cy="53" r="1.5" fill="var(--bg)"/>
+  <g class="fang" transform="translate(194,58)"><path d="M0,0 L4,6 L-1,3Z" fill="var(--amber)"/><path d="M4,0 L0,6 L5,3Z" fill="var(--amber)"/></g>
+  <g transform="translate(210,20)"><rect width="90" height="80" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1"/>
+  <text x="10" y="18" fill="var(--red)" font-size="9" font-family="Space Grotesk" font-weight="600">Do NOT</text>
+  <text x="10" y="33" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Cut wound</text>
+  <text x="10" y="45" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Suck venom</text>
+  <text x="10" y="57" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Tourniquet</text>
+  <text x="10" y="69" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Apply ice</text>
+  <text x="10" y="81" fill="var(--green)" font-size="8" font-family="Space Grotesk" font-weight="600">Anti-venom only!</text></g>
+  <text x="10" y="110" fill="var(--amber)" font-size="9" font-family="Space Grotesk" font-weight="600">IMMOBILIZE limb</text>
+</svg>`,
+ha:`<svg viewBox="0 0 320 120" class="ha-anim" style="width:100%;height:100%">
+  <g class="heart-icon" transform="translate(20,10) scale(.8)"><path d="M25 45 C25 30 10 18 10 8 C10 0 18 -3 25 5 C32 -3 40 0 40 8 C40 18 25 30 25 45Z"/></g>
+  <g transform="translate(55,25)"><line x1="0" y1="25" x2="10" y2="25" stroke="var(--red)" stroke-width="2" opacity=".5"/></g>
+  <polyline class="ecg-line" points="80,50 100,50 110,50 118,50 124,30 130,65 136,40 142,55 148,50 180,50 188,50 194,50 200,30 206,65 212,40 218,55 224,50 310,50"/>
+  <text x="130" y="80" fill="var(--red)" font-size="9" font-family="Space Grotesk" font-weight="600">EVERY MINUTE MATTERS</text>
+  <rect x="200" y="85" width="100" height="28" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1"/>
+  <text x="210" y="103" fill="var(--green)" font-size="8" font-family="Space Grotesk" font-weight="600">101 → Hospital</text>
+  <text x="10" y="100" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Call first, then</text>
+  <text x="10" y="112" fill="var(--muted)" font-size="8" font-family="Space Grotesk">aspirin + CPR</text>
+</svg>`,
+drown:`<svg viewBox="0 0 320 120" class="drown-anim" style="width:100%;height:100%">
+  <g class="person-bob" transform="translate(130,30)"><circle cx="15" cy="8" r="7" fill="var(--text2)"/><line x1="15" y1="18" x2="15" y2="42" stroke="var(--text2)" stroke-width="2"/><line x1="15" y1="25" x2="5" y2="35" stroke="var(--text2)" stroke-width="1.5"/><line x1="15" y1="25" x2="25" y2="32" stroke="var(--text2)" stroke-width="1.5"/></g>
+  <circle class="bubble" cx="150" cy="55" r="3"/><circle class="bubble" cx="155" cy="50" r="2"/>
+  <path class="wave" d="M0,80 Q20,70 40,80 Q60,90 80,80 Q100,70 120,80 Q140,90 160,80 Q180,70 200,80 Q220,90 240,80 Q260,70 280,80 Q300,90 320,80 L320,120 L0,120Z" opacity=".3"/>
+  <path class="wave" d="M0,85 Q25,75 50,85 Q75,95 100,85 Q125,75 150,85 Q175,95 200,85 Q225,75 250,85 Q275,95 300,85 Q310,80 320,85 L320,120 L0,120Z" opacity=".2"/>
+  <path class="wave" d="M0,90 Q30,80 60,90 Q90,100 120,90 Q150,80 180,90 Q210,100 240,90 Q270,80 300,90 Q310,95 320,90 L320,120 L0,120Z" opacity=".15"/>
+  <rect x="200" y="10" width="105" height="60" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1"/>
+  <text x="210" y="28" fill="var(--red)" font-size="9" font-family="Space Grotesk" font-weight="600">Do NOT</text>
+  <text x="210" y="42" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Water pump</text>
+  <text x="210" y="54" fill="var(--muted)" font-size="8" font-family="Space Grotesk">technique</text>
+  <text x="210" y="64" fill="var(--muted)" font-size="8" font-family="Space Grotesk">(it's dangerous)</text>
+  <text x="10" y="20" fill="var(--cyan)" font-size="9" font-family="Space Grotesk" font-weight="600">5 BREATHS</text>
+  <text x="10" y="32" fill="var(--muted)" font-size="8" font-family="Space Grotesk">first, then</text>
+  <text x="10" y="44" fill="var(--muted)" font-size="8" font-family="Space Grotesk">30:2 CPR</text>
+</svg>`
+  };
+  return svgs[type]||'';
+}
+
+// ===== GPS =====
+function getGPS(){return new Promise((ok,no)=>{if(!navigator.geolocation){no('No geolocation');return}navigator.geolocation.getCurrentPosition(p=>ok({lat:p.coords.latitude,lng:p.coords.longitude,acc:p.coords.accuracy}),e=>no(e.message),{enableHighAccuracy:true,timeout:15000,maximumAge:30000})})}
+
+async function initGPS(){
+  try{const p=await getGPS();uLat=p.lat;uLng=p.lng;uAcc=p.acc;gpsOk=true;document.getElementById('gpsD').className='sdot on';document.getElementById('gpsT').textContent=`GPS ±${Math.round(p.acc)}m`;loadWeather();loadAQI();loadNearby(nType)}
+  catch(e){document.getElementById('gpsD').className='sdot off';document.getElementById('gpsT').textContent='GPS Off';
+  document.getElementById('wOut').innerHTML=`<div style="text-align:center;padding:20px;color:var(--muted)"><i class="fa-solid fa-location-crosshairs" style="font-size:20px;margin-bottom:6px;opacity:.3"></i><div>GPS required for weather & air quality</div></div>`;
+  document.getElementById('aqiOut').innerHTML=document.getElementById('wOut').innerHTML;}
+}
+
+// ===== TABS =====
+function go(t){document.querySelectorAll('.htab').forEach(e=>e.classList.remove('active'));document.querySelector(`.htab[data-t="${t}"]`).classList.add('active');document.querySelectorAll('.section').forEach(e=>e.classList.remove('active'));document.getElementById(`sec-${t}`).classList.add('active');
+if(t==='quake'&&!qMap)initQMap();if(t==='nearby'&&!nMap)initNMap();
+if(t==='helpline'&&!document.getElementById('hlOut').children.length)renderHL();if(t==='ambulance'&&!document.getElementById('ambOut').children.length)renderAmb();
+if(t==='firstaid'&&!document.getElementById('faOut').children.length)renderFA();if(t==='contacts')renderC();if(t==='missing')renderM();if(t==='checklist'&&!document.getElementById('ckO').children.length)renderCK()}
+
+// ===== SOS =====
+async function doSOS(){const b=document.getElementById('sosBtn');b.innerHTML='<i class="fa-solid fa-spinner fa-spin" style="font-size:22px"></i><span>Finding...</span>';
+try{const p=await getGPS();uLat=p.lat;uLng=p.lng;uAcc=p.acc;gpsOk=true;document.getElementById('gpsD').className='sdot on';document.getElementById('gpsT').textContent=`GPS ±${Math.round(p.acc)}m`;b.className='sos-btn ok';b.innerHTML='<i class="fa-solid fa-check" style="font-size:22px"></i><span>Located</span>';
+document.getElementById('sosOut').style.display='block';document.getElementById('sosC').textContent=`${p.lat.toFixed(6)}° N, ${p.lng.toFixed(6)}° E`;document.getElementById('sosAc').textContent=`Accuracy: ±${Math.round(p.acc)}m`;
+try{const r=await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${p.lat}&lon=${p.lng}&format=json&zoom=18&addressdetails=1`);const d=await r.json();const a=d.address;document.getElementById('sosA').textContent=[a.neighbourhood,a.road,a.city||a.town||a.village,a.state,'Nepal'].filter(Boolean).join(', ')||'Address unavailable'}catch(e){document.getElementById('sosA').textContent='Could not fetch address'}toast('Location found')}catch(e){b.innerHTML='<i class="fa-solid fa-exclamation" style="font-size:22px"></i><span>SOS</span>';toast('GPS failed — call 100')}}
+function shareLoc(){if(!uLat){toast('Tap SOS first');return}const t=`EMERGENCY — My location: https://www.google.com/maps?q=${uLat},${uLng} (±${Math.round(uAcc)}m)`;if(navigator.share)navigator.share({title:'Emergency Location',text:t}).catch(()=>cp(t));else cp(t)}
+function cp(t){navigator.clipboard.writeText(t).then(()=>toast('Copied')).catch(()=>toast('Copy failed'))}
+
+// ===== EARTHQUAKE =====
+function initQMap(){qMap=L.map('qMap',{zoomControl:false,attributionControl:false}).setView([28.3,84.5],6);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:16}).addTo(qMap);loadQuakes();setInterval(loadQuakes,60000)}
+async function loadQuakes(){const i=document.getElementById('qRI');if(i)i.classList.add('fa-spin');
+try{const r=await fetch('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson');const d=await r.json();const n=d.features.filter(f=>{const[,lat,lng]=f.geometry.coordinates;return lat>=25&&lat<=32&&lng>=78&&lng<=90});renderQ(n)}
+catch(e){document.getElementById('qList').innerHTML=`<div style="text-align:center;padding:16px;color:var(--muted)"><i class="fa-solid fa-triangle-exclamation"></i><div style="margin-top:4px">Failed</div></div>`}if(i)i.classList.remove('fa-spin')}
+
+function renderQ(qs){
+if(qMap)qMap.eachLayer(l=>{if(l._qm)qMap.removeLayer(l)});
+if(!qs.length){document.getElementById('qList').innerHTML=`<div style="text-align:center;padding:16px;color:var(--green)"><i class="fa-solid fa-circle-check" style="font-size:16px;margin-bottom:4px"></i><div style="font-weight:600;color:var(--text2)">No earthquakes — Nepal is calm</div></div>`;return}
+document.getElementById('qList').innerHTML=`<div style="font-size:10px;color:var(--text2);margin-bottom:6px">${qs.length} earthquake${qs.length>1?'s':''} (24h)</div>`+qs.sort((a,b)=>b.properties.mag-a.properties.mag).map(q=>{const p=q.properties;const[,lat,lng,dep]=q.geometry.coordinates;const m=p.mag;const mc=m>=6?'var(--red)':m>=4.5?'var(--amber)':m>=3?'#fb923c':'var(--green)';const mb=m>=6?'rgba(239,68,68,.15)':m>=4.5?'rgba(245,158,11,.15)':'rgba(16,185,129,.12)';const ha=Math.floor((Date.now()-p.time)/3600000);const ts=ha<1?`${Math.floor((Date.now()-p.time)/60000)}m ago`:ha<24?`${ha}h ago`:`${Math.floor(ha/24)}d ago`;
+if(qMap){const mk=L.circleMarker([lat,lng],{radius:Math.max(4,m*3),color:mc,fillColor:mc,fillOpacity:.4,weight:1.5}).addTo(qMap);mk._qm=true;mk.bindPopup(`<div style="font-family:Space Grotesk"><b>M ${m}</b><div style="font-size:11px;color:var(--text2)">${p.place}</div><div style="font-size:10px;color:var(--muted)">Depth: ${dep.toFixed(1)}km</div></div>`)}
+return`<div class="qi" onclick="qMap&&qMap.flyTo([${lat},${lng}],8,{duration:.8})"><div style="display:flex;gap:8px;align-items:flex-start"><div style="min-width:32px;height:32px;border-radius:7px;background:${mb};color:${mc};display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px">${m.toFixed(1)}</div><div style="flex:1;min-width:0"><div style="font-size:10px;font-weight:500;line-height:1.3">${p.place||'—'}</div><div style="display:flex;gap:8px;margin-top:3px;font-size:9px;color:var(--muted)"><span>${dep.toFixed(1)}km</span><span>${ts}</span></div></div></div></div>`}).join('');
+if(qMap&&qs.length)qMap.fitBounds(L.latLngBounds(qs.map(q=>[q.geometry.coordinates[1],q.geometry.coordinates[0]])),{padding:[20,20]})}
+
+// ===== NEARBY (FIXED) =====
+function initNMap(){nMap=L.map('nMap',{zoomControl:false,attributionControl:false}).setView([28.3,84.5],13);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:16}).addTo(nMap);if(gpsOk)loadNearby(nType)}
+
+const OT={hospital:'["amenity"="hospital"]',blood_bank:'["healthcare"="blood_donation"]',pharmacy:'["amenity"="pharmacy"]',police:'["amenity"="police"]',shelter:'["amenity"="shelter"]'};
+const OI={hospital:{i:'fa-hospital',c:'var(--green)',bg:'rgba(16,185,129,.12)'},blood_bank:{i:'fa-droplet',c:'#ef4444',bg:'rgba(239,68,68,.12)'},pharmacy:{i:'fa-pills',c:'var(--cyan)',bg:'rgba(6,182,212,.12)'},police:{i:'fa-shield-halved',c:'var(--red)',bg:'rgba(239,68,68,.12)'},shelter:{i:'fa-tent',c:'var(--amber)',bg:'var(--amber-glow)'}};
+const OL={hospital:'Hospitals',blood_bank:'Blood Banks',pharmacy:'Pharmacies',police:'Police Stations',shelter:'Shelters'};
+
+async function loadNearby(type,btn){
+  nType=type;
+  document.querySelectorAll('#nF .fbtn').forEach(b=>{b.classList.remove('on');b.style.background='var(--card)';b.style.color='var(--text2)';b.style.borderColor='var(--border)'});
+  if(btn){btn.classList.add('on');btn.style.background='var(--green)';btn.style.color='#fff';btn.style.borderColor='var(--green)'}
+
+  if(!gpsOk){document.getElementById('nList').innerHTML=`<div style="text-align:center;padding:20px;color:var(--amber)"><i class="fa-solid fa-location-crosshairs" style="font-size:18px;margin-bottom:6px;opacity:.5"></i><div style="font-weight:600;color:var(--text2)">GPS Required</div><div style="font-size:9px;margin-top:2px">Tap SOS tab first to enable GPS</div></div>`;return}
+
+  document.getElementById('nList').innerHTML=`<div class="loader"><i class="fa-solid fa-spinner"></i><div style="margin-top:6px">Searching ${OL[type].toLowerCase()}...</div></div>`;
+
+  const d=.08;const tag=OT[type];
+  // Build Overpass query - use out center for better reliability
+  const q=`[out:json][timeout:20];(node${tag}(${uLat-d},${uLng-d},${uLat+d},${uLng+d}););out body 50;`;
+
+  try{
+    // Try primary endpoint
+    let data=await overpassFetch(q);
+    if(!data||!data.elements||!data.elements.length){
+      // Try backup endpoint
+      data=await overpassFetch(q,'https://overpass.kumi.systems/api/interpreter');
+    }
+    if(!data||!data.elements||!data.elements.length){
+      // Try even wider search
+      const q2=`[out:json][timeout:20];(node${tag}(${uLat-d*2},${uLng-d*2},${uLat+d*2},${uLng+d*2}););out body 80;`;
+      data=await overpassFetch(q2);
+    }
+
+    if(!data||!data.elements||!data.elements.length){
+      document.getElementById('nList').innerHTML=`<div style="text-align:center;padding:20px;color:var(--muted)"><i class="fa-solid fa-magnifying-glass" style="font-size:18px;margin-bottom:6px;opacity:.3"></i><div>No ${OL[type].toLowerCase()} found nearby</div><div style="font-size:9px;margin-top:3px">Try a different category or check if GPS is accurate</div></div>`;return;
+    }
+
+    const items=data.elements.map(e=>({name:(e.tags&&e.tags.name)||'Unnamed',lat:e.lat,lon:e.lon,dist:hav(uLat,uLng,e.lat,e.lon)})).sort((a,b)=>a.dist-b.dist);
+
+    if(nMap){nMap.eachLayer(l=>{if(l._nm)nMap.removeLayer(l)});const um=L.circleMarker([uLat,uLng],{radius:7,color:'var(--cyan)',fillColor:'var(--cyan)',fillOpacity:.6,weight:2}).addTo(nMap);um._nm=true;um.bindPopup('<b>You</b>');
+    const ic=OI[type];items.forEach(it=>{const m=L.circleMarker([it.lat,it.lon],{radius:5,color:ic.c,fillColor:ic.c,fillOpacity:.5,weight:1.5}).addTo(nMap);m._nm=true;m.bindPopup(`<b>${it.name}</b><div style="font-size:11px;color:var(--text2)">${it.dist.toFixed(1)} km</div>`)});
+    nMap.fitBounds(L.latLngBounds([[uLat,uLng],...items.map(i=>[i.lat,i.lon])]),{padding:[20,20]})}
+
+    const ic=OI[type];
+    document.getElementById('nList').innerHTML=`<div style="font-size:10px;color:var(--text2);margin-bottom:6px">${items.length} ${OL[type].toLowerCase()} found</div>`+items.map(it=>`<div class="ni" onclick="nMap&&nMap.flyTo([${it.lat},${it.lon}],15,{duration:.6})"><div style="display:flex;gap:9px;align-items:center"><div style="width:32px;height:32px;border-radius:7px;background:${ic.bg};display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fa-solid ${ic.i}" style="color:${ic.c};font-size:12px"></i></div><div style="flex:1;min-width:0"><div style="font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${it.name}</div><div style="font-size:9px;color:var(--muted);margin-top:1px">${it.dist.toFixed(1)} km away</div></div><a href="https://www.google.com/maps/dir/${uLat},${uLng}/${it.lat},${it.lon}" target="_blank" rel="noopener" style="width:30px;height:30px;border-radius:50%;background:var(--card2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--cyan);text-decoration:none;flex-shrink:0"><i class="fa-solid fa-diamond-turn-right" style="font-size:10px"></i></a></div></div>`).join('');
+    document.getElementById('lastR').textContent=`Nearby: ${npt()}`;
+  }catch(e){document.getElementById('nList').innerHTML=`<div style="text-align:center;padding:20px;color:var(--muted)"><i class="fa-solid fa-triangle-exclamation"></i><div style="margin-top:4px">Search failed — tap again to retry</div><div style="font-size:9px;margin-top:2px;color:var(--red)">${e.message||'Network error'}</div></div>`}
+}
+
+async function overpassFetch(q,url){
+  const u=url||'https://overpass-api.de/api/interpreter';
+  const c=new AbortController();const t=setTimeout(()=>c.abort(),18000);
+  try{const r=await fetch(u+'?data='+encodeURIComponent(q),{signal:c.signal});clearTimeout(t);return await r.json()}
+  catch(e){clearTimeout(t);return null}
+}
+
+function hav(a,b,c,d){const R=6371;const dL=(c-a)*Math.PI/180;const dN=(d-b)*Math.PI/180;const x=Math.sin(dL/2)**2+Math.cos(a*Math.PI/180)*Math.cos(c*Math.PI/180)*Math.sin(dN/2)**2;return R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x))}
+
+// ===== AQI =====
+async function loadAQI(){if(!gpsOk)return;try{const r=await fetch(`https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${uLat}&longitude=${uLng}&current=pm10,pm2_5,carbon_monoxide,nitrogen_dioxide,sulphur_dioxide,ozone,us_aqi&timezone=Asia/Kathmandu`);const d=await r.json();renderAQI(d.current)}catch(e){document.getElementById('aqiOut').innerHTML=`<div style="text-align:center;padding:16px;color:var(--muted)">Failed to load</div>`}}
+function aqiI(v){if(v<=50)return{l:'Good',c:'#10b981',a:'Satisfactory — no risk'};if(v<=100)return{l:'Moderate',c:'#f59e0b',a:'Sensitive people minor effects'};if(v<=150)return{l:'Unhealthy (Sensitive)',c:'#f97316',a:'Sensitive groups may feel effects'};if(v<=200)return{l:'Unhealthy',c:'#ef4444',a:'Everyone may feel effects'};if(v<=300)return{l:'Very Unhealthy',c:'#a855f7',a:'Serious effects — avoid outdoor'};return{l:'Hazardous',c:'#7f1d1d',a:'Emergency — stay indoors'}}
+function renderAQI(c){const a=c.us_aqi;const i=aqiI(a);const ms=[{l:'PM2.5',v:c.pm2_5,u:'µg/m³',mx:75,w:35},{l:'PM10',v:c.pm10,u:'µg/m³',mx:150,w:70},{l:'O₃',v:c.ozone,u:'µg/m³',mx:200,w:100},{l:'NO₂',v:c.nitrogen_dioxide,u:'µg/m³',mx:200,w:80},{l:'SO₂',v:c.sulphur_dioxide,u:'µg/m³',mx:350,w:125},{l:'CO',v:c.carbon_monoxide,u:'µg/m³',mx:15000,w:5000}];
+document.getElementById('aqiOut').innerHTML=`<div class="sc" style="margin-bottom:12px;display:flex;align-items:center;gap:16px"><div class="aqi-ring" style="border-color:${i.c}"><div style="font-size:26px;font-weight:700;color:${i.c}">${a}</div><div style="font-size:8px;color:var(--muted)">US AQI</div></div><div><div style="font-size:14px;font-weight:600;color:${i.c}">${i.l}</div><div style="font-size:10px;color:var(--text2);margin-top:3px;line-height:1.4">${i.a}</div></div></div><div class="stitle"><i class="fa-solid fa-flask" style="color:var(--cyan)"></i>Pollutants</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">${ms.map(m=>{const p=Math.min(100,(m.v/m.mx)*100);const cl=m.v>=m.w?'var(--amber)':'var(--green)';return`<div class="sc" style="padding:8px"><div style="display:flex;justify-content:space-between;margin-bottom:3px"><span style="font-size:9px;color:var(--muted)">${m.l}</span><span class="mono" style="font-size:11px;font-weight:600;color:${cl}">${m.v.toFixed(1)}</span></div><div style="height:2px;background:var(--border);border-radius:2px;overflow:hidden"><div style="height:100%;width:${p}%;background:${cl};border-radius:2px"></div></div><div style="font-size:7px;color:var(--muted);margin-top:1px">${m.u}</div></div>`}).join('')}</div><div style="margin-top:10px;padding:8px 10px;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.15);border-radius:8px;font-size:9px;color:var(--text2);line-height:1.5"><i class="fa-solid fa-circle-info" style="color:var(--amber);margin-right:3px"></i>${aqi>150?'Wear N95 mask. Limit outdoor exercise. Keep windows closed.':aqi>100?'Sensitive: reduce outdoor exertion. Consider mask in traffic.':'Safe for outdoor activities. Monitor if respiratory issues.'}</div>`}
+
+// ===== WEATHER =====
+async function loadWeather(){if(!gpsOk)return;try{const r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${uLat}&longitude=${uLng}&current=temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m,wind_direction_10m,precipitation,weather_code,pressure_msl&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=Asia/Kathmandu&forecast_days=3`);const d=await r.json();renderW(d)}catch(e){document.getElementById('wOut').innerHTML=`<div style="text-align:center;padding:16px;color:var(--muted)">Failed</div>`}}
+function wc(c){const m={0:{i:'☀️',l:'Clear'},1:{i:'🌤️',l:'Mainly Clear'},2:{i:'⛅',l:'Partly Cloudy'},3:{i:'☁️',l:'Overcast'},45:{i:'🌫️',l:'Fog'},48:{i:'🌫️',l:'Rime Fog'},51:{i:'🌦️',l:'Drizzle'},53:{i:'🌦️',l:'Drizzle'},55:{i:'🌦️',l:'Dense Drizzle'},61:{i:'🌧️',l:'Light Rain'},63:{i:'🌧️',l:'Rain'},65:{i:'🌧️',l:'Heavy Rain'},71:{i:'🌨️',l:'Light Snow'},73:{i:'🌨️',l:'Snow'},75:{i:'❄️',l:'Heavy Snow'},80:{i:'🌦️',l:'Showers'},81:{i:'🌧️',l:'Rain Showers'},82:{i:'⛈️',l:'Heavy Showers'},95:{i:'⛈️',l:'Thunderstorm'},96:{i:'⛈️',l:'Thunder+Hail'},99:{i:'⛈️',l:'Severe Storm'}};return m[c]||{i:'🌡️',l:'Unknown'}}
+function wd(d){return['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'][Math.round(d/22.5)%16]}
+function renderW(d){const c=d.current;const dy=d.daily;const w=wc(c.weather_code);const alerts=[];
+if(c.temperature_2m>40)alerts.push({c:'var(--red)',i:'fa-temperature-high',t:'Extreme heat'});if(c.temperature_2m<2)alerts.push({c:'var(--cyan)',i:'fa-snowflake',t:'Cold wave'});if(c.wind_speed_10m>60)alerts.push({c:'var(--amber)',i:'fa-wind',t:'High wind'});if(c.precipitation>50)alerts.push({c:'var(--cyan)',i:'fa-cloud-showers-heavy',t:'Heavy rain — landslide risk'});if(c.weather_code>=95)alerts.push({c:'var(--purple)',i:'fa-bolt',t:'Thunderstorm — stay indoors'});
+document.getElementById('wOut').innerHTML=`<div class="sc" style="margin-bottom:12px;display:flex;align-items:center;gap:14px"><div><div style="font-size:40px">${w.i}</div><div style="font-size:9px;color:var(--text2);text-align:center">${w.l}</div></div><div><div style="font-size:44px;font-weight:300;line-height:1">${Math.round(c.temperature_2m)}°</div><div style="font-size:10px;color:var(--muted)">Feels ${Math.round(c.apparent_temperature)}°C</div></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px"><div class="sc" style="text-align:center"><div style="font-size:8px;color:var(--muted);text-transform:uppercase">Humidity</div><div style="font-size:16px;font-weight:700;color:var(--cyan)">${c.relative_humidity_2m}%</div></div><div class="sc" style="text-align:center"><div style="font-size:8px;color:var(--muted);text-transform:uppercase">Wind</div><div style="font-size:16px;font-weight:700">${c.wind_speed_10m.toFixed(0)} <span style="font-size:9px;color:var(--muted)">km/h ${wd(c.wind_direction_10m)}</span></div></div><div class="sc" style="text-align:center"><div style="font-size:8px;color:var(--muted);text-transform:uppercase">Pressure</div><div style="font-size:16px;font-weight:700">${Math.round(c.pressure_msl/100)} <span style="font-size:9px;color:var(--muted)">hPa</span></div></div><div class="sc" style="text-align:center"><div style="font-size:8px;color:var(--muted);text-transform:uppercase">Rain</div><div style="font-size:16px;font-weight:700;color:${c.precipitation>0?'var(--cyan)':'inherit'}">${c.precipitation} <span style="font-size:9px;color:var(--muted)">mm</span></div></div></div><div class="stitle"><i class="fa-solid fa-calendar-days" style="color:var(--amber)"></i>Forecast</div><div class="sc" style="display:flex">${dy.time.map((t,i)=>{const dn=new Date(t);const dn2=i===0?'Today':['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][dn.getDay()];const dw=wc(dy.weather_code[i]);return`<div style="text-align:center;flex:1;padding:6px"><div style="font-size:9px;color:var(--muted)">${dn2}</div><div style="font-size:18px">${dw.i}</div><div><b>${Math.round(dy.temperature_2m_max[i])}°</b> <span style="color:var(--muted)">${Math.round(dy.temperature_2m_min[i])}°</span></div>${dy.precipitation_sum[i]>0?`<div style="font-size:8px;color:var(--cyan)">${dy.precipitation_sum[i].toFixed(1)}mm</div>`:''}</div>`}).join('')}</div>${alerts.length?`<div style="margin-top:8px">${alerts.map(a=>`<div style="background:${a.c}12;border:1px solid ${a.c}30;border-radius:6px;padding:7px 10px;display:flex;align-items:center;gap:6px;margin-bottom:5px"><i class="fa-solid ${a.i}" style="color:${a.c}"></i><span style="font-size:10px;color:${a.c}">${a.t}</span></div>`).join('')}</div>`:''}`}
+
+// ===== HELPLINES =====
+function renderHL(){document.getElementById('hlOut').innerHTML=HL.map(cat=>`<div style="margin-bottom:14px"><div class="stitle"><i class="fa-solid ${cat.icon}" style="color:${cat.color}"></i>${cat.cat}</div>${cat.items.map(it=>`<a href="tel:${it.num.replace(/\s/g,'')}" class="hc"><div style="width:34px;height:34px;border-radius:7px;background:${cat.color}15;display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fa-solid ${cat.icon}" style="color:${cat.color};font-size:12px"></i></div><div style="flex:1;min-width:0"><div style="font-size:11px;font-weight:600">${it.name}</div><div style="font-size:9px;color:var(--muted)">${it.desc}</div></div><div style="text-align:right;flex-shrink:0;display:flex;align-items:center;gap:6px"><div class="mono" style="font-size:11px;font-weight:600;color:${cat.color}">${it.num}</div><div class="cbtn" style="width:26px;height:26px"><i class="fa-solid fa-phone" style="font-size:9px"></i></div></div></a>`).join('')}</div>`).join('')}
+
+// ===== AMBULANCE =====
+function renderAmb(){const g=AMB.filter(a=>a.tag==='Govt');const p=AMB.filter(a=>a.tag==='Pvt');document.getElementById('ambOut').innerHTML=`<div class="stitle"><i class="fa-solid fa-landmark" style="color:var(--green)"></i>Government (Free)</div>${g.map(a=>ambC(a,'var(--green)')).join('')}<div class="stitle" style="margin-top:14px"><i class="fa-solid fa-building" style="color:var(--amber)"></i>Private</div>${p.map(a=>ambC(a,'var(--amber)')).join('')}<div style="margin-top:10px;padding:8px 10px;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.15);border-radius:6px;font-size:9px;color:var(--text2);line-height:1.5"><i class="fa-solid fa-circle-info" style="color:var(--green);margin-right:3px"></i><b>Tip:</b> Govt (101) free but slower. Private charges but faster. Keep both saved.</div>`}
+function ambC(a,c){return`<a href="tel:${a.num.replace(/\s/g,'')}" class="hc"><div style="width:34px;height:34px;border-radius:7px;background:${c}15;display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fa-solid fa-truck-medical" style="color:${c};font-size:12px"></i></div><div style="flex:1;min-width:0"><div style="font-size:11px;font-weight:600">${a.name}</div><div style="font-size:9px;color:var(--muted)">${a.desc}</div></div><div style="display:flex;align-items:center;gap:6px"><div class="mono" style="font-size:11px;font-weight:600;color:${c}">${a.num}</div><div class="cbtn" style="width:26px;height:26px"><i class="fa-solid fa-phone" style="font-size:9px"></i></div></div></a>`}
+
+// ===== FIRST AID WITH ANIMATED SVGs =====
+function renderFA(){document.getElementById('faOut').innerHTML=FA.map((f,i)=>`<div class="fa-item" id="fa-${i}"><div class="fa-head" onclick="toggleFA(${i})"><div style="width:32px;height:32px;border-radius:7px;background:${f.color}15;display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fa-solid ${f.icon}" style="color:${f.color};font-size:13px"></i></div><div style="font-size:12px;font-weight:600">${f.title}</div><i class="fa-solid fa-chevron-down fa-chevron" style="font-size:11px"></i></div><div class="fa-body"><div class="fa-anim">${faSVG(f.anim)}</div><ol style="padding-left:16px;margin:0">${f.steps.map(s=>`<li style="margin-bottom:5px;font-size:11px;line-height:1.5;color:var(--text2)">${s}</li>`).join('')}</ol><div style="margin-top:8px;padding:7px 10px;background:rgba(239,68,68,.06);border-radius:6px;font-size:9px;color:var(--red)"><i class="fa-solid fa-triangle-exclamation" style="margin-right:3px"></i>Always call 101 alongside first aid. Not a substitute for professional training.</div></div></div>`).join('')}
+function toggleFA(i){document.getElementById(`fa-${i}`).classList.toggle('open')}
+
+// ===== CONTACTS =====
+function renderC(){const cs=JSON.parse(localStorage.getItem('sn_c')||'[]');if(!cs.length){document.getElementById('cL').innerHTML=`<div style="text-align:center;padding:24px;color:var(--muted)"><i class="fa-solid fa-address-book" style="font-size:20px;margin-bottom:6px;opacity:.3"></i><div>No contacts yet</div></div>`;return}document.getElementById('cL').innerHTML=cs.map((c,i)=>`<div class="contact-card"><div style="width:34px;height:34px;border-radius:50%;background:var(--amber-glow);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--amber);font-weight:700;font-size:13px">${c.n.charAt(0).toUpperCase()}</div><div style="flex:1;min-width:0"><div class="rel">${c.r}</div><div style="font-size:12px;font-weight:600">${c.n}</div><div class="mono" style="font-size:10px;color:var(--text2)">${c.p}</div></div><a href="tel:${c.p}" class="cbtn" style="width:30px;height:30px" aria-label="Call"><i class="fa-solid fa-phone" style="font-size:10px"></i></a><button onclick="delC(${i})" style="width:30px;height:30px;border-radius:50%;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:var(--red);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0" aria-label="Delete"><i class="fa-solid fa-trash" style="font-size:9px"></i></button></div>`).join('')}
+function saveC(){const n=document.getElementById('cN').value.trim();const p=document.getElementById('cP').value.trim();const r=document.getElementById('cR').value;if(!n||!p){toast('Name and phone required');return}const cs=JSON.parse(localStorage.getItem('sn_c')||'[]');cs.push({n,p,r});localStorage.setItem('sn_c',JSON.stringify(cs));document.getElementById('cN').value='';document.getElementById('cP').value='';document.getElementById('cF').style.display='none';renderC();toast('Contact saved')}
+function delC(i){const cs=JSON.parse(localStorage.getItem('sn_c')||'[]');cs.splice(i,1);localStorage.setItem('sn_c',JSON.stringify(cs));renderC();toast('Removed')}
+
+// ===== MISSING =====
+function renderM(){const ms=JSON.parse(localStorage.getItem('sn_m')||'[]');if(!ms.length){document.getElementById('mL2').innerHTML=`<div style="text-align:center;padding:24px;color:var(--muted)"><i class="fa-solid fa-person-circle-question" style="font-size:20px;margin-bottom:6px;opacity:.3"></i><div>No reports</div></div>`;return}document.getElementById('mL2').innerHTML=ms.map((m,i)=>`<div class="miss-card"><div style="display:flex;gap:10px"><div class="photo">${m.ph?`<img src="${m.ph}" alt="${m.n}">`:'<i class="fa-solid fa-user"></i>'}</div><div style="flex:1;min-width:0"><div style="display:flex;justify-content:space-between"><div style="font-size:13px;font-weight:700">${m.n}</div><span style="font-size:10px;color:var(--amber);background:var(--amber-glow);padding:1px 7px;border-radius:8px;font-weight:600">${m.a} yrs</span></div><div style="font-size:10px;color:var(--text2);margin-top:3px"><i class="fa-solid fa-location-dot" style="width:10px;color:var(--red)"></i>${m.l}</div><div style="font-size:10px;color:var(--text2);margin-top:1px"><i class="fa-solid fa-phone" style="width:10px;color:var(--green)"></i><span class="mono">${m.c}</span></div>${m.d?`<div style="font-size:9px;color:var(--muted);margin-top:3px;line-height:1.4">${m.d}</div>`:''}<div style="font-size:8px;color:var(--muted);margin-top:3px">${m.dt}</div></div></div><div style="display:flex;gap:5px;margin-top:7px"><a href="tel:${m.c}" class="cbtn" style="flex:1;border-radius:7px;height:28px;gap:4px;justify-content:center;font-size:10px;font-family:inherit;text-decoration:none"><i class="fa-solid fa-phone" style="font-size:9px"></i> Call</a><button onclick="shareM(${i})" style="flex:1;height:28px;border-radius:7px;background:var(--card2);border:1px solid var(--border);color:var(--cyan);font-family:inherit;font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:3px"><i class="fa-solid fa-share-nodes" style="font-size:9px"></i> Share</button><button onclick="delM(${i})" style="width:28px;height:28px;border-radius:7px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:var(--red);cursor:pointer;display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-trash" style="font-size:9px"></i></button></div></div>`).join('')}
+function saveM(){const n=document.getElementById('mN').value.trim();const a=document.getElementById('mA').value;const l=document.getElementById('mL').value.trim();const d=document.getElementById('mD').value.trim();const c=document.getElementById('mC').value.trim();if(!n||!l||!c){toast('Name, location, contact required');return}const pf=document.getElementById('mPh').files[0];const save=(ph)=>{const ms=JSON.parse(localStorage.getItem('sn_m')||'[]');ms.unshift({n,a:a||'?',l,d,c,ph,dt:npt()});localStorage.setItem('sn_m',JSON.stringify(ms));document.getElementById('mN').value='';document.getElementById('mA').value='';document.getElementById('mL').value='';document.getElementById('mD').value='';document.getElementById('mC').value='';document.getElementById('mPh').value='';document.getElementById('mF').style.display='none';renderM();toast('Saved — also inform police 100')};if(pf){const r=new FileReader();r.onload=e=>save(e.target.result);r.readAsDataURL(pf)}else save(null)}
+function delM(i){const ms=JSON.parse(localStorage.getItem('sn_m')||'[]');ms.splice(i,1);localStorage.setItem('sn_m',JSON.stringify(ms));renderM();toast('Removed')}
+function shareM(i){const ms=JSON.parse(localStorage.getItem('sn_m')||'[]');const m=ms[i];if(!m)return;const t=`MISSING PERSON\nName: ${m.n}\nAge: ${m.a}\nLast Seen: ${m.l}\nDesc: ${m.d||'N/A'}\nContact: ${m.c}\nReported: ${m.dt}\n\nPlease share widely.`;if(navigator.share)navigator.share({title:'Missing: '+m.n,text:t}).catch(()=>cp(t));else cp(t)}
+
+// ===== CHECKLIST =====
+function renderCK(){const sv=JSON.parse(localStorage.getItem('sn_ck')||'{}');document.getElementById('ckO').innerHTML=CK.map((cat,ci)=>{const dn=cat.items.length;const dd=cat.items.filter((_,ii)=>sv[`${ci}-${ii}`]).length;const pc=Math.round(dd/dn*100);const bc=pc===100?'var(--green)':pc>50?'var(--amber)':'var(--red)';return`<div style="margin-bottom:16px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px"><div class="stitle" style="margin:0"><i class="fa-solid fa-clipboard-list" style="color:var(--amber)"></i>${cat.cat}</div><span class="mono" style="font-size:10px;color:${bc};font-weight:600">${dd}/${dn}</span></div><div style="height:2px;background:var(--border);border-radius:2px;margin-bottom:6px;overflow:hidden"><div style="height:100%;width:${pc}%;background:${bc};border-radius:2px;transition:width .3s"></div></div>${cat.items.map((it,ii)=>{const k=`${ci}-${ii}`;const ck=sv[k];return`<div class="ci" onclick="togCK('${k}')"><div class="cb ${ck?'ck':''}">${ck?'<i class="fa-solid fa-check" style="font-size:8px;color:#fff"></i>':''}</div><div class="ct ${ck?'dn':''}" style="font-size:10px;line-height:1.5">${it}</div></div>`}).join('')}</div>`}).join('')}
+function togCK(k){const sv=JSON.parse(localStorage.getItem('sn_ck')||'{}');sv[k]=!sv[k];localStorage.setItem('sn_ck',JSON.stringify(sv));renderCK()}
+
+// ===== UTILS =====
+function npt(){const n=new Date();const u=n.getTime()+n.getTimezoneOffset()*60000;const np=new Date(u+345*60000);return`${String(np.getHours()).padStart(2,'0')}:${String(np.getMinutes()).padStart(2,'0')} NPT`}
+function toast(m){const t=document.getElementById('toast');document.getElementById('toastMsg').textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2500)}
+function updClock(){document.getElementById('clock').textContent=npt();const o=navigator.onLine;document.getElementById('netD').className=`sdot ${o?'on':'off'}`;document.getElementById('netT').textContent=o?'Online':'Offline'}
+
+document.addEventListener('DOMContentLoaded',()=>{updClock();setInterval(updClock,10000);initGPS();window.addEventListener('online',()=>{toast('Back online');updClock()});window.addEventListener('offline',()=>{toast('Offline');updClock()})});
+</script>
+</body>
+</html>
