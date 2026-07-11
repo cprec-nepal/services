@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nepal Safety Net — Admin Panel</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#06090f;--bg2:#0b1018;--card:#0f1724;--card2:#162032;--border:#1c2e42;--cyan:#22d3ee;--cg:rgba(34,211,238,.1);--red:#ef4444;--rg:rgba(239,68,68,.1);--green:#10b981;--gg:rgba(16,185,129,.1);--amber:#f59e0b;--ag:rgba(245,158,11,.1);--purple:#a78bfa;--pg:rgba(167,139,250,.1);--pink:#ec4899;--text:#f1f5f9;--text2:#94a3b8;--muted:#475569}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);overflow:hidden;height:100vh}.mono{font-family:'JetBrains Mono',monospace}
+::-webkit-scrollbar{width:4px;height:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--muted);border-radius:10px}
+.leaflet-container{background:var(--bg)!important}.leaflet-tile-pane{filter:saturate(.25)brightness(.3)contrast(1.2)}.leaflet-control-zoom a{background:var(--card)!important;color:var(--cyan)!important;border-color:var(--border)!important}.leaflet-control-attribution{display:none!important}
+.leaflet-popup-content-wrapper{background:var(--card)!important;color:var(--text)!important;border:1px solid var(--border)!important;border-radius:8px!important;box-shadow:0 6px 20px rgba(0,0,0,.5)!important}.leaflet-popup-tip{background:var(--card)!important}.leaflet-popup-close-button{color:var(--muted)!important}
+
+.hnav{display:flex;gap:2px;overflow-x:auto;padding:0 8px;scrollbar-width:none}.hnav::-webkit-scrollbar{display:none}
+.htab{display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 8px;border-radius:8px;cursor:pointer;transition:all .2s;color:var(--muted);font-size:7px;font-weight:500;white-space:nowrap;min-width:48px;border:1px solid transparent;flex-shrink:0}.htab:hover{color:var(--text2);background:var(--card)}.htab.active{color:var(--cyan);background:var(--cg);border-color:rgba(34,211,238,.15)}.htab i{font-size:14px}
+.section{display:none;height:100%;overflow-y:auto;padding:14px 16px}.section.active{display:block}
+.stitle{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:8px;font-weight:600;display:flex;align-items:center;gap:6px}
+.sc{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;transition:all .2s}
+.sbar{background:var(--bg2);border-top:1px solid var(--border);padding:4px 12px;display:flex;align-items:center;gap:10px;font-size:9px;color:var(--muted);flex-shrink:0}
+.sdot{width:4px;height:4px;border-radius:50%;display:inline-block;margin-right:3px}.sdot.on{background:var(--green);box-shadow:0 0 4px var(--green)}.sdot.off{background:var(--red)}
+.glow{position:fixed;width:350px;height:350px;border-radius:50%;pointer-events:none;z-index:0;filter:blur(80px);opacity:.25}
+
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;position:relative;overflow:hidden;flex:1;min-width:0}
+.stat-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px}
+.stat-card.cyan::before{background:linear-gradient(90deg,transparent,var(--cyan),transparent)}
+.stat-card.green::before{background:linear-gradient(90deg,transparent,var(--green),transparent)}
+.stat-card.red::before{background:linear-gradient(90deg,transparent,var(--red),transparent)}
+.stat-card.amber::before{background:linear-gradient(90deg,transparent,var(--amber),transparent)}
+.stat-card.purple::before{background:linear-gradient(90deg,transparent,var(--purple),transparent)}
+
+.log-item{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 10px;margin-bottom:5px;display:flex;align-items:center;gap:8px;transition:all .15s}
+.log-item:hover{border-color:rgba(34,211,238,.2)}
+.log-type{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px}
+
+.data-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:11px}.data-row:last-child{border-bottom:none}
+.data-label{color:var(--muted)}.data-val{color:var(--text2);text-align:right;max-width:60%;word-break:break-all}
+
+.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%) translateY(60px);background:var(--card);border:1px solid var(--cyan);border-radius:10px;padding:8px 18px;color:var(--text);font-size:11px;z-index:10000;opacity:0;transition:all .4s cubic-bezier(.4,0,.2,1);box-shadow:0 6px 20px rgba(0,0,0,.4);white-space:nowrap;max-width:90vw;overflow:hidden;text-overflow:ellipsis}.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+.progress-bar{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin-top:4px}
+.progress-fill{height:100%;border-radius:3px;transition:width .5s ease}
+
+.filter-chip{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:4px 10px;font-size:10px;cursor:pointer;transition:all .15s;color:var(--muted);white-space:nowrap}
+.filter-chip:hover{border-color:var(--muted)}.filter-chip.on{background:var(--cg);color:var(--cyan);border-color:rgba(34,211,238,.2);font-weight:600}
+
+.admin-badge{background:var(--cyan);color:var(--bg);font-size:7px;font-weight:700;padding:2px 6px;border-radius:4px;letter-spacing:1px;text-transform:uppercase;line-height:1}
+
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:livePulse 2s ease-in-out infinite}
+@keyframes livePulse{0%,100%{opacity:1;box-shadow:0 0 4px var(--green)}50%{opacity:.4;box-shadow:none}}
+
+@media(max-width:768px){.htab{min-width:42px;padding:6px 5px;font-size:7px}.htab i{font-size:12px}.section{padding:12px}.stat-card{padding:10px}}
+@media(prefers-reduced-motion:reduce){.live-dot{animation:none!important}*{transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div class="glow" style="top:-150px;left:-150px;background:radial-gradient(circle,rgba(34,211,238,.04),transparent 70%)"></div>
+<div id="toast" class="toast"><i class="fa-solid fa-circle-check" style="color:var(--cyan);margin-right:5px"></i><span id="toastMsg"></span></div>
+
+<div style="display:flex;flex-direction:column;height:100vh;position:relative;z-index:1">
+<header style="background:var(--bg2);border-bottom:1px solid var(--border);padding:8px 12px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
+  <div style="display:flex;align-items:center;gap:8px">
+    <div style="width:24px;height:24px;background:var(--cyan);border-radius:5px;display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-shield-halved" style="color:var(--bg);font-size:11px"></i></div>
+    <div><h1 style="font-size:12px;font-weight:700;letter-spacing:-.3px;line-height:1.1">Nepal Safety Net <span class="admin-badge">Admin</span></h1><p style="font-size:7px;color:var(--muted);text-transform:uppercase;letter-spacing:1px">Monitoring Dashboard</p></div>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px">
+    <div class="live-dot"></div>
+    <span style="font-size:10px;color:var(--green)" id="connStatus">Connected</span>
+    <button onclick="refreshData()" style="background:var(--card);border:1px solid var(--border);border-radius:6px;color:var(--cyan);padding:4px 10px;font-family:inherit;font-size:10px;cursor:pointer;transition:all .15s" onmouseover="this.style.borderColor='var(--cyan)'" onmouseout="this.style.borderColor='var(--border)'"><i class="fa-solid fa-rotate" id="refIco"></i></button>
+  </div>
+</header>
+<nav style="background:var(--bg2);border-bottom:1px solid var(--border);padding:4px 0;flex-shrink:0"><div class="hnav">
+  <div class="htab active" onclick="goA('dash')" data-t="dash"><i class="fa-solid fa-chart-line"></i>Dashboard</div>
+  <div class="htab" onclick="goA('activity')" data-t="activity"><i class="fa-solid fa-clock-rotate-left"></i>Activity</div>
+  <div class="htab" onclick="goA('sos')" data-t="sos"><i class="fa-solid fa-phone-volume"></i>SOS Log</div>
+  <div class="htab" onclick="goA('contacts')" data-t="contacts"><i class="fa-solid fa-address-book"></i>Contacts</div>
+  <div class="htab" onclick="goA('missing')" data-t="missing"><i class="fa-solid fa-person-circle-question"></i>Missing</div>
+  <div class="htab" onclick="goA('checklist')" data-t="checklist"><i class="fa-solid fa-clipboard-check"></i>Checklist</div>
+  <div class="htab" onclick="goA('map')" data-t="map"><i class="fa-solid fa-map-location-dot"></i>Map</div>
+  <div class="htab" onclick="goA('device')" data-t="device"><i class="fa-solid fa-mobile-screen"></i>Device</div>
+  <div class="htab" onclick="goA('data')" data-t="data"><i class="fa-solid fa-database"></i>Data</div>
+</div></nav>
+<div style="flex:1;overflow:hidden;position:relative">
+
+<!-- Dashboard -->
+<div class="section active" id="sec-dash">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:14px">
+    <div class="stat-card cyan"><div style="font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">SOS Activations</div><div class="mono" style="font-size:22px;font-weight:700;color:var(--cyan);line-height:1.2" id="dSos">0</div></div>
+    <div class="stat-card green"><div style="font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">Contacts Saved</div><div class="mono" style="font-size:22px;font-weight:700;color:var(--green);line-height:1.2" id="dCon">0</div></div>
+    <div class="stat-card red"><div style="font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">Missing Reports</div><div class="mono" style="font-size:22px;font-weight:700;color:var(--red);line-height:1.2" id="dMis">0</div></div>
+    <div class="stat-card amber"><div style="font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">Total Activities</div><div class="mono" style="font-size:22px;font-weight:700;color:var(--amber);line-height:1.2" id="dAct">0</div></div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:14px">
+    <div class="stat-card purple"><div style="font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">Checklist Done</div><div style="display:flex;align-items:baseline;gap:4px"><span class="mono" style="font-size:22px;font-weight:700;color:var(--purple);line-height:1.2" id="dCk">0</span><span style="font-size:11px;color:var(--muted)" id="dCkT">/0</span></div><div class="progress-bar"><div class="progress-fill" id="dCkBar" style="width:0%;background:var(--purple)"></div></div></div>
+    <div class="stat-card cyan"><div style="font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">Location Method</div><div style="font-size:12px;font-weight:600;color:var(--cyan);margin-top:2px" id="dLoc">—</div></div>
+    <div class="stat-card green"><div style="font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">Network</div><div style="display:flex;align-items:center;gap:4px;margin-top:2px"><span class="sdot" id="netD2"></span><span style="font-size:11px" id="netT2">—</span></div></div>
+    <div class="stat-card amber"><div style="font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">Last Activity</div><div style="font-size:11px;color:var(--text2);margin-top:2px" id="dLast">—</div></div>
+  </div>
+  <div class="stitle"><i class="fa-solid fa-chart-bar" style="color:var(--cyan)"></i>Activity Breakdown</div>
+  <div id="dBreakdown" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:6px;margin-bottom:14px"></div>
+  <div class="stitle"><i class="fa-solid fa-timeline" style="color:var(--amber)"></i>Recent Activity</div>
+  <div id="dRecent"></div>
+</div>
+
+<!-- Activity Log -->
+<div class="section" id="sec-activity">
+  <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:10px" id="actFilters"></div>
+  <div style="position:relative;margin-bottom:10px"><i class="fa-solid fa-magnifying-glass" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:11px"></i><input type="text" id="actSearch" placeholder="Search activities..." style="width:100%;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:8px 10px 8px 32px;font-family:inherit;font-size:11px;outline:none;transition:border-color .2s" oninput="renderActLog()" onfocus="this.style.borderColor='var(--cyan)'" onblur="this.style.borderColor='var(--border)'"></div>
+  <div id="actList"></div>
+</div>
+
+<!-- SOS Log -->
+<div class="section" id="sec-sos">
+  <div id="sosList"></div>
+  <div id="sosMap" style="height:250px;border-radius:10px;overflow:hidden;margin-top:10px;border:1px solid var(--border)"></div>
+</div>
+
+<!-- Contacts -->
+<div class="section" id="sec-contacts">
+  <div id="conList"></div>
+</div>
+
+<!-- Missing -->
+<div class="section" id="sec-missing">
+  <div id="misList"></div>
+</div>
+
+<!-- Checklist -->
+<div class="section" id="sec-checklist">
+  <div id="ckList"></div>
+</div>
+
+<!-- Map -->
+<div class="section" id="sec-map">
+  <div id="allMap" style="height:calc(100vh - 180px);min-height:300px;border-radius:10px;overflow:hidden;border:1px solid var(--border)"></div>
+</div>
+
+<!-- Device -->
+<div class="section" id="sec-device">
+  <div class="stitle"><i class="fa-solid fa-circle-info" style="color:var(--cyan)"></i>Browser & Device</div>
+  <div class="sc" style="margin-bottom:10px" id="devInfo"></div>
+  <div class="stitle"><i class="fa-solid fa-clock" style="color:var(--amber)"></i>Session</div>
+  <div class="sc" id="sessInfo"></div>
+  <div class="stitle"><i class="fa-solid fa-hard-drive" style="color:var(--purple)"></i>Storage Usage</div>
+  <div class="sc" id="storInfo"></div>
+</div>
+
+<!-- Data Management -->
+<div class="section" id="sec-data">
+  <div class="stitle"><i class="fa-solid fa-download" style="color:var(--cyan)"></i>Export</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">
+    <button onclick="exportAll()" style="padding:12px;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--cyan);font-family:inherit;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:8px" onmouseover="this.style.borderColor='var(--cyan)'" onmouseout="this.style.borderColor='var(--border)'"><i class="fa-solid fa-file-export"></i>Export All as JSON</button>
+    <button onclick="exportReport()" style="padding:12px;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--amber);font-family:inherit;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:8px" onmouseover="this.style.borderColor='var(--amber)'" onmouseout="this.style.borderColor='var(--border)'"><i class="fa-solid fa-file-lines"></i>Export Text Report</button>
+  </div>
+  <div class="stitle"><i class="fa-solid fa-triangle-exclamation" style="color:var(--red)"></i>Danger Zone</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+    <button onclick="clearLogs()" style="padding:12px;background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);border-radius:8px;color:var(--red);font-family:inherit;font-size:12px;cursor:pointer;transition:all .15s" onmouseover="this.style.borderColor='var(--red)';this.style.background='rgba(239,68,68,.1)'" onmouseout="this.style.borderColor='rgba(239,68,68,.2)';this.style.background='rgba(239,68,68,.06)'"><i class="fa-solid fa-eraser" style="margin-right:6px"></i>Clear Activity Logs</button>
+    <button onclick="clearAll()" style="padding:12px;background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);border-radius:8px;color:var(--red);font-family:inherit;font-size:12px;cursor:pointer;transition:all .15s" onmouseover="this.style.borderColor='var(--red)';this.style.background='rgba(239,68,68,.1)'" onmouseout="this.style.borderColor='rgba(239,68,68,.2)';this.style.background='rgba(239,68,68,.06)'"><i class="fa-solid fa-trash" style="margin-right:6px"></i>Clear ALL Data</button>
+  </div>
+</div>
+
+</div>
+<div class="sbar"><span><span class="sdot" id="netD"></span><span id="netT">—</span></span><span class="mono" id="clock">—</span><span style="margin-left:auto" id="lastR">—</span></div>
+</div>
+
+<script>
+let allMap=null,actFilter='all',sessionStart=Date.now(),tabTimes={dash:Date.now()};
+const LOG_ICONS={sos:{i:'fa-phone-volume',c:'var(--red)',bg:'rgba(239,68,68,.12)'},contact:{i:'fa-user-plus',c:'var(--green)',bg:'rgba(16,185,129,.12)'},missing:{i:'fa-person-circle-question',c:'var(--amber)',bg:'var(--ag)'},checklist:{i:'fa-clipboard-check',c:'var(--purple)',bg:'var(--pg)'},nearby:{i:'fa-hospital',c:'var(--cyan)',bg:'var(--cg)'},weather:{i:'fa-cloud-sun',c:'var(--amber)',bg:'var(--ag)'},aqi:{i:'fa-lungs',c:'var(--cyan)',bg:'var(--cg)'},share:{i:'fa-share-nodes',c:'var(--cyan)',bg:'var(--cg)'},location:{i:'fa-location-crosshairs',c:'var(--green)',bg:'var(--gg)'}};
+
+function npt(){const n=new Date();const u=n.getTime()+n.getTimezoneOffset()*60000;const np=new Date(u+345*60000);return`${String(np.getHours()).padStart(2,'0')}:${String(np.getMinutes()).padStart(2,'0')}:${String(np.getSeconds()).padStart(2,'0')} NPT`}
+function fmtTime(iso){if(!iso)return'—';const d=new Date(iso);const np=new Date(d.getTime()+d.getTimezoneOffset()*60000+345*60000);const now=Date.now();const diff=now-d.getTime();const ago=diff<60000?`${Math.floor(diff/1000)}s ago`:diff<3600000?`${Math.floor(diff/60000)}m ago`:diff<86400000?`${Math.floor(diff/3600000)}h ago`:`${Math.floor(diff/86400000)}d ago`;return`${String(np.getHours()).padStart(2,'0')}:${String(np.getMinutes()).padStart(2,'0')} (${ago})`}
+function toast(m){const t=document.getElementById('toast');document.getElementById('toastMsg').textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2000)}
+function ls(k,d){try{return d?JSON.parse(localStorage.getItem(k)||d):JSON.parse(localStorage.getItem(k)||'null')}catch(e){return null}}
+function ss(k,v){localStorage.setItem(k,JSON.stringify(v))}
+
+// ===== TABS =====
+function goA(t){document.querySelectorAll('.htab').forEach(e=>e.classList.remove('active'));document.querySelector(`.htab[data-t="${t}"]`).classList.add('active');document.querySelectorAll('.section').forEach(e=>e.classList.remove('active'));document.getElementById(`sec-${t}`).classList.add('active');
+tabTimes[t]=Date.now();if(t==='map'&&!allMap)initAllMap();renderAll()}
+
+// ===== DATA LOADING =====
+function getData(){
+  const logs=ls('sn_log',[]);const contacts=ls('sn_c',[]);const missing=ls('sn_m',[]);
+  const checks=ls('sn_ck',{});const location=ls('sn_loc',null);
+  return{logs,contacts,missing,checks,location}
+}
+
+// ===== DASHBOARD =====
+function renderDash(){
+  const{logs,contacts,missing,checks,location}=getData();
+  const sosCount=logs.filter(l=>l.t==='sos').length;
+  document.getElementById('dSos').textContent=sosCount;
+  document.getElementById('dCon').textContent=contacts.length;
+  document.getElementById('dMis').textContent=missing.length;
+  document.getElementById('dAct').textContent=logs.length;
+  // Checklist
+  const ckKeys=Object.keys(checks);let done=0,total=0;
+  ckKeys.forEach(k=>{total++;if(checks[k])done++});
+  document.getElementById('dCk').textContent=done;
+  document.getElementById('dCkT').textContent=`/${total}`;
+  document.getElementById('dCkBar').style.width=total?`${(done/total*100).toFixed(0)}%`:'0%';
+  // Location
+  if(location){document.getElementById('dLoc').textContent=location.method==='gps'?'GPS (Precise)':location.method==='ip'?`IP (${location.city||'Nepal'})`:`Manual: ${location.method}`}
+  else{document.getElementById('dLoc').textContent='Not set'}
+  // Network
+  const on=navigator.onLine;document.getElementById('netD2').className=`sdot ${on?'on':'off'}`;document.getElementById('netT2').textContent=on?'Online':'Offline';
+  // Last activity
+  if(logs.length)document.getElementById('dLast').textContent=fmtTime(logs[0].time);
+  else document.getElementById('dLast').textContent='No activity yet';
+  // Breakdown
+  const types={};logs.forEach(l=>{types[l.t]=(types[l.t]||0)+1});
+  const bd=document.getElementById('dBreakdown');
+  const typeLabels={sos:'SOS Activations',contact:'Contacts Saved',missing:'Missing Reports',checklist:'Checklist Toggles',nearby:'Nearby Searches',weather:'Weather Loads',aqi:'AQI Checks',share:'Location Shares',location:'Location Sets'};
+  bd.innerHTML=Object.entries(types).sort((a,b)=>b[1]-a[1]).map(([t,c])=>{
+    const ic=LOG_ICONS[t]||{i:'fa-circle',c:'var(--muted)',bg:'var(--card2)'};
+    return`<div class="sc" style="display:flex;align-items:center;gap:10px"><div style="width:30px;height:30px;border-radius:7px;background:${ic.bg};display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fa-solid ${ic.i}" style="color:${ic.c};font-size:12px"></i></div><div style="flex:1;min-width:0"><div style="font-size:11px;font-weight:500">${typeLabels[t]||t}</div><div style="font-size:9px;color:var(--muted)">actions</div></div><div class="mono" style="font-size:16px;font-weight:700;color:${ic.c}">${c}</div></div>`}).join('');
+  // Recent
+  const recent=document.getElementById('dRecent');
+  if(!logs.length){recent.innerHTML=`<div style="text-align:center;padding:20px;color:var(--muted)"><i class="fa-solid fa-inbox" style="font-size:20px;margin-bottom:6px;opacity:.3"></i><div>No activity recorded</div><div style="font-size:9px;margin-top:3px">Use the main app to generate activity</div></div>`;return}
+  recent.innerHTML=logs.slice(0,8).map(l=>{const ic=LOG_ICONS[l.t]||{i:'fa-circle',c:'var(--muted)',bg:'var(--card2)'};return`<div class="log-item"><div class="log-type" style="background:${ic.bg}"><i class="fa-solid ${ic.i}" style="color:${ic.c}"></i></div><div style="flex:1;min-width:0"><div style="font-size:11px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${l.d}</div></div><div style="font-size:9px;color:var(--muted);white-space:nowrap">${fmtTime(l.time)}</div></div>`}).join('');
+}
+
+// ===== ACTIVITY LOG =====
+function renderActFilters(){
+  const{logs}=getData();const types=[...new Set(logs.map(l=>l.t))];
+  const labels={sos:'SOS',contact:'Contacts',missing:'Missing',checklist:'Checklist',nearby:'Nearby',weather:'Weather',aqi:'AQI',share:'Shared',location:'Location'};
+  document.getElementById('actFilters').innerHTML=`<div class="filter-chip on" onclick="setActF('all',this)">All (${logs.length})</div>`+types.map(t=>`<div class="filter-chip" onclick="setActF('${t}',this)">${labels[t]||t}</div>`).join('');
+}
+function setActF(f,el){actFilter=f;document.querySelectorAll('#actFilters .filter-chip').forEach(c=>c.classList.remove('on'));el.classList.add('on');renderActLog()}
+function renderActLog(){
+  const{logs}=getData();const q=(document.getElementById('actSearch').value||'').toLowerCase();
+  let filtered=actFilter==='all'?logs:logs.filter(l=>l.t===actFilter);
+  if(q)filtered=filtered.filter(l=>l.d.toLowerCase().includes(q));
+  const list=document.getElementById('actList');
+  if(!filtered.length){list.innerHTML=`<div style="text-align:center;padding:20px;color:var(--muted)">No matching activities</div>`;return}
+  list.innerHTML=filtered.map(l=>{const ic=LOG_ICONS[l.t]||{i:'fa-circle',c:'var(--muted)',bg:'var(--card2)'};return`<div class="log-item"><div class="log-type" style="background:${ic.bg}"><i class="fa-solid ${ic.i}" style="color:${ic.c}"></i></div><div style="flex:1;min-width:0"><div style="font-size:11px;color:var(--text2)">${l.d}</div></div><div style="font-size:9px;color:var(--muted);white-space:nowrap">${fmtTime(l.time)}</div></div>`}).join('');
+}
+
+// ===== SOS LOG =====
+function renderSosLog(){
+  const{logs,location}=getData();const sosLogs=logs.filter(l=>l.t==='sos');
+  const list=document.getElementById('sosList');
+  if(!sosLogs.length){list.innerHTML=`<div style="text-align:center;padding:20px;color:var(--muted)"><i class="fa-solid fa-phone-volume" style="font-size:20px;margin-bottom:6px;opacity:.3"></i><div>No SOS activations recorded</div></div>`;return}
+  list.innerHTML=sosLogs.map((l,i)=>{const loc=location;const coords=l.coords||'—';return`<div class="sc" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><div style="display:flex;align-items:center;gap:6px"><div style="width:26px;height:26px;border-radius:6px;background:rgba(239,68,68,.12);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-phone-volume" style="color:var(--red);font-size:11px"></i></div><span style="font-size:11px;font-weight:600">SOS #${sosLogs.length-i}</span></div><span style="font-size:9px;color:var(--muted)">${fmtTime(l.time)}</span></div><div style="font-size:10px;color:var(--text2);line-height:1.6"><div style="display:flex;gap:6px"><span style="color:var(--muted)">Coords:</span><span class="mono">${coords}</span></div>${l.method?`<div style="display:flex;gap:6px"><span style="color:var(--muted)">Method:</span><span>${l.method}</span></div>`:''}${l.address?`<div style="display:flex;gap:6px"><span style="color:var(--muted)">Address:</span><span>${l.address}</span></div>`:''}</div></div>`}).join('');
+}
+
+// ===== CONTACTS =====
+function renderContacts(){
+  const{contacts}=getData();const list=document.getElementById('conList');
+  if(!contacts.length){list.innerHTML=`<div style="text-align:center;padding:20px;color:var(--muted)">No contacts saved</div>`;return}
+  list.innerHTML=contacts.map((c,i)=>`<div class="sc" style="margin-bottom:6px;display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:50%;background:var(--ag);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--amber);font-weight:700;font-size:12px">${c.n.charAt(0).toUpperCase()}</div><div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:600">${c.n}</div><div style="display:flex;gap:8px;margin-top:2px;font-size:10px;color:var(--muted)"><span class="rel" style="font-size:8px;text-transform:uppercase;letter-spacing:.5px;background:var(--card2);padding:1px 5px;border-radius:4px">${c.r}</span><span class="mono">${c.p}</span></div></div><a href="tel:${c.p}" style="width:30px;height:30px;border-radius:50%;background:var(--green);border:none;color:#fff;display:flex;align-items:center;justify-content:center;text-decoration:none;flex-shrink:0;cursor:pointer"><i class="fa-solid fa-phone" style="font-size:10px"></i></a></div>`).join('');
+}
+
+// ===== MISSING =====
+function renderMissing(){
+  const{missing}=getData();const list=document.getElementById('misList');
+  if(!missing.length){list.innerHTML=`<div style="text-align:center;padding:20px;color:var(--muted)">No missing reports</div>`;return}
+  list.innerHTML=missing.map(m=>`<div class="sc" style="margin-bottom:8px"><div style="display:flex;gap:10px;margin-bottom:6px"><div style="width:42px;height:42px;border-radius:8px;background:var(--card2);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:16px;overflow:hidden;flex-shrink:0">${m.ph?`<img src="${m.ph}" style="width:100%;height:100%;object-fit:cover">`:'<i class="fa-solid fa-user"></i>'}</div><div style="flex:1;min-width:0"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:13px;font-weight:700">${m.n}</div><span style="font-size:10px;color:var(--amber);background:var(--ag);padding:1px 7px;border-radius:8px;font-weight:600">${m.a} yrs</span></div><div style="font-size:10px;color:var(--text2);margin-top:2px"><i class="fa-solid fa-location-dot" style="width:10px;color:var(--red)"></i>${m.l}</div><div style="font-size:10px;color:var(--text2);margin-top:1px"><i class="fa-solid fa-phone" style="width:10px;color:var(--green)"></i><span class="mono">${m.c}</span></div>${m.d?`<div style="font-size:9px;color:var(--muted);margin-top:2px">${m.d}</div>`:''}<div style="font-size:8px;color:var(--muted);margin-top:3px">Reported: ${m.dt||'—'}</div></div></div></div>`).join('');
+}
+
+// ===== CHECKLIST =====
+function renderChecklist(){
+  const{checks}=getData();const list=document.getElementById('ckList');
+  const cats=[{cat:"Before Earthquake",items:["Identify safe spots","Secure heavy furniture","Prepare go-bag","Know shutoffs","Plan meeting point","Keep docs safe","Learn first aid","Identify open space","Know exits","Keep cash ready"]},{cat:"During Earthquake",items:["DROP COVER HOLD ON","Crouch interior wall","Stay from windows","In bed: stay put","Outdoors: clear area","Vehicle: pull over","Don't run outside","Coast: higher ground"]},{cat:"After Earthquake",items:["Check injuries","Check gas leaks","Put out fires","Wear shoes","Inspect building","No elevators","Listen to radio","Expect aftershocks","Don't enter damaged","Help neighbors","Document damage"]},{cat:"Flood & Landslide",items:["Know risk zone","Keep drainage clear","No riverbanks monsoon","Move to higher ground","Keep items above flood","Move perpendicular","Boil water","Watch animals"]}];
+  let totalDone=0,totalAll=0;
+  list.innerHTML=cats.map((cat,ci)=>{let done=0;const total=cat.items.length;totalAll+=total;
+    cat.items.forEach((_,ii)=>{const k=`${ci}-${ii}`;if(checks[k])done++;totalDone+=done});
+    const pct=total?Math.round(done/total*100):0;const bc=pct===100?'var(--green)':pct>50?'var(--amber)':'var(--red)';
+    return`<div class="sc" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><div style="font-size:11px;font-weight:600">${cat.cat}</div><span class="mono" style="font-size:11px;color:${bc};font-weight:600">${done}/${total}</span></div><div class="progress-bar"><div class="progress-fill" style="width:${pct}%;background:${bc}"></div></div><div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:6px">${cat.items.map((it,ii)=>{const k=`${ci}-${ii}`;const ck=checks[k];return`<span style="font-size:9px;padding:3px 7px;border-radius:4px;background:${ck?'var(--gg)':'var(--card2)'};color:${ck?'var(--green)':'var(--muted)'};border:1px solid ${ck?'rgba(16,185,129,.2)':'var(--border)'}">${ck?'✓':'○'} ${it}</span>`}).join('')}</div></div>`}).join('');
+  document.getElementById('dCk').textContent=totalDone;document.getElementById('dCkT').textContent=`/${totalAll}`;
+  document.getElementById('dCkBar').style.width=totalAll?`${(totalDone/totalAll*100).toFixed(0)}%`:'0%';
+}
+
+// ===== MAP =====
+function initAllMap(){
+  allMap=L.map('allMap',{zoomControl:false,attributionControl:false}).setView([28.1,84.2],7);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:16}).addTo(allMap);
+  plotAllMapData();
+}
+function plotAllMapData(){
+  if(!allMap)return;
+  allMap.eachLayer(l=>{if(l._admin)allMap.removeLayer(l)});
+  const{contacts,missing}=getData();
+  // Plot contacts
+  const loc=ls('sn_loc',null);
+  if(loc){L.circleMarker([loc.lat,loc.lng],{radius:8,color:'var(--cyan)',fillColor:'var(--cyan)',fillOpacity:.5,weight:2}).addTo(allMap).bindPopup('<b>User Location</b>')._admin=true}
+  // Plot SOS locations from logs
+  const logs=ls('sn_log',[]);const sosLogs=logs.filter(l=>l.t==='sos');
+  sosLogs.forEach(l=>{if(l.lat&&l.lng){L.circleMarker([l.lat,l.lng],{radius:10,color:'var(--red)',fillColor:'var(--red)',fillOpacity:.3,weight:2}).addTo(allMap).bindPopup(`<b>SOS</b><div style="font-size:10px;color:var(--text2)">${fmtTime(l.time)}</div>`)._admin=true}});
+  // Plot missing person last seen (approximate - we only have city name)
+  if(missing.length){const bounds=[];if(loc)bounds.push([loc.lat,loc.lng]);sosLogs.forEach(l=>{if(l.lat)bounds.push([l.lat,l.lng])});
+  if(bounds.length)allMap.fitBounds(L.latLngBounds(bounds),{padding:[30,30]})}
+}
+
+// ===== DEVICE INFO =====
+function renderDevice(){
+  const ua=navigator.userAgent;const loc=ls('sn_loc',null);
+  let browser='Unknown',os='Unknown',device='Unknown';
+  if(ua.includes('Firefox/'))browser='Firefox';
+  else if(ua.includes('Edg/'))browser='Edge';
+  else if(ua.includes('Chrome/'))browser='Chrome';
+  else if(ua.includes('Safari/'))browser='Safari';
+  if(ua.includes('Windows'))os='Windows';
+  else if(ua.includes('Mac OS'))os='macOS';
+  else if(ua.includes('Android'))os='Android';
+  else if(ua.includes('iPhone')||ua.includes('iPad'))os='iOS';
+  else if(ua.includes('Linux'))os='Linux';
+  if(/Mobile|Android|iPhone|iPad/i.test(ua))device='Mobile';else device='Desktop';
+  const sessDur=Math.floor((Date.now()-sessionStart)/60000);
+
+  document.getElementById('devInfo').innerHTML=[
+    ['Browser',browser],['OS',os],['Device',device],['Screen',`${screen.width}×${screen.height}`],['DPR',window.devicePixelRatio],['Language',navigator.language||'—'],['Cookies',navigator.cookieEnabled?'Enabled':'Disabled'],['Local Storage',typeof localStorage!=='undefined'?'Available':'Unavailable']
+  ].map(([l,v])=>`<div class="data-row"><span class="data-label">${l}</span><span class="data-val" style="color:var(--text2)">${v}</span></div>`).join('');
+
+  document.getElementById('sessInfo').innerHTML=[
+    ['Session Start',npt()],['Duration',`${sessDur} min`],['Page Visible',document.hidden?'No':'Yes'],['Active Tab',getActiveTab()],['Refreshes',sessionRefreshes||0],['Location',loc?`${loc.method} (${Math.round(loc.acc||0)}m)`:'Not set']
+  ].map(([l,v])=>`<div class="data-row"><span class="data-label">${l}</span><span class="data-val" style="color:var(--text2)">${v}</span></div>`).join('');
+
+  // Storage
+  let totalSize=0;const sizes={};
+  for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);const v=localStorage.getItem(k);const size=new Blob([k,v]).size;sizes[k]=size;totalSize+=size}
+  document.getElementById('storInfo').innerHTML=Object.entries(sizes).sort((a,b)=>b[1]-a[1]).map(([k,s])=>`<div class="data-row"><span class="data-label" style="max-width:50%;word-break:break-all">${k}</span><span class="data-val" style="color:var(--text2)">${(s/1024).toFixed(1)} KB</span></div>`).join('')+`<div class="data-row" style="border-top:2px solid var(--cyan);margin-top:4px;padding-top:8px;border-bottom:none"><span class="data-label" style="font-weight:600;color:var(--cyan)">Total</span><span class="data-val" style="font-weight:700;color:var(--cyan)">${(totalSize/1024).toFixed(1)} KB (${localStorage.length} keys)</span></div>`;
+}
+function getActiveTab(){const a=document.querySelector('.htab.active');return a?a.dataset.t:'dash'}
+let sessionRefreshes=0;
+
+// ===== DATA MANAGEMENT =====
+function exportAll(){
+  const data={exportedAt:new Date().toISOString(),logs:ls('sn_log',[]),contacts:ls('sn_c',[]),missing:ls('sn_m',[]),checklist:ls('sn_ck',{}),location:ls('sn_loc',null)};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`safetynet-export-${Date.now()}.json`;a.click();URL.revokeObjectURL(a.href);toast('Exported as JSON');
+}
+function exportReport(){
+  const{logs,contacts,missing,checks,location}=getData();
+  const sosCount=logs.filter(l=>l.t==='sos').length;
+  let ckTotal=0,ckDone=0;Object.values(checks).forEach(v=>{ckTotal++;if(v)ckDone++});
+  const text=`NEPAL SAFETY NET — ADMIN REPORT\nGenerated: ${npt()}\n${'='.repeat(50)}\n\nSUMMARY\n  Total Activities: ${logs.length}\n  SOS Activations: ${sosCount}\n  Contacts Saved: ${contacts.length}\n  Missing Reports: ${missing.length}\n  Checklist: ${ckDone}/${ckTotal} (${ckTotal?Math.round(ckDone/ckTotal*100):0}%)\n  Location: ${location?location.method+' ±'+Math.round(location.acc||0)+'m':'Not set'}\n\nRECENT ACTIVITY (Last 20)\n${logs.slice(0,20).map((l,i)=>`${i+1}. [${l.t.toUpperCase()}] ${l.d} — ${fmtTime(l.time)}`).join('\n')}\n\nEMERGENCY CONTACTS\n${contacts.map((c,i)=>`${i+1}. ${c.n} (${c.r}) — ${c.p}`).join('\n')||'None'}\n\nMISSING PERSONS\n${missing.map((m,i)=>`${i+1}. ${m.n}, ${m.a}yrs — Last seen: ${m.l} — Contact: ${m.c}`).join('\n')||'None'}\n`;
+  const blob=new Blob([text],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`safetynet-report-${Date.now()}.txt`;a.click();URL.revokeObjectURL(a.href);toast('Text report exported');
+}
+function clearLogs(){if(!confirm('Clear all activity logs? This cannot be undone.'))return;localStorage.removeItem('sn_log');renderAll();toast('Activity logs cleared')}
+function clearAll(){if(!confirm('DELETE ALL data? Contacts, missing reports, checklist progress, activity logs — everything? This CANNOT be undone.'))return;['sn_log','sn_c','sn_m','sn_ck','sn_loc'].forEach(k=>localStorage.removeItem(k));renderAll();toast('All data cleared')}
+
+// ===== REFRESH =====
+function refreshData(){sessionRefreshes++;const i=document.getElementById('refIco');i.classList.add('fa-spin');setTimeout(()=>i.classList.remove('fa-spin'),600);renderAll();document.getElementById('lastR').textContent=`Updated ${npt()}`}
+
+// ===== RENDER ALL =====
+function renderAll(){renderDash();renderActFilters();renderActLog();renderSosLog();renderContacts();renderMissing();renderChecklist();renderDevice();if(allMap)plotAllMapData()}
+
+// ===== UTILS =====
+function updClock(){document.getElementById('clock').textContent=npt();const o=navigator.onLine;document.getElementById('netD').className=`sdot ${o?'on':'off'}`;document.getElementById('netT').textContent=o?'Online':'Offline';document.getElementById('connStatus').textContent=o?'Connected':'Disconnected'}
+// Auto-refresh every 5 seconds
+setInterval(()=>{updClock();renderDash()},5000);
+// Listen for storage changes from main app
+window.addEventListener('storage',e=>{if(e.key.startsWith('sn_')){renderAll()}});
+
+document.addEventListener('DOMContentLoaded',()=>{updClock();setInterval(updClock,10000);renderAll()});
+</script>
+</body>
+</html>
