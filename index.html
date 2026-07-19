@@ -16,10 +16,8 @@
 ::-webkit-scrollbar{width:4px;height:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--muted);border-radius:10px}
 .leaflet-container{background:var(--bg)!important}.leaflet-tile-pane{filter:saturate(.3)brightness(.35)contrast(1.2)}.leaflet-control-zoom a{background:var(--card)!important;color:var(--amber)!important;border-color:var(--border)!important}.leaflet-control-attribution{display:none!important}
 .leaflet-popup-content-wrapper{background:var(--card)!important;color:var(--text)!important;border:1px solid var(--border)!important;border-radius:10px!important;box-shadow:0 8px 30px rgba(0,0,0,.6)!important}.leaflet-popup-tip{background:var(--card)!important}.leaflet-popup-close-button{color:var(--muted)!important}
-
 .hnav{display:flex;gap:2px;overflow-x:auto;padding:0 10px;scrollbar-width:none;-ms-overflow-style:none}.hnav::-webkit-scrollbar{display:none}
 .htab{display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 9px;border-radius:10px;cursor:pointer;transition:all .2s;color:var(--muted);font-size:8px;font-weight:500;white-space:nowrap;min-width:52px;border:1px solid transparent;flex-shrink:0}.htab:hover{color:var(--text2);background:var(--card)}.htab.active{color:var(--amber);background:var(--amber-glow);border-color:rgba(245,158,11,.2)}.htab i{font-size:15px}
-
 .section{display:none;height:100%;overflow-y:auto;padding:14px 18px}.section.active{display:block}
 .stitle{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:10px;font-weight:600;display:flex;align-items:center;gap:6px}
 .sc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;transition:all .2s}.sc:hover{border-color:rgba(245,158,11,.3)}
@@ -42,80 +40,70 @@
 .contact-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:11px;display:flex;align-items:center;gap:10px;margin-bottom:7px}.contact-card .rel{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
 .miss-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:8px}.miss-card .photo{width:48px;height:48px;border-radius:10px;background:var(--card2);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:18px;flex-shrink:0;overflow:hidden}.miss-card .photo img{width:100%;height:100%;object-fit:cover}
 .aqi-ring{width:90px;height:90px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;border:4px solid}
-input[type="text"],input[type="tel"],input[type="number"],textarea,select{background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:8px 11px;font-family:inherit;font-size:11px;outline:none;width:100%;transition:border-color .2s}input:focus,textarea:focus,select:focus{border-color:var(--amber)}textarea{resize:vertical;min-height:50px}
-
-/* First Aid Animated Illustrations */
+input[type="text"],input[type="tel"],input[type="number"],input[type="password"],textarea,select{background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:8px 11px;font-family:inherit;font-size:11px;outline:none;width:100%;transition:border-color .2s}input:focus,textarea:focus,select:focus{border-color:var(--amber)}textarea{resize:vertical;min-height:50px}
 .fa-anim{width:100%;height:120px;border-radius:10px;overflow:hidden;margin-bottom:12px;position:relative;background:var(--bg)}
-
-/* CPR Animation */
-.cpr-anim .heart{fill:var(--red);animation:cprHeart 1.2s ease-in-out infinite}
-.cpr-anim .hand{animation:cprPush 1.2s ease-in-out infinite}
-.cpr-anim .ecg{stroke:var(--green);stroke-width:2;fill:none;stroke-dasharray:200;stroke-dashoffset:200;animation:ecgDraw 2s linear infinite}
+.cpr-anim .heart{fill:var(--red);animation:cprHeart 1.2s ease-in-out infinite}.cpr-anim .hand{animation:cprPush 1.2s ease-in-out infinite}.cpr-anim .ecg{stroke:var(--green);stroke-width:2;fill:none;stroke-dasharray:200;stroke-dashoffset:200;animation:ecgDraw 2s linear infinite}
 @keyframes cprHeart{0%,100%{transform:scale(1)}30%,50%{transform:scale(.75)}70%{transform:scale(1.05)}}
 @keyframes cprPush{0%,20%{transform:translateY(0)}35%,55%{transform:translateY(6px)}70%,100%{transform:translateY(0)}}
 @keyframes ecgDraw{0%{stroke-dashoffset:200}50%{stroke-dashoffset:0}100%{stroke-dashoffset:-200}}
-
-/* Bleeding Animation */
-.bleed-anim .drop{fill:var(--red);animation:dropFall 1s ease-in infinite}
-.bleed-anim .drop:nth-child(2){animation-delay:.3s}.bleed-anim .drop:nth-child(3){animation-delay:.6s}
-.bleed-anim .hand-press{animation:pressHand 1.5s ease-in-out infinite}
+.bleed-anim .drop{fill:var(--red);animation:dropFall 1s ease-in infinite}.bleed-anim .drop:nth-child(2){animation-delay:.3s}.bleed-anim .drop:nth-child(3){animation-delay:.6s}.bleed-anim .hand-press{animation:pressHand 1.5s ease-in-out infinite}
 @keyframes dropFall{0%{opacity:0;transform:translateY(-5px)}30%{opacity:1}100%{opacity:0;transform:translateY(30px)}}
 @keyframes pressHand{0%,100%{transform:translateY(0)}50%{transform:translateY(2px)}}
-
-/* Burn Animation */
-.burn-anim .water-drop{fill:var(--cyan);animation:waterFall .8s ease-in infinite}
-.burn-anim .water-drop:nth-child(2){animation-delay:.2s;left:52%}.burn-anim .water-drop:nth-child(3){animation-delay:.4s;left:48%}
-.burn-anim .flame{fill:var(--amber);animation:flameFlicker .3s ease-in-out infinite alternate}
-.burn-anim .flame:nth-child(2){animation-delay:.1s}
+.burn-anim .water-drop{fill:var(--cyan);animation:waterFall .8s ease-in infinite}.burn-anim .water-drop:nth-child(2){animation-delay:.2s;left:52%}.burn-anim .water-drop:nth-child(3){animation-delay:.4s;left:48%}.burn-anim .flame{fill:var(--amber);animation:flameFlicker .3s ease-in-out infinite alternate}.burn-anim .flame:nth-child(2){animation-delay:.1s}
 @keyframes waterFall{0%{opacity:0;transform:translateY(-10px) scale(.8)}40%{opacity:1;transform:translateY(10px) scale(1)}100%{opacity:0;transform:translateY(35px) scale(.6)}}
 @keyframes flameFlicker{0%{transform:scaleX(1) scaleY(1)}100%{transform:scaleX(.85) scaleY(1.1)}}
-
-/* Choking Animation */
-.choke-anim .thrust{animation:thrustMotion 1s ease-in-out infinite}
-.choke-anim .air-arrow{stroke:var(--cyan);stroke-width:2;fill:none;stroke-dasharray:30;stroke-dashoffset:30;animation:airBurst 1s ease-out infinite}
+.choke-anim .thrust{animation:thrustMotion 1s ease-in-out infinite}.choke-anim .air-arrow{stroke:var(--cyan);stroke-width:2;fill:none;stroke-dasharray:30;stroke-dashoffset:30;animation:airBurst 1s ease-out infinite}
 @keyframes thrustMotion{0%,100%{transform:translateX(0)}40%{transform:translateX(8px)}60%{transform:translateX(8px)}}
 @keyframes airBurst{0%{stroke-dashoffset:30;opacity:0}30%{opacity:1}100%{stroke-dashoffset:-30;opacity:0}}
-
-/* Fracture Animation */
-.frac-anim .crack{stroke:var(--amber);stroke-width:2;stroke-dasharray:5;animation:crackGrow 1.5s ease-out forwards}
-.frac-anim .splint{stroke:var(--green);stroke-width:3;stroke-dasharray:60;stroke-dashoffset:60;animation:splintWrap 2s ease-out .8s forwards}
+.frac-anim .crack{stroke:var(--amber);stroke-width:2;stroke-dasharray:5;animation:crackGrow 1.5s ease-out forwards}.frac-anim .splint{stroke:var(--green);stroke-width:3;stroke-dasharray:60;stroke-dashoffset:60;animation:splintWrap 2s ease-out .8s forwards}
 @keyframes crackGrow{0%{stroke-dashoffset:20}100%{stroke-dashoffset:0}}
-@keyframes splintWrap{0%{stroke-dashoffset:60}100%{stroke-dashoffset:0}}
-
-/* Snake Animation */
-.snake-anim .snake-body{stroke:var(--green);stroke-width:4;fill:none;stroke-linecap:round;stroke-dasharray:80;stroke-dashoffset:80;animation:snakeSlither 2s ease-in-out infinite}
-.snake-anim .fang{fill:var(--amber);animation:fangStrike 2s ease-in-out infinite}
+@keyframes splintWrap{0%{stroke-dashoffset:60}100%{stroke-dashoffset=0}}
+.snake-anim .snake-body{stroke:var(--green);stroke-width:4;fill:none;stroke-linecap:round;stroke-dasharray:80;stroke-dashoffset:80;animation:snakeSlither 2s ease-in-out infinite}.snake-anim .fang{fill:var(--amber);animation:fangStrike 2s ease-in-out infinite}
 @keyframes snakeSlither{0%,100%{stroke-dashoffset:80;transform:translateX(0)}50%{stroke-dashoffset:0;transform:translateX(10px)}}
 @keyframes fangStrike{0%,70%,100%{transform:translateY(0)}80%{transform:translateY(3px)}}
-
-/* Heart Attack Animation */
-.ha-anim .ecg-line{stroke:var(--red);stroke-width:2;fill:none;stroke-dasharray:300;animation:haEcg 1.5s linear infinite}
-.ha-anim .heart-icon{fill:var(--red);animation:haHeart 1.5s ease-in-out infinite}
+.ha-anim .ecg-line{stroke:var(--red);stroke-width:2;fill:none;stroke-dasharray:300;animation:haEcg 1.5s linear infinite}.ha-anim .heart-icon{fill:var(--red);animation:haHeart 1.5s ease-in-out infinite}
 @keyframes haEcg{0%{stroke-dashoffset:300}100%{stroke-dashoffset:0}}
 @keyframes haHeart{0%,40%,100%{transform:scale(1)}50%{transform:scale(.85)}55%{transform:scale(1.1)}65%{transform:scale(.9)}}
-
-/* Drowning Animation */
-.drown-anim .wave{fill:var(--cyan);animation:waveMove 2s ease-in-out infinite}
-.drown-anim .wave:nth-child(2){animation-delay:-.5s;opacity:.6}.drown-anim .wave:nth-child(3){animation-delay:-1s;opacity:.3}
-.drown-anim .person-bob{animation:bob 2s ease-in-out infinite}
-.drown-anim .bubble{fill:none;stroke:var(--cyan);stroke-width:1;animation:rise 1.5s ease-in infinite}
-.drown-anim .bubble:nth-child(2){animation-delay:.5s;left:55%}
+.drown-anim .wave{fill:var(--cyan);animation:waveMove 2s ease-in-out infinite}.drown-anim .wave:nth-child(2){animation-delay:-.5s;opacity:.6}.drown-anim .wave:nth-child(3){animation-delay:-1s;opacity:.3}.drown-anim .person-bob{animation:bob 2s ease-in-out infinite}.drown-anim .bubble{fill:none;stroke:var(--cyan);stroke-width:1;animation:rise 1.5s ease-in infinite}.drown-anim .bubble:nth-child(2){animation-delay:.5s;left:55%}
 @keyframes waveMove{0%,100%{transform:translateX(0) translateY(0)}50%{transform:translateX(-10px) translateY(-3px)}}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
 @keyframes rise{0%{opacity:0;transform:translateY(10px) scale(.5)}30%{opacity:.8}100%{opacity:0;transform:translateY(-30px) scale(1.2)}}
-
-@media(max-width:768px){.htab{min-width:46px;padding:6px 5px;font-size:7px}.htab i{font-size:13px}.section{padding:12px 14px}.sos-btn{width:110px;height:110px;font-size:15px}.fa-anim{height:100px}}
+/* Admin styles */
+.admin-overlay{position:absolute;inset:0;background:var(--bg);z-index:100;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px}
+.admin-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;width:300px;text-align:center}
+.admin-stat{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;flex:1;min-width:0}
+.admin-tab{padding:6px 12px;border-radius:8px;font-size:10px;font-family:inherit;cursor:pointer;transition:all .2s;background:transparent;border:1px solid var(--border);color:var(--muted)}
+.admin-tab.active{background:var(--cyan);color:var(--bg);border-color:var(--cyan)}
+.admin-tab:hover:not(.active){border-color:var(--cyan);color:var(--text2)}
+.alert-sev{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:2px 8px;border-radius:6px}
+.shelter-type{font-size:8px;padding:2px 8px;border-radius:6px;font-weight:600}
+@media(max-width:768px){.htab{min-width:42px;padding:6px 4px;font-size:7px}.htab i{font-size:13px}.section{padding:12px 14px}.sos-btn{width:110px;height:110px;font-size:15px}.fa-anim{height:100px}}
 @media(prefers-reduced-motion:reduce){.sos-btn{animation:none!important}.fa-anim *{animation:none!important}*{transition-duration:.01ms!important}}
+
+[data-theme="light"]{--bg:#f1f5f9;--bg2:#e2e8f0;--card:#ffffff;--card2:#f8fafc;--border:#cbd5e1;--amber:#d97706;--amber-glow:rgba(217,119,6,.1);--red:#dc2626;--red-glow:rgba(220,38,38,.1);--green:#059669;--green-glow:rgba(5,150,105,.1);--cyan:#0891b2;--cyan-glow:rgba(8,145,178,.1);--purple:#7c3aed;--pink:#db2777;--text:#0f172a;--text2:#475569;--muted:#94a3b8}
+[data-theme="light"] .leaflet-tile-pane{filter:saturate(.8)brightness(1)contrast(.95)}
+[data-theme="light"] .leaflet-control-zoom a{background:#fff!important;color:#d97706!important;border-color:#cbd5e1!important}
+[data-theme="light"] .leaflet-popup-content-wrapper{background:#fff!important;color:#0f172a!important;border:1px solid #cbd5e1!important;box-shadow:0 4px 20px rgba(0,0,0,.1)!important}
+[data-theme="light"] .leaflet-popup-tip{background:#fff!important}
+[data-theme="light"] .leaflet-popup-close-button{color:#94a3b8!important}
+[data-theme="light"] .glow{opacity:.15}
+[data-theme="light"] .sos-btn{box-shadow:0 0 30px rgba(220,38,38,.2)}
+[data-theme="light"] .sos-btn.ok{box-shadow:0 0 30px rgba(5,150,105,.2)}
+[data-theme="light"] .toast{box-shadow:0 8px 30px rgba(0,0,0,.12)}
+.theme-btn{width:30px;height:30px;border-radius:8px;background:var(--card);border:1px solid var(--border);color:var(--amber);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;font-size:13px}
+.theme-btn:hover{border-color:var(--amber);transform:scale(1.05)}
 </style>
 </head>
 <body>
 <div class="glow" style="top:-200px;left:-200px;background:radial-gradient(circle,rgba(245,158,11,.05),transparent 70%)"></div>
 <div id="toast" class="toast"><i class="fa-solid fa-circle-check" style="color:var(--amber);margin-right:6px"></i><span id="toastMsg"></span></div>
-
 <div style="display:flex;flex-direction:column;height:100vh;position:relative;z-index:1">
 <header style="background:var(--bg2);border-bottom:1px solid var(--border);padding:8px 14px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
   <div style="display:flex;align-items:center;gap:7px"><div style="width:26px;height:26px;background:var(--amber);border-radius:6px;display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-shield-halved" style="color:var(--bg);font-size:12px"></i></div><div><h1 style="font-size:13px;font-weight:700;letter-spacing:-.3px;line-height:1.1">CPREC Nepal</h1><p style="font-size:7px;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px">Emergency & Social Safety</p></div></div>
-  <div id="gpsSt" style="display:flex;align-items:center;gap:5px;font-size:10px;color:var(--muted)"><span class="sdot off" id="gpsD"></span><span id="gpsT">Locating...</span></div>
+  <div style="display:flex;align-items:center;gap:8px">
+    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="Toggle theme"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
+    <div style="display:flex;align-items:center;gap:5px;font-size:10px;color:var(--muted)"><span class="sdot off" id="gpsD"></span><span id="gpsT">Locating...</span></div>
+  </div>
 </header>
 <nav style="background:var(--bg2);border-bottom:1px solid var(--border);padding:5px 0;flex-shrink:0"><div class="hnav">
   <div class="htab active" onclick="go('sos')" data-t="sos"><i class="fa-solid fa-phone-volume"></i>SOS</div>
@@ -123,14 +111,18 @@ input[type="text"],input[type="tel"],input[type="number"],textarea,select{backgr
   <div class="htab" onclick="go('nearby')" data-t="nearby"><i class="fa-solid fa-hospital"></i>Nearby</div>
   <div class="htab" onclick="go('aqi')" data-t="aqi"><i class="fa-solid fa-lungs"></i>Air</div>
   <div class="htab" onclick="go('weather')" data-t="weather"><i class="fa-solid fa-cloud-sun"></i>Weather</div>
+  <div class="htab" onclick="go('uv')" data-t="uv"><i class="fa-solid fa-sun"></i>UV</div>
+  <div class="htab" onclick="go('flood')" data-t="flood"><i class="fa-solid fa-water"></i>Flood</div>
   <div class="htab" onclick="go('helpline')" data-t="helpline"><i class="fa-solid fa-phone-flip"></i>Help</div>
   <div class="htab" onclick="go('ambulance')" data-t="ambulance"><i class="fa-solid fa-truck-medical"></i>Ambulance</div>
   <div class="htab" onclick="go('firstaid')" data-t="firstaid"><i class="fa-solid fa-kit-medical"></i>First Aid</div>
   <div class="htab" onclick="go('contacts')" data-t="contacts"><i class="fa-solid fa-address-book"></i>Contacts</div>
   <div class="htab" onclick="go('missing')" data-t="missing"><i class="fa-solid fa-person-circle-question"></i>Missing</div>
   <div class="htab" onclick="go('checklist')" data-t="checklist"><i class="fa-solid fa-clipboard-check"></i>Ready</div>
+  <div class="htab" onclick="go('alerts')" data-t="alerts"><i class="fa-solid fa-bell"></i>Alerts</div>
+  <div class="htab" onclick="go('shelters')" data-t="shelters"><i class="fa-solid fa-tent"></i>Shelters</div>
+  <div class="htab" onclick="go('admin')" data-t="admin"><i class="fa-solid fa-user-shield"></i>Admin</div>
 </div></nav>
-
 <div style="flex:1;overflow:hidden;position:relative">
 
 <!-- SOS -->
@@ -142,26 +134,24 @@ input[type="text"],input[type="tel"],input[type="number"],textarea,select{backgr
   </div>
   <div id="sosOut" style="display:none">
     <div class="stitle"><i class="fa-solid fa-location-crosshairs" style="color:var(--red)"></i>Your Location</div>
-    <div class="sc" style="margin-bottom:12px"><div class="mono" style="font-size:11px;color:var(--amber);margin-bottom:3px" id="sosC">—</div><div style="font-size:11px;color:var(--text2)" id="sosA">Detecting...</div><div style="font-size:9px;color:var(--muted);margin-top:2px" id="sosAc">—</div></div>
+    <div class="sc" style="margin-bottom:12px"><div class="mono" style="font-size:11px;color:var(--amber);margin-bottom:3px" id="sosC">&mdash;</div><div style="font-size:11px;color:var(--text2)" id="sosA">Detecting...</div><div style="font-size:9px;color:var(--muted);margin-top:2px" id="sosAc">&mdash;</div></div>
     <div class="stitle"><i class="fa-solid fa-phone" style="color:var(--green)"></i>Emergency Services</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:12px">
       <a href="tel:100" class="sc" style="text-align:center;text-decoration:none;color:var(--text);display:flex;flex-direction:column;align-items:center;gap:3px"><div style="width:36px;height:36px;border-radius:50%;background:rgba(239,68,68,.12);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-shield-halved" style="color:var(--red);font-size:14px"></i></div><div style="font-weight:600;font-size:11px">Police</div><div class="mono" style="color:var(--red);font-size:16px;font-weight:700">100</div></a>
       <a href="tel:102" class="sc" style="text-align:center;text-decoration:none;color:var(--text);display:flex;flex-direction:column;align-items:center;gap:3px"><div style="width:36px;height:36px;border-radius:50%;background:rgba(16,185,129,.12);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-truck-medical" style="color:var(--green);font-size:14px"></i></div><div style="font-weight:600;font-size:11px">Ambulance</div><div class="mono" style="color:var(--green);font-size:16px;font-weight:700">102</div></a>
-      <a href="tel:102" class="sc" style="text-align:center;text-decoration:none;color:var(--text);display:flex;flex-direction:column;align-items:center;gap:3px"><div style="width:36px;height:36px;border-radius:50%;background:var(--amber-glow);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-fire-extinguisher" style="color:var(--amber);font-size:14px"></i></div><div style="font-weight:600;font-size:11px">Fire</div><div class="mono" style="color:var(--amber);font-size:16px;font-weight:700">101</div></a>
+      <a href="tel:101" class="sc" style="text-align:center;text-decoration:none;color:var(--text);display:flex;flex-direction:column;align-items:center;gap:3px"><div style="width:36px;height:36px;border-radius:50%;background:var(--amber-glow);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-fire-extinguisher" style="color:var(--amber);font-size:14px"></i></div><div style="font-weight:600;font-size:11px">Fire</div><div class="mono" style="color:var(--amber);font-size:16px;font-weight:700">101</div></a>
       <a href="tel:112" class="sc" style="text-align:center;text-decoration:none;color:var(--text);display:flex;flex-direction:column;align-items:center;gap:3px"><div style="width:36px;height:36px;border-radius:50%;background:rgba(167,139,250,.12);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-triangle-exclamation" style="color:var(--purple);font-size:14px"></i></div><div style="font-weight:600;font-size:11px">Emergency</div><div class="mono" style="color:var(--purple);font-size:16px;font-weight:700">112</div></a>
     </div>
     <button onclick="shareLoc()" style="width:100%;padding:10px;background:var(--card);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:inherit;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s" onmouseover="this.style.borderColor='var(--cyan)'" onmouseout="this.style.borderColor='var(--border)'"><i class="fa-solid fa-share-nodes" style="color:var(--cyan)"></i>Share My Location</button>
   </div>
 </div>
-
 <!-- Quake -->
 <div class="section" id="sec-quake">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div><h2 style="font-size:15px;font-weight:700">Live Earthquakes</h2><p style="font-size:9px;color:var(--muted);margin-top:1px">USGS — Nepal region</p></div><button onclick="loadQuakes()" class="fbtn"><i class="fa-solid fa-rotate" id="qRI"></i> Refresh</button></div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div><h2 style="font-size:15px;font-weight:700">Live Earthquakes</h2><p style="font-size:9px;color:var(--muted);margin-top:1px">USGS &mdash; Nepal region</p></div><button onclick="loadQuakes()" class="fbtn"><i class="fa-solid fa-rotate" id="qRI"></i> Refresh</button></div>
   <div id="qList"><div class="loader"><i class="fa-solid fa-spinner"></i><div style="margin-top:6px">Loading...</div></div></div>
   <div id="qMap" style="height:240px;border-radius:12px;overflow:hidden;margin-top:12px;border:1px solid var(--border)"></div>
   <p style="font-size:8px;color:var(--muted);margin-top:5px;text-align:center">Auto-refresh 60s</p>
 </div>
-
 <!-- Nearby -->
 <div class="section" id="sec-nearby">
   <h2 style="font-size:15px;font-weight:700;margin-bottom:2px">Nearby Help</h2>
@@ -173,45 +163,49 @@ input[type="text"],input[type="tel"],input[type="number"],textarea,select{backgr
     <button class="fbtn" onclick="loadNearby('police',this)"><i class="fa-solid fa-shield-halved"></i> Police</button>
     <button class="fbtn" onclick="loadNearby('shelter',this)"><i class="fa-solid fa-tent"></i> Shelter</button>
   </div>
-  <div id="nList"><div class="loader"><i class="fa-solid fa-spinner"></i><div style="margin-top:6px">Need GPS — tap SOS first</div></div></div>
+  <div id="nList"><div class="loader"><i class="fa-solid fa-spinner"></i><div style="margin-top:6px">Need GPS &mdash; tap SOS first</div></div></div>
   <div id="nMap" style="height:240px;border-radius:12px;overflow:hidden;margin-top:12px;border:1px solid var(--border)"></div>
 </div>
-
 <!-- AQI -->
 <div class="section" id="sec-aqi">
-  <h2 style="font-size:15px;font-weight:700;margin-bottom:2px">Air Quality Index</h2>
-  <p style="font-size:9px;color:var(--muted);margin-bottom:12px">Open-Meteo Air Quality API</p>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px"><div><h2 style="font-size:15px;font-weight:700">Air Quality Index</h2><p style="font-size:9px;color:var(--muted);margin-top:1px">Open-Meteo Air Quality API</p></div><button onclick="loadAQI()" class="fbtn"><i class="fa-solid fa-rotate" id="aqiRI"></i> Refresh</button></div>
   <div id="aqiOut"><div class="loader"><i class="fa-solid fa-spinner"></i><div style="margin-top:6px">Loading...</div></div></div>
 </div>
-
 <!-- Weather -->
 <div class="section" id="sec-weather">
   <h2 style="font-size:15px;font-weight:700;margin-bottom:2px">Weather</h2>
   <p style="font-size:9px;color:var(--muted);margin-bottom:12px">Open-Meteo</p>
   <div id="wOut"><div class="loader"><i class="fa-solid fa-spinner"></i><div style="margin-top:6px">Loading...</div></div></div>
 </div>
-
+<!-- UV -->
+<div class="section" id="sec-uv">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px"><div><h2 style="font-size:15px;font-weight:700">UV & Sun Safety</h2><p style="font-size:9px;color:var(--muted);margin-top:1px">Ultraviolet index &mdash; Nepal</p></div><button onclick="loadUV()" class="fbtn"><i class="fa-solid fa-rotate" id="uvRI"></i> Refresh</button></div>
+  <div id="uvOut"><div class="loader"><i class="fa-solid fa-spinner"></i><div style="margin-top:6px">Loading...</div></div></div>
+</div>
+<!-- Flood -->
+<div class="section" id="sec-flood">
+  <h2 style="font-size:15px;font-weight:700;margin-bottom:2px">Flood & River Monitor</h2>
+  <p style="font-size:9px;color:var(--muted);margin-bottom:12px">Major river basins &mdash; Nepal</p>
+  <div id="floodOut"></div>
+</div>
 <!-- Helplines -->
 <div class="section" id="sec-helpline">
   <h2 style="font-size:15px;font-weight:700;margin-bottom:2px">Helplines</h2>
-  <p style="font-size:9px;color:var(--muted);margin-bottom:12px">Real Nepal numbers — tap to call</p>
+  <p style="font-size:9px;color:var(--muted);margin-bottom:12px">Real Nepal numbers &mdash; tap to call</p>
   <div id="hlOut"></div>
 </div>
-
 <!-- Ambulance -->
 <div class="section" id="sec-ambulance">
   <h2 style="font-size:15px;font-weight:700;margin-bottom:2px">Ambulance Services</h2>
-  <p style="font-size:9px;color:var(--muted);margin-bottom:12px">Govt & private — all real numbers</p>
+  <p style="font-size:9px;color:var(--muted);margin-bottom:12px">Govt & private &mdash; all real numbers</p>
   <div id="ambOut"></div>
 </div>
-
 <!-- First Aid -->
 <div class="section" id="sec-firstaid">
   <h2 style="font-size:15px;font-weight:700;margin-bottom:2px">First Aid Guide</h2>
   <p style="font-size:9px;color:var(--muted);margin-bottom:12px">Real medical instructions with visual guides</p>
   <div id="faOut"></div>
 </div>
-
 <!-- Contacts -->
 <div class="section" id="sec-contacts">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div><h2 style="font-size:15px;font-weight:700">My Contacts</h2><p style="font-size:9px;color:var(--muted);margin-top:1px">Saved on device only</p></div><button onclick="document.getElementById('cF').style.display=document.getElementById('cF').style.display==='none'?'block':'none'" class="fbtn" style="background:var(--amber);color:var(--bg);border-color:var(--amber)"><i class="fa-solid fa-plus"></i> Add</button></div>
@@ -221,10 +215,9 @@ input[type="text"],input[type="tel"],input[type="number"],textarea,select{backgr
   </div>
   <div id="cL"></div>
 </div>
-
 <!-- Missing -->
 <div class="section" id="sec-missing">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div><h2 style="font-size:15px;font-weight:700">Missing Person</h2><p style="font-size:9px;color:var(--muted);margin-top:1px">Local record — share with police</p></div><button onclick="document.getElementById('mF').style.display=document.getElementById('mF').style.display==='none'?'block':'none'" class="fbtn" style="background:var(--red);color:#fff;border-color:var(--red)"><i class="fa-solid fa-plus"></i> Report</button></div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div><h2 style="font-size:15px;font-weight:700">Missing Person</h2><p style="font-size:9px;color:var(--muted);margin-top:1px">Local record &mdash; share with police</p></div><button onclick="document.getElementById('mF').style.display=document.getElementById('mF').style.display==='none'?'block':'none'" class="fbtn" style="background:var(--red);color:#fff;border-color:var(--red)"><i class="fa-solid fa-plus"></i> Report</button></div>
   <div id="mF" style="display:none" class="sc">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:6px"><div><label style="font-size:9px;color:var(--muted);display:block;margin-bottom:2px">Name</label><input type="text" id="mN" placeholder="Full name"></div><div><label style="font-size:9px;color:var(--muted);display:block;margin-bottom:2px">Age</label><input type="number" id="mA" placeholder="Age" min="1" max="120"></div></div>
     <div style="margin-bottom:6px"><label style="font-size:9px;color:var(--muted);display:block;margin-bottom:2px">Last Seen Location</label><input type="text" id="mL" placeholder="Place, district"></div>
@@ -234,27 +227,98 @@ input[type="text"],input[type="tel"],input[type="number"],textarea,select{backgr
   </div>
   <div id="mL2"></div>
 </div>
-
 <!-- Checklist -->
 <div class="section" id="sec-checklist">
   <h2 style="font-size:15px;font-weight:700;margin-bottom:2px">Disaster Ready</h2>
   <p style="font-size:9px;color:var(--muted);margin-bottom:12px">Progress saved on device</p>
   <div id="ckO"></div>
 </div>
-
+<!-- Alerts -->
+<div class="section" id="sec-alerts">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div><h2 style="font-size:15px;font-weight:700">Community Alerts</h2><p style="font-size:9px;color:var(--muted);margin-top:1px">Emergency notifications</p></div><button onclick="showAddAlert()" class="fbtn" style="background:var(--red);color:#fff;border-color:var(--red)"><i class="fa-solid fa-plus"></i> New</button></div>
+  <div id="alertForm" style="display:none" class="sc" >
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:6px">
+      <div><label style="font-size:9px;color:var(--muted);display:block;margin-bottom:2px">Title</label><input type="text" id="alT" placeholder="Alert title"></div>
+      <div><label style="font-size:9px;color:var(--muted);display:block;margin-bottom:2px">Severity</label><select id="alS"><option value="critical">Critical</option><option value="warning">Warning</option><option value="info" selected>Info</option></select></div>
+    </div>
+    <div style="margin-bottom:6px"><label style="font-size:9px;color:var(--muted);display:block;margin-bottom:2px">Description</label><textarea id="alD" placeholder="Alert details..."></textarea></div>
+    <div style="margin-bottom:8px"><label style="font-size:9px;color:var(--muted);display:block;margin-bottom:2px">Source</label><input type="text" id="alSrc" placeholder="e.g. NDRRMA, DHM, Police"></div>
+    <div style="display:flex;gap:6px">
+      <button onclick="saveAlert()" style="flex:1;padding:8px;background:var(--green);color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:11px;font-weight:600;cursor:pointer"><i class="fa-solid fa-check"></i> Post</button>
+      <button onclick="document.getElementById('alertForm').style.display='none'" style="padding:8px 16px;background:var(--card2);border:1px solid var(--border);border-radius:8px;color:var(--text2);font-family:inherit;font-size:11px;cursor:pointer">Cancel</button>
+    </div>
+  </div>
+  <div id="alertList"></div>
 </div>
-<div class="sbar"><span><span class="sdot" id="netD"></span><span id="netT">—</span></span><span class="mono" id="clock">—</span><span style="margin-left:auto" id="lastR">—</span></div>
+<!-- Shelters -->
+<div class="section" id="sec-shelters">
+  <h2 style="font-size:15px;font-weight:700;margin-bottom:2px">Emergency Shelters</h2>
+  <p style="font-size:9px;color:var(--muted);margin-bottom:10px">Major shelters across Nepal</p>
+  <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px" id="shF">
+    <button class="fbtn on" onclick="filterShelters('all',this)">All</button>
+    <button class="fbtn" onclick="filterShelters('govt',this)">Government</button>
+    <button class="fbtn" onclick="filterShelters('redcross',this)">Red Cross</button>
+    <button class="fbtn" onclick="filterShelters('community',this)">Community</button>
+  </div>
+  <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px" id="shP">
+    <button class="fbtn on" onclick="filterShProvince('all',this)">All Provinces</button>
+    <button class="fbtn" onclick="filterShProvince(1,this)">Prov 1</button>
+    <button class="fbtn" onclick="filterShProvince(2,this)">Madhesh</button>
+    <button class="fbtn" onclick="filterShProvince(3,this)">Bagmati</button>
+    <button class="fbtn" onclick="filterShProvince(4,this)">Gandaki</button>
+    <button class="fbtn" onclick="filterShProvince(5,this)">Lumbini</button>
+    <button class="fbtn" onclick="filterShProvince(6,this)">Karnali</button>
+    <button class="fbtn" onclick="filterShProvince(7,this)">Sudurpashchim</button>
+  </div>
+  <div id="shList"></div>
 </div>
-
+<!-- Admin -->
+<div class="section" id="sec-admin">
+  <div id="adminLogin" class="admin-overlay">
+    <div class="admin-card">
+      <div style="width:50px;height:50px;background:var(--cyan-glow);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px"><i class="fa-solid fa-user-shield" style="color:var(--cyan);font-size:20px"></i></div>
+      <h2 style="font-size:16px;font-weight:700;margin-bottom:4px">Admin Access</h2>
+      <p style="font-size:9px;color:var(--muted);margin-bottom:16px">Authorized personnel only</p>
+      <input type="password" id="adminPwd" placeholder="Enter password" onkeydown="if(event.key==='Enter')adminLogin()" style="margin-bottom:12px;text-align:center;font-size:13px;letter-spacing:1px">
+      <button onclick="adminLogin()" style="width:100%;padding:10px;background:var(--cyan);color:var(--bg);border:none;border-radius:10px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
+      <p id="adminErr" style="font-size:9px;color:var(--red);margin-top:8px;display:none">Invalid password</p>
+    </div>
+  </div>
+  <div id="adminDash" style="display:none">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+      <div><h2 style="font-size:15px;font-weight:700;color:var(--cyan)"><i class="fa-solid fa-user-shield" style="margin-right:6px"></i>Admin Dashboard</h2><p style="font-size:9px;color:var(--muted);margin-top:1px">CPREC Nepal Management</p></div>
+      <button onclick="adminLogout()" class="fbtn" style="background:var(--red);color:#fff;border-color:var(--red)"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+    </div>
+    <!-- Stats -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:14px" id="adminStats"></div>
+    <!-- Tabs -->
+    <div style="display:flex;gap:4px;margin-bottom:12px;flex-wrap:wrap">
+      <button class="admin-tab active" onclick="adminTab('logs',this)">Activity Log</button>
+      <button class="admin-tab" onclick="adminTab('missing',this)">Missing</button>
+      <button class="admin-tab" onclick="adminTab('contacts',this)">Contacts</button>
+      <button class="admin-tab" onclick="adminTab('alertsmgr',this)">Alerts</button>
+      <button class="admin-tab" onclick="adminTab('system',this)">System</button>
+    </div>
+    <div id="adminContent"></div>
+    <!-- Export -->
+    <div style="margin-top:14px;display:flex;gap:6px">
+      <button onclick="exportData()" class="fbtn" style="background:var(--green);color:#fff;border-color:var(--green)"><i class="fa-solid fa-download"></i> Export All Data</button>
+      <button onclick="clearAllData()" class="fbtn" style="background:var(--red);color:#fff;border-color:var(--red)"><i class="fa-solid fa-trash"></i> Clear All Data</button>
+    </div>
+  </div>
+</div>
+</div><!-- end sections container -->
+<div class="sbar"><span><span class="sdot" id="netD"></span><span id="netT">&mdash;</span></span><span class="mono" id="clock">&mdash;</span><span style="margin-left:auto" id="lastR">&mdash;</span></div>
+</div>
 <script>
-let uLat=null,uLng=null,uAcc=null,gpsOk=false,qMap=null,nMap=null,nType='hospital';
+let uLat=null,uLng=null,uAcc=null,gpsOk=false,qMap=null,nMap=null,nType='hospital',adminAuth=false;
 
 // ===== HELPLINES =====
 const HL=[
 {cat:"Women Safety",icon:"fa-venus",color:"#e91e63",items:[{name:"Women Helpline (WPS)",num:"1145",desc:"24/7 GoN"},{name:"Nepal Police Women Cell",num:"01-4221765",desc:"Kathmandu"},{name:"Sathi Nepal",num:"01-4228040",desc:"Anti-trafficking"},{name:"ABC Nepal",num:"01-4382296",desc:"Women & child rights"},{name:"WOREC Nepal",num:"01-5003542",desc:"Rehabilitation"}]},
 {cat:"Child Protection",icon:"fa-child",color:"#f59e0b",items:[{name:"Child Helpline",num:"1098",desc:"24/7 toll-free"},{name:"CWIN Nepal",num:"01-4270504",desc:"Child workers"},{name:"Kopila Nepal",num:"01-4285750",desc:"Abuse support"}]},
 {cat:"Mental Health",icon:"fa-brain",color:"#a78bfa",items:[{name:"Koshish Nepal",num:"1660-01-020050",desc:"Mental health"},{name:"TPO Nepal",num:"01-5545868",desc:"Psychosocial"},{name:"LifeLine Nepal",num:"1660-01-010005",desc:"Crisis counseling"}]},
-{cat:"Disaster & Rescue",icon:"fa-house-crack",color:"#ef4444",items:[{name:"Nepal Police",num:"100",desc:"Emergency"},{name:"Ambulance",num:"102",desc:"Medical"},{name:"Fire Service",num:"102",desc:"Fire & rescue"},{name:"NDRRMA",num:"01-4211050",desc:"Disaster authority"},{name:"Nepal Army Rescue",num:"01-4200116",desc:"Rescue ops"},{name:"NRCS",num:"01-4228097",desc:"Red Cross"}]},
+{cat:"Disaster & Rescue",icon:"fa-house-crack",color:"#ef4444",items:[{name:"Nepal Police",num:"100",desc:"Emergency"},{name:"Ambulance",num:"102",desc:"Medical"},{name:"Fire Service",num:"101",desc:"Fire & rescue"},{name:"NDRRMA",num:"01-4211050",desc:"Disaster authority"},{name:"Nepal Army Rescue",num:"01-4200116",desc:"Rescue ops"},{name:"NRCS",num:"01-4228097",desc:"Red Cross"}]},
 {cat:"Senior Citizens",icon:"fa-person-cane",color:"#06b6d4",items:[{name:"Senior Helpline",num:"1155",desc:"Elderly welfare"},{name:"Ageing Nepal",num:"01-5521859",desc:"Elderly care"}]},
 {cat:"Legal Aid",icon:"fa-scale-balanced",color:"#10b981",items:[{name:"Legal Aid Commission",num:"01-4265365",desc:"Free legal"},{name:"Advocacy Forum",num:"01-4265456",desc:"Human rights"},{name:"FWLD",num:"01-5003546",desc:"Women's rights"}]},
 {cat:"Human Rights",icon:"fa-hand-fist",color:"#f97316",items:[{name:"NHRC Nepal",num:"01-4265549",desc:"Human Rights Commission"},{name:"INSEC",num:"01-4270525",desc:"HR documentation"}]},
@@ -263,7 +327,7 @@ const HL=[
 
 // ===== AMBULANCE =====
 const AMB=[
-{name:"Govt Ambulance",num:"102",desc:"Free — all districts",tag:"Govt"},{name:"Red Cross Ambulance",num:"01-4228097",desc:"Kathmandu Valley",tag:"Govt"},
+{name:"Govt Ambulance",num:"102",desc:"Free - all districts",tag:"Govt"},{name:"Red Cross Ambulance",num:"01-4228097",desc:"Kathmandu Valley",tag:"Govt"},
 {name:"Bir Hospital",num:"01-4221049",desc:"Kathmandu",tag:"Govt"},{name:"Patan Hospital",num:"01-5522266",desc:"Lalitpur",tag:"Govt"},
 {name:"Bhaktapur Hospital",num:"01-6612630",desc:"Bhaktapur",tag:"Govt"},{name:"B.P. Koirala Hospital",num:"021-621040",desc:"Dharan",tag:"Govt"},
 {name:"Koshi Hospital",num:"021-620246",desc:"Biratnagar",tag:"Govt"},
@@ -276,15 +340,15 @@ const AMB=[
 // ===== FIRST AID =====
 const FA=[
 {title:"CPR",icon:"fa-heart-pulse",color:"var(--red)",anim:'cpr',steps:[
-"Check if person is unresponsive — tap shoulders, shout","Call 102 immediately","Place on back on firm surface",
+"Check if person is unresponsive - tap shoulders, shout","Call 102 immediately","Place on back on firm surface",
 "Heel of one hand on center of chest (lower breastbone)","Other hand on top, interlace fingers",
 "Push hard and fast: 2 inches deep, 100-120 per minute","After 30 compressions, 2 rescue breaths if trained",
 "Continue 30:2 until help arrives or person recovers","Hands-only CPR (no breaths) is still effective","Do NOT stop unless breathing resumes or help arrives"]},
 {title:"Severe Bleeding",icon:"fa-droplet",color:"#ef4444",anim:'bleed',steps:[
-"Call 102 immediately","Apply firm direct pressure with clean cloth","Do NOT remove soaked cloth — add more on top",
+"Call 102 immediately","Apply firm direct pressure with clean cloth","Do NOT remove soaked cloth - add more on top",
 "If possible, raise injured area above heart","If direct pressure fails, press nearest pressure point",
-"Tourniquet ONLY as last resort — note the time","Keep person lying down, warm, calm",
-"Do NOT remove embedded objects — stabilize in place","Watch for shock: pale skin, rapid pulse, confusion","Maintain pressure until help arrives"]},
+"Tourniquet ONLY as last resort - note the time","Keep person lying down, warm, calm",
+"Do NOT remove embedded objects - stabilize in place","Watch for shock: pale skin, rapid pulse, confusion","Maintain pressure until help arrives"]},
 {title:"Burns",icon:"fa-fire",color:"var(--amber)",anim:'burn',steps:[
 "Cool burn with cool (not cold) running water for 20 minutes","Do NOT use ice, butter, oil, or home remedies",
 "Remove jewelry near burn before swelling starts","Cover with clean non-stick dressing",
@@ -292,33 +356,33 @@ const FA=[
 "For electrical burns: ensure no contact with electricity first","Call 102 if larger than palm, on face/hands, or deep",
 "Paracetamol for pain if available and conscious","Watch for signs of shock"]},
 {title:"Choking",icon:"fa-wind",color:"var(--cyan)",anim:'choke',steps:[
-"Ask 'Are you choking?' — if they nod, act","Stand behind, arms around waist",
+"Ask 'Are you choking?' - if they nod, act","Stand behind, arms around waist",
 "Make fist above navel, thrust inward/upward with J-motion","Repeat until expelled or unconscious",
 "If unconscious, lower to ground, start CPR","For infants: 5 back blows between shoulder blades",
 "Then 5 chest thrusts with 2 fingers on breastbone","Alternate until object expelled",
 "Do NOT slap back while person stands upright","Call 102 in all cases"]},
 {title:"Fractures",icon:"fa-bone",color:"#a78bfa",anim:'frac',steps:[
-"Do NOT try to straighten the bone","Immobilize the area — do not move injured part",
+"Do NOT try to straighten the bone","Immobilize the area - do not move injured part",
 "Splint with any rigid material + cloth","Pad splint for comfort",
 "For open fractures: cover with clean dressing, do NOT push bone back","Apply ice wrapped in cloth 15-20 min",
-"Elevate injured limb if possible","Check circulation below injury — can they feel/move?",
-"Call 102 — fractures need X-ray","Do NOT give food/drink in case surgery needed"]},
+"Elevate injured limb if possible","Check circulation below injury - can they feel/move?",
+"Call 102 - fractures need X-ray","Do NOT give food/drink in case surgery needed"]},
 {title:"Snake Bite",icon:"fa-worm",color:"#10b981",anim:'snake',steps:[
 "Keep person calm and still","Call 102 immediately","Immobilize bitten limb with splint",
 "Remove rings, watches near bite","Note time and snake appearance if safe",
 "Do NOT cut wound, suck venom, or use tourniquet","Do NOT apply ice",
-"Do NOT try to catch the snake","Photo from safe distance if possible","Anti-venom is only treatment — hospital fast"]},
+"Do NOT try to catch the snake","Photo from safe distance if possible","Anti-venom is only treatment - hospital fast"]},
 {title:"Heart Attack",icon:"fa-heart-crack",color:"#ef4444",anim:'ha',steps:[
-"Call 102 immediately — every minute matters","Sit or lie person comfortably",
+"Call 102 immediately - every minute matters","Sit or lie person comfortably",
 "Help with prescribed nitroglycerin if available","Chew 300mg aspirin if not allergic",
 "Loosen tight clothing","If unconscious and not breathing, start CPR",
 "Do NOT leave alone","Do NOT let them 'wait it out'",
 "Monitor breathing and pulse","Be ready to use AED if available"]},
 {title:"Drowning",icon:"fa-water",color:"var(--cyan)",anim:'drown',steps:[
-"Get person out — reach, throw, row, swim (last resort)","Call 102 immediately",
-"If not breathing: 5 rescue breaths first, then 30:2 CPR","Even if conscious, they need hospital — secondary drowning risk",
+"Get person out - reach, throw, row, swim (last resort)","Call 102 immediately",
+"If not breathing: 5 rescue breaths first, then 30:2 CPR","Even if conscious, they need hospital - secondary drowning risk",
 "Remove wet clothing, keep warm","Recovery position if unconscious but breathing",
-"Do NOT use 'water pump' technique — it's dangerous","Triage: treat non-breathing first",
+"Do NOT use 'water pump' technique - it's dangerous","Triage: treat non-breathing first",
 "Continue CPR until help arrives","Every second without oxygen = brain damage"]}
 ];
 
@@ -326,10 +390,9 @@ const FA=[
 const CK=[
 {cat:"Before Earthquake",items:["Identify safe spots in each room","Secure heavy furniture to walls","Prepare go-bag: water, food, flashlight, radio, first-aid, medicines","Know gas/electric/water shutoffs","Plan family meeting point & communication","Keep documents in waterproof bag","Learn first aid and CPR","Identify nearest open space","Everyone knows emergency exits","Keep emergency cash ready"]},
 {cat:"During Earthquake",items:["DROP, COVER, HOLD ON","If no table: crouch against interior wall, protect head","Stay from windows, glass, falling objects","In bed: stay, protect head with pillow","Outdoors: move to clear area","In vehicle: pull over, stay inside","Do NOT run outside during shaking","Near coast after: move to higher ground"]},
-{cat:"After Earthquake",items:["Check for injuries","Check gas leaks — leave if smell, no lighters","Put out small fires","Wear sturdy shoes","Inspect building — evacuate if unsafe","No elevators","Listen to FM 92.4/102.8","Expect aftershocks","Do NOT enter damaged buildings","Help neighbors, text not call","Document damage with photos"]},
-{cat:"Flood & Landslide",items:["Know flood risk zone and landslide-prone slopes","Keep drainage clear","Never sleep near riverbanks in monsoon","Water rises: move to higher ground","Keep items above flood level","Landslide: move perpendicular to slide — not downhill","After flood: boil water before drinking","Watch for displaced animals and snakes"]}
+{cat:"After Earthquake",items:["Check for injuries","Check gas leaks - leave if smell, no lighters","Put out small fires","Wear sturdy shoes","Inspect building - evacuate if unsafe","No elevators","Listen to FM 92.4/102.8","Expect aftershocks","Do NOT enter damaged buildings","Help neighbors, text not call","Document damage with photos"]},
+{cat:"Flood & Landslide",items:["Know flood risk zone and landslide-prone slopes","Keep drainage clear","Never sleep near riverbanks in monsoon","Water rises: move to higher ground","Keep items above flood level","Landslide: move perpendicular to slide - not downhill","After flood: boil water before drinking","Watch for displaced animals and snakes"]}
 ];
-
 // ===== SVG ILLUSTRATIONS =====
 function faSVG(type){
   const svgs={
@@ -412,22 +475,28 @@ snake:`<svg viewBox="0 0 320 120" class="snake-anim" style="width:100%;height:10
   <circle cx="190" cy="55" r="6" fill="var(--green)"/>
   <circle cx="192" cy="53" r="1.5" fill="var(--bg)"/>
   <g class="fang" transform="translate(194,58)"><path d="M0,0 L4,6 L-1,3Z" fill="var(--amber)"/><path d="M4,0 L0,6 L5,3Z" fill="var(--amber)"/></g>
-  <g transform="translate(210,20)"><rect width="90" height="80" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1"/>
+  <g transform="translate(10,15)"><rect width="90" height="80" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1"/>
   <text x="10" y="18" fill="var(--red)" font-size="9" font-family="Space Grotesk" font-weight="600">Do NOT</text>
   <text x="10" y="33" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Cut wound</text>
-  <text x="10" y="45" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Suck venom</text>
-  <text x="10" y="57" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Tourniquet</text>
-  <text x="10" y="69" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Apply ice</text>
-  <text x="10" y="81" fill="var(--green)" font-size="8" font-family="Space Grotesk" font-weight="600">Anti-venom only!</text></g>
-  <text x="10" y="110" fill="var(--amber)" font-size="9" font-family="Space Grotesk" font-weight="600">IMMOBILIZE limb</text>
+  <text x="10" y="46" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Suck venom</text>
+  <text x="10" y="59" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Use tourniquet</text>
+  <text x="10" y="72" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Apply ice</text></g>
+  <g transform="translate(210,20)"><rect width="90" height="80" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1"/>
+  <text x="10" y="18" fill="var(--green)" font-size="9" font-family="Space Grotesk" font-weight="600">DO</text>
+  <text x="10" y="33" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Stay calm</text>
+  <text x="10" y="46" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Immobilize limb</text>
+  <text x="10" y="59" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Note snake look</text>
+  <text x="10" y="72" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Call 102</text></g>
 </svg>`,
 ha:`<svg viewBox="0 0 320 120" class="ha-anim" style="width:100%;height:100%">
-  <g class="heart-icon" transform="translate(20,10) scale(.8)"><path d="M25 45 C25 30 10 18 10 8 C10 0 18 -3 25 5 C32 -3 40 0 40 8 C40 18 25 30 25 45Z"/></g>
-  <g transform="translate(55,25)"><line x1="0" y1="25" x2="10" y2="25" stroke="var(--red)" stroke-width="2" opacity=".5"/></g>
-  <polyline class="ecg-line" points="80,50 100,50 110,50 118,50 124,30 130,65 136,40 142,55 148,50 180,50 188,50 194,50 200,30 206,65 212,40 218,55 224,50 310,50"/>
-  <text x="130" y="80" fill="var(--red)" font-size="9" font-family="Space Grotesk" font-weight="600">EVERY MINUTE MATTERS</text>
-  <rect x="200" y="85" width="100" height="28" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="1"/>
-  <text x="210" y="103" fill="var(--green)" font-size="8" font-family="Space Grotesk" font-weight="600">102 → Hospital</text>
+  <g class="heart-icon" transform="translate(15,20)"><path d="M20 35 C20 25 10 15 10 8 C10 2 15 0 20 5 C25 0 30 2 30 8 C30 15 20 25 20 35Z"/></g>
+  <polyline class="ecg-line" points="90,70 120,70 130,70 140,45 150,90 160,55 170,75 180,70 300,70"/>
+  <rect x="210" y="10" width="95" height="95" rx="8" fill="var(--card)" stroke="var(--border)" stroke-width="1"/>
+  <text x="220" y="30" fill="var(--red)" font-size="9" font-family="Space Grotesk" font-weight="600">ACTION</text>
+  <text x="220" y="48" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Call 102 first</text>
+  <text x="220" y="62" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Chew aspirin</text>
+  <text x="220" y="76" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Sit upright</text>
+  <text x="220" y="90" fill="var(--green)" font-size="8" font-family="Space Grotesk" font-weight="600">102 -> Hospital</text>
   <text x="10" y="100" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Call first, then</text>
   <text x="10" y="112" fill="var(--muted)" font-size="8" font-family="Space Grotesk">aspirin + CPR</text>
 </svg>`,
@@ -441,10 +510,10 @@ drown:`<svg viewBox="0 0 320 120" class="drown-anim" style="width:100%;height:10
   <text x="210" y="28" fill="var(--red)" font-size="9" font-family="Space Grotesk" font-weight="600">Do NOT</text>
   <text x="210" y="42" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Water pump</text>
   <text x="210" y="54" fill="var(--muted)" font-size="8" font-family="Space Grotesk">technique</text>
-  <text x="210" y="64" fill="var(--muted)" font-size="8" font-family="Space Grotesk">(it's dangerous)</text>
-  <text x="10" y="20" fill="var(--cyan)" font-size="9" font-family="Space Grotesk" font-weight="600">5 BREATHS</text>
-  <text x="10" y="32" fill="var(--muted)" font-size="8" font-family="Space Grotesk">first, then</text>
-  <text x="10" y="44" fill="var(--muted)" font-size="8" font-family="Space Grotesk">30:2 CPR</text>
+  <text x="210" y="66" fill="var(--green)" font-size="8" font-family="Space Grotesk" font-weight="600">5 breaths first!</text>
+  <text x="10" y="15" fill="var(--cyan)" font-size="9" font-family="Space Grotesk" font-weight="600">REACH-THROW-ROW</text>
+  <text x="10" y="28" fill="var(--muted)" font-size="8" font-family="Space Grotesk">Last resort: swim</text>
+  <text x="10" y="40" fill="var(--muted)" font-size="8" font-family="Space Grotesk">to person</text>
 </svg>`
   };
   return svgs[type]||'';
@@ -454,112 +523,414 @@ drown:`<svg viewBox="0 0 320 120" class="drown-anim" style="width:100%;height:10
 function getGPS(){return new Promise((ok,no)=>{if(!navigator.geolocation){no('No geolocation');return}navigator.geolocation.getCurrentPosition(p=>ok({lat:p.coords.latitude,lng:p.coords.longitude,acc:p.coords.accuracy}),e=>no(e.message),{enableHighAccuracy:true,timeout:15000,maximumAge:30000})})}
 
 async function initGPS(){
-  try{const p=await getGPS();uLat=p.lat;uLng=p.lng;uAcc=p.acc;gpsOk=true;document.getElementById('gpsD').className='sdot on';document.getElementById('gpsT').textContent=`GPS ±${Math.round(p.acc)}m`;loadWeather();loadAQI();loadNearby(nType)}
+  try{const p=await getGPS();uLat=p.lat;uLng=p.lng;uAcc=p.acc;gpsOk=true;document.getElementById('gpsD').className='sdot on';document.getElementById('gpsT').textContent=`GPS ±${Math.round(p.acc)}m`;loadWeather();loadAQI();loadUV();loadNearby(nType);logAct('GPS',`Location: ${p.lat.toFixed(4)}, ${p.lng.toFixed(4)}`)}
   catch(e){document.getElementById('gpsD').className='sdot off';document.getElementById('gpsT').textContent='GPS Off';
   document.getElementById('wOut').innerHTML=`<div style="text-align:center;padding:20px;color:var(--muted)"><i class="fa-solid fa-location-crosshairs" style="font-size:20px;margin-bottom:6px;opacity:.3"></i><div>GPS required for weather & air quality</div></div>`;
-  document.getElementById('aqiOut').innerHTML=document.getElementById('wOut').innerHTML;}
+  document.getElementById('aqiOut').innerHTML=document.getElementById('wOut').innerHTML;
+  document.getElementById('uvOut').innerHTML=document.getElementById('wOut').innerHTML;}
 }
 
 // ===== TABS =====
-function go(t){document.querySelectorAll('.htab').forEach(e=>e.classList.remove('active'));document.querySelector(`.htab[data-t="${t}"]`).classList.add('active');document.querySelectorAll('.section').forEach(e=>e.classList.remove('active'));document.getElementById(`sec-${t}`).classList.add('active');
-if(t==='quake'&&!qMap)initQMap();if(t==='nearby'&&!nMap)initNMap();
-if(t==='helpline'&&!document.getElementById('hlOut').children.length)renderHL();if(t==='ambulance'&&!document.getElementById('ambOut').children.length)renderAmb();
-if(t==='firstaid'&&!document.getElementById('faOut').children.length)renderFA();if(t==='contacts')renderC();if(t==='missing')renderM();if(t==='checklist'&&!document.getElementById('ckO').children.length)renderCK()}
+function go(t){
+  if(t==='admin'&&!adminAuth){return}
+  document.querySelectorAll('.htab').forEach(e=>e.classList.remove('active'));
+  const tab=document.querySelector(`.htab[data-t="${t}"]`);
+  if(tab)tab.classList.add('active');
+  document.querySelectorAll('.section').forEach(e=>e.classList.remove('active'));
+  document.getElementById(`sec-${t}`).classList.add('active');
+  if(t==='quake'&&!qMap)initQMap();if(t==='nearby'&&!nMap)initNMap();
+  if(t==='helpline'&&!document.getElementById('hlOut').children.length)renderHL();
+  if(t==='ambulance'&&!document.getElementById('ambOut').children.length)renderAmb();
+  if(t==='firstaid'&&!document.getElementById('faOut').children.length)renderFA();
+  if(t==='contacts')renderC();if(t==='missing')renderM();
+  if(t==='checklist'&&!document.getElementById('ckO').children.length)renderCK();
+  if(t==='alerts')renderAlerts();
+  if(t==='shelters'&&!document.getElementById('shList').children.length)renderShelters();
+  if(t==='admin'&&adminAuth){renderAdminStats();adminTab('logs',document.querySelector('.admin-tab.active'))}
+  if(t==='flood'&&!document.getElementById('floodOut').children.length)renderFlood();
+  logAct('NAV','Switched to: '+t);
+}
 
 // ===== SOS =====
 async function doSOS(){const b=document.getElementById('sosBtn');b.innerHTML='<i class="fa-solid fa-spinner fa-spin" style="font-size:22px"></i><span>Finding...</span>';
 try{const p=await getGPS();uLat=p.lat;uLng=p.lng;uAcc=p.acc;gpsOk=true;document.getElementById('gpsD').className='sdot on';document.getElementById('gpsT').textContent=`GPS ±${Math.round(p.acc)}m`;b.className='sos-btn ok';b.innerHTML='<i class="fa-solid fa-check" style="font-size:22px"></i><span>Located</span>';
-document.getElementById('sosOut').style.display='block';document.getElementById('sosC').textContent=`${p.lat.toFixed(6)}° N, ${p.lng.toFixed(6)}° E`;document.getElementById('sosAc').textContent=`Accuracy: ±${Math.round(p.acc)}m`;
-try{const r=await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${p.lat}&lon=${p.lng}&format=json&zoom=18&addressdetails=1`);const d=await r.json();const a=d.address;document.getElementById('sosA').textContent=[a.neighbourhood,a.road,a.city||a.town||a.village,a.state,'Nepal'].filter(Boolean).join(', ')||'Address unavailable'}catch(e){document.getElementById('sosA').textContent='Could not fetch address'}toast('Location found')}catch(e){b.innerHTML='<i class="fa-solid fa-exclamation" style="font-size:22px"></i><span>SOS</span>';toast('GPS failed — call 100')}}
-function shareLoc(){if(!uLat){toast('Tap SOS first');return}const t=`EMERGENCY — My location: https://www.google.com/maps?q=${uLat},${uLng} (±${Math.round(uAcc)}m)`;if(navigator.share)navigator.share({title:'Emergency Location',text:t}).catch(()=>cp(t));else cp(t)}
+document.getElementById('sosOut').style.display='block';document.getElementById('sosC').textContent=`${p.lat.toFixed(6)}, ${p.lng.toFixed(6)}`;document.getElementById('sosAc').textContent=`Accuracy: ±${Math.round(p.acc)}m`;
+loadWeather();loadAQI();loadUV();loadNearby(nType);
+try{const r=await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${p.lat}&lon=${p.lng}&format=json&zoom=18&addressdetails=1`);const d=await r.json();const a=d.address;document.getElementById('sosA').textContent=[a.neighbourhood,a.road,a.city||a.town||a.village,a.state,'Nepal'].filter(Boolean).join(', ')||'Address unavailable'}catch(e){document.getElementById('sosA').textContent='Could not fetch address'}
+toast('Location found');logAct('SOS','Emergency location activated')}catch(e){b.innerHTML='<i class="fa-solid fa-exclamation" style="font-size:22px"></i><span>SOS</span>';toast('GPS failed - call 100')}}
+function shareLoc(){if(!uLat){toast('Tap SOS first');return}const t=`EMERGENCY - My location: https://www.google.com/maps?q=${uLat},${uLng} (±${Math.round(uAcc)}m)`;if(navigator.share)navigator.share({title:'Emergency Location',text:t}).catch(()=>cp(t));else cp(t)}
 function cp(t){navigator.clipboard.writeText(t).then(()=>toast('Copied')).catch(()=>toast('Copy failed'))}
 
 // ===== EARTHQUAKE =====
 function initQMap(){qMap=L.map('qMap',{zoomControl:false,attributionControl:false}).setView([28.3,84.5],6);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:16}).addTo(qMap);loadQuakes();setInterval(loadQuakes,60000)}
 async function loadQuakes(){const i=document.getElementById('qRI');if(i)i.classList.add('fa-spin');
-try{const r=await fetch('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson');const d=await r.json();const n=d.features.filter(f=>{const[,lat,lng]=f.geometry.coordinates;return lat>=25&&lat<=32&&lng>=78&&lng<=90});renderQ(n)}
-catch(e){document.getElementById('qList').innerHTML=`<div style="text-align:center;padding:16px;color:var(--muted)"><i class="fa-solid fa-triangle-exclamation"></i><div style="margin-top:4px">Failed</div></div>`}if(i)i.classList.remove('fa-spin')}
+try{var r=await fetch('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson');if(!r.ok)throw new Error('HTTP '+r.status);var d=await r.json();var n=d.features.filter(function(f){var c=f.geometry.coordinates;return c[1]>=25&&c[1]<=32&&c[0]>=78&&c[0]<=90});renderQ(n)}
+catch(e){document.getElementById('qList').innerHTML='<div style="text-align:center;padding:20px;color:var(--muted)"><i class="fa-solid fa-triangle-exclamation" style="margin-bottom:6px"></i><div style="margin-top:4px">Failed to load earthquakes</div><div style="font-size:9px;margin-top:3px;color:var(--red)">'+(e.message||'Network error')+'</div><div style="font-size:8px;margin-top:4px;color:var(--muted)">Tap Refresh to retry</div></div>'}if(i)i.classList.remove('fa-spin')}
 
 function renderQ(qs){
-if(qMap)qMap.eachLayer(l=>{if(l._qm)qMap.removeLayer(l)});
-if(!qs.length){document.getElementById('qList').innerHTML=`<div style="text-align:center;padding:16px;color:var(--green)"><i class="fa-solid fa-circle-check" style="font-size:16px;margin-bottom:4px"></i><div style="font-weight:600;color:var(--text2)">No earthquakes — Nepal is calm</div></div>`;return}
-document.getElementById('qList').innerHTML=`<div style="font-size:10px;color:var(--text2);margin-bottom:6px">${qs.length} earthquake${qs.length>1?'s':''} (24h)</div>`+qs.sort((a,b)=>b.properties.mag-a.properties.mag).map(q=>{const p=q.properties;const[,lat,lng,dep]=q.geometry.coordinates;const m=p.mag;const mc=m>=6?'var(--red)':m>=4.5?'var(--amber)':m>=3?'#fb923c':'var(--green)';const mb=m>=6?'rgba(239,68,68,.15)':m>=4.5?'rgba(245,158,11,.15)':'rgba(16,185,129,.12)';const ha=Math.floor((Date.now()-p.time)/3600000);const ts=ha<1?`${Math.floor((Date.now()-p.time)/60000)}m ago`:ha<24?`${ha}h ago`:`${Math.floor(ha/24)}d ago`;
-if(qMap){const mk=L.circleMarker([lat,lng],{radius:Math.max(4,m*3),color:mc,fillColor:mc,fillOpacity:.4,weight:1.5}).addTo(qMap);mk._qm=true;mk.bindPopup(`<div style="font-family:Space Grotesk"><b>M ${m}</b><div style="font-size:11px;color:var(--text2)">${p.place}</div><div style="font-size:10px;color:var(--muted)">Depth: ${dep.toFixed(1)}km</div></div>`)}
-return`<div class="qi" onclick="qMap&&qMap.flyTo([${lat},${lng}],8,{duration:.8})"><div style="display:flex;gap:8px;align-items:flex-start"><div style="min-width:32px;height:32px;border-radius:7px;background:${mb};color:${mc};display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px">${m.toFixed(1)}</div><div style="flex:1;min-width:0"><div style="font-size:10px;font-weight:500;line-height:1.3">${p.place||'—'}</div><div style="display:flex;gap:8px;margin-top:3px;font-size:9px;color:var(--muted)"><span>${dep.toFixed(1)}km</span><span>${ts}</span></div></div></div></div>`}).join('');
-if(qMap&&qs.length)qMap.fitBounds(L.latLngBounds(qs.map(q=>[q.geometry.coordinates[1],q.geometry.coordinates[0]])),{padding:[20,20]})}
+if(qMap)qMap.eachLayer(function(l){if(l._qm)qMap.removeLayer(l)});
+if(!qs.length){document.getElementById('qList').innerHTML='<div style="text-align:center;padding:16px;color:var(--green)"><i class="fa-solid fa-circle-check" style="font-size:16px;margin-bottom:4px"></i><div style="font-weight:600;color:var(--text2)">No earthquakes - Nepal is calm</div><div style="font-size:9px;color:var(--muted);margin-top:4px">Auto-refreshes every 60 seconds</div></div>';return}
+var sorted=qs.sort(function(a,b){return b.properties.mag-a.properties.mag});
+var h='<div style="font-size:10px;color:var(--text2);margin-bottom:6px">'+sorted.length+' earthquake'+(sorted.length>1?'s':'')+' (24h)</div>';
+for(var i=0;i<sorted.length;i++){var q=sorted[i];var p=q.properties;var c=q.geometry.coordinates;var lng=c[0],lat=c[1],dep=c[2];var m=p.mag;
+var mc=m>=6?'#ef4444':m>=4.5?'#f59e0b':m>=3?'#fb923c':'#10b981';
+var mb=m>=6?'rgba(239,68,68,.15)':m>=4.5?'rgba(245,158,11,.15)':'rgba(16,185,129,.12)';
+var ha=Math.floor((Date.now()-p.time)/3600000);var ts=ha<1?Math.floor((Date.now()-p.time)/60000)+'m ago':ha<24?ha+'h ago':Math.floor(ha/24)+'d ago';
+if(qMap){var mk=L.circleMarker([lat,lng],{radius:Math.max(4,m*3),color:mc,fillColor:mc,fillOpacity:.4,weight:1.5}).addTo(qMap);mk._qm=true;mk.bindPopup('<div style="font-family:Space Grotesk"><b style="color:#111">M '+m+'</b><div style="font-size:11px;color:#333">'+(p.place||'Nepal region')+'</div><div style="font-size:10px;color:#666">Depth: '+dep.toFixed(1)+'km</div></div>')}
+h+='<div class="qi" onclick="qMap&&qMap.setView(['+lat+','+lng+'],9)"><div style="display:flex;align-items:center;gap:8px"><div style="width:36px;height:36px;border-radius:8px;background:'+mb+';display:flex;align-items:center;justify-content:center;flex-shrink:0"><span class="mono" style="font-size:13px;font-weight:700;color:'+mc+'">'+m.toFixed(1)+'</span></div><div style="flex:1;min-width:0"><div style="font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+(p.place||'Nepal region')+'</div><div style="font-size:9px;color:var(--muted)">'+dep.toFixed(1)+'km depth &middot; '+ts+'</div></div></div></div>'}
+document.getElementById('qList').innerHTML=h;
+if(qMap&&sorted.length){var bounds=L.latLngBounds(sorted.map(function(q){var c=q.geometry.coordinates;return[c[1],c[0]]}));qMap.fitBounds(bounds,{padding:[20,20]})}}
 
 // ===== NEARBY (FIXED) =====
-function initNMap(){nMap=L.map('nMap',{zoomControl:false,attributionControl:false}).setView([28.3,84.5],13);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:16}).addTo(nMap);if(gpsOk)loadNearby(nType)}
+function initNMap(){nMap=L.map('nMap',{zoomControl:false,attributionControl:false}).setView([uLat||28.2,uLng||84.1],14);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:16}).addTo(nMap);if(gpsOk)loadNearby(nType)}
 
 const OT={hospital:'["amenity"="hospital"]',blood_bank:'["healthcare"="blood_donation"]',pharmacy:'["amenity"="pharmacy"]',police:'["amenity"="police"]',shelter:'["amenity"="shelter"]'};
-const OI={hospital:{i:'fa-hospital',c:'var(--green)',bg:'rgba(16,185,129,.12)'},blood_bank:{i:'fa-droplet',c:'#ef4444',bg:'rgba(239,68,68,.12)'},pharmacy:{i:'fa-pills',c:'var(--cyan)',bg:'rgba(6,182,212,.12)'},police:{i:'fa-shield-halved',c:'var(--red)',bg:'rgba(239,68,68,.12)'},shelter:{i:'fa-tent',c:'var(--amber)',bg:'var(--amber-glow)'}};
+const OI={hospital:{i:'fa-hospital',c:'#10b981',cv:'var(--green)',bg:'rgba(16,185,129,.12)'},blood_bank:{i:'fa-droplet',c:'#ef4444',cv:'var(--red)',bg:'rgba(239,68,68,.12)'},pharmacy:{i:'fa-pills',c:'#06b6d4',cv:'var(--cyan)',bg:'rgba(6,182,212,.12)'},police:{i:'fa-shield-halved',c:'#ef4444',cv:'var(--red)',bg:'rgba(239,68,68,.12)'},shelter:{i:'fa-tent',c:'#f59e0b',cv:'var(--amber)',bg:'var(--amber-glow)'}};
 const OL={hospital:'Hospitals',blood_bank:'Blood Banks',pharmacy:'Pharmacies',police:'Police Stations',shelter:'Shelters'};
 
+var _nearbyLoading=false;
 async function loadNearby(type,btn){
   nType=type;
   document.querySelectorAll('#nF .fbtn').forEach(b=>{b.classList.remove('on');b.style.background='var(--card)';b.style.color='var(--text2)';b.style.borderColor='var(--border)'});
   if(btn){btn.classList.add('on');btn.style.background='var(--green)';btn.style.color='#fff';btn.style.borderColor='var(--green)'}
 
-  if(!gpsOk){document.getElementById('nList').innerHTML=`<div style="text-align:center;padding:20px;color:var(--amber)"><i class="fa-solid fa-location-crosshairs" style="font-size:18px;margin-bottom:6px;opacity:.5"></i><div style="font-weight:600;color:var(--text2)">GPS Required</div><div style="font-size:9px;margin-top:2px">Tap SOS tab first to enable GPS</div></div>`;return}
+  if(!gpsOk){document.getElementById('nList').innerHTML='<div style="text-align:center;padding:20px;color:var(--amber)"><i class="fa-solid fa-location-crosshairs" style="font-size:18px;margin-bottom:6px;opacity:.5"></i><div style="font-weight:600;color:var(--text2)">GPS Required</div><div style="font-size:9px;margin-top:2px">Tap SOS tab first to enable GPS</div></div>';return}
 
-  document.getElementById('nList').innerHTML=`<div class="loader"><i class="fa-solid fa-spinner"></i><div style="margin-top:6px">Searching ${OL[type].toLowerCase()}...</div></div>`;
+  document.getElementById('nList').innerHTML='<div class="loader"><i class="fa-solid fa-spinner"></i><div style="margin-top:6px">Searching '+OL[type].toLowerCase()+'...</div></div>';
 
-  const d=.08;const tag=OT[type];
-  // Build Overpass query - use out center for better reliability
-  const q=`[out:json][timeout:20];(node${tag}(${uLat-d},${uLng-d},${uLat+d},${uLng+d}););out body 50;`;
+  var d=.08;var tag=OT[type];
+  // Use nwr (node,way,relation) + out center to catch ALL feature types
+  var q='[out:json][timeout:25];(nwr'+tag+'('+((uLat-d).toFixed(4))+','+((uLng-d).toFixed(4))+','+((uLat+d).toFixed(4))+','+((uLng+d).toFixed(4))+'););out center 50;';
 
   try{
-    // Try primary endpoint
-    let data=await overpassFetch(q);
+    _nearbyLoading=true;
+    var data=await overpassFetch(q);
+    if(!data||!data.elements||!data.elements.length){data=await overpassFetch(q,'https://overpass.kumi.systems/api/interpreter')}
     if(!data||!data.elements||!data.elements.length){
-      // Try backup endpoint
-      data=await overpassFetch(q,'https://overpass.kumi.systems/api/interpreter');
-    }
-    if(!data||!data.elements||!data.elements.length){
-      // Try even wider search
-      const q2=`[out:json][timeout:20];(node${tag}(${uLat-d*2},${uLng-d*2},${uLat+d*2},${uLng+d*2}););out body 80;`;
+      var d2=d*2;
+      var q2='[out:json][timeout:25];(nwr'+tag+'('+((uLat-d2).toFixed(4))+','+((uLng-d2).toFixed(4))+','+((uLat+d2).toFixed(4))+','+((uLng+d2).toFixed(4))+'););out center 80;';
       data=await overpassFetch(q2);
     }
+    if(!data||!data.elements||!data.elements.length){data=await overpassFetch(q,'https://maps.mail.ru/osm/tools/overpass/api/interpreter')}
 
     if(!data||!data.elements||!data.elements.length){
-      document.getElementById('nList').innerHTML=`<div style="text-align:center;padding:20px;color:var(--muted)"><i class="fa-solid fa-magnifying-glass" style="font-size:18px;margin-bottom:6px;opacity:.3"></i><div>No ${OL[type].toLowerCase()} found nearby</div><div style="font-size:9px;margin-top:3px">Try a different category or check if GPS is accurate</div></div>`;return;
+      document.getElementById('nList').innerHTML='<div style="text-align:center;padding:20px;color:var(--muted)"><i class="fa-solid fa-magnifying-glass" style="font-size:18px;margin-bottom:6px;opacity:.3"></i><div>No '+OL[type].toLowerCase()+' found nearby</div><div style="font-size:9px;margin-top:3px">Try a different category or check if GPS is accurate</div></div>';_nearbyLoading=false;return}
+
+    // Extract coords: nodes have lat/lon, ways/relations have center.lat/center.lon
+    var items=[];
+    for(var i=0;i<data.elements.length;i++){
+      var e=data.elements[i];
+      var lat=e.lat||(e.center&&e.center.lat);
+      var lon=e.lon||(e.center&&e.center.lon);
+      if(!lat||!lon)continue;
+      var nm=(e.tags&&e.tags.name)||'Unnamed';
+      items.push({name:nm,lat:lat,lon:lon,dist:hav(uLat,uLng,lat,lon)});
     }
+    items.sort(function(a,b){return a.dist-b.dist});
 
-    const items=data.elements.map(e=>({name:(e.tags&&e.tags.name)||'Unnamed',lat:e.lat,lon:e.lon,dist:hav(uLat,uLng,e.lat,e.lon)})).sort((a,b)=>a.dist-b.dist);
+    if(nMap){nMap.eachLayer(function(l){if(l._nm)nMap.removeLayer(l)});var um=L.circleMarker([uLat,uLng],{radius:7,color:'#06b6d4',fillColor:'#06b6d4',fillOpacity:.6,weight:2}).addTo(nMap);um._nm=true;um.bindPopup('<b style="color:#111">You</b>');
+    var ic=OI[type];for(var j=0;j<items.length;j++){var it=items[j];var m=L.circleMarker([it.lat,it.lon],{radius:5,color:ic.c,fillColor:ic.c,fillOpacity:.5,weight:1.5}).addTo(nMap);m._nm=true;m.bindPopup('<b style="color:#111">'+it.name+'</b><div style="font-size:11px;color:#666">'+it.dist.toFixed(1)+' km</div>')}
+    var bounds=L.latLngBounds([[uLat,uLng]]);for(var k=0;k<items.length;k++){bounds.extend([items[k].lat,items[k].lon])}
+    nMap.fitBounds(bounds,{padding:[20,20]})}
 
-    if(nMap){nMap.eachLayer(l=>{if(l._nm)nMap.removeLayer(l)});const um=L.circleMarker([uLat,uLng],{radius:7,color:'var(--cyan)',fillColor:'var(--cyan)',fillOpacity:.6,weight:2}).addTo(nMap);um._nm=true;um.bindPopup('<b>You</b>');
-    const ic=OI[type];items.forEach(it=>{const m=L.circleMarker([it.lat,it.lon],{radius:5,color:ic.c,fillColor:ic.c,fillOpacity:.5,weight:1.5}).addTo(nMap);m._nm=true;m.bindPopup(`<b>${it.name}</b><div style="font-size:11px;color:var(--text2)">${it.dist.toFixed(1)} km</div>`)});
-    nMap.fitBounds(L.latLngBounds([[uLat,uLng],...items.map(i=>[i.lat,i.lon])]),{padding:[20,20]})}
-
-    const ic=OI[type];
-    document.getElementById('nList').innerHTML=`<div style="font-size:10px;color:var(--text2);margin-bottom:6px">${items.length} ${OL[type].toLowerCase()} found</div>`+items.map(it=>`<div class="ni" onclick="nMap&&nMap.flyTo([${it.lat},${it.lon}],15,{duration:.6})"><div style="display:flex;gap:9px;align-items:center"><div style="width:32px;height:32px;border-radius:7px;background:${ic.bg};display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fa-solid ${ic.i}" style="color:${ic.c};font-size:12px"></i></div><div style="flex:1;min-width:0"><div style="font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${it.name}</div><div style="font-size:9px;color:var(--muted);margin-top:1px">${it.dist.toFixed(1)} km away</div></div><a href="https://www.google.com/maps/dir/${uLat},${uLng}/${it.lat},${it.lon}" target="_blank" rel="noopener" style="width:30px;height:30px;border-radius:50%;background:var(--card2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--cyan);text-decoration:none;flex-shrink:0"><i class="fa-solid fa-diamond-turn-right" style="font-size:10px"></i></a></div></div>`).join('');
-    document.getElementById('lastR').textContent=`Nearby: ${npt()}`;
-  }catch(e){document.getElementById('nList').innerHTML=`<div style="text-align:center;padding:20px;color:var(--muted)"><i class="fa-solid fa-triangle-exclamation"></i><div style="margin-top:4px">Search failed — tap again to retry</div><div style="font-size:9px;margin-top:2px;color:var(--red)">${e.message||'Network error'}</div></div>`}
+    var ic=OI[type];var h='<div style="font-size:10px;color:var(--text2);margin-bottom:6px">'+items.length+' '+OL[type].toLowerCase()+' found</div>';
+    for(var j=0;j<items.length;j++){var it=items[j];
+    h+='<div class="ni" onclick="nMap&&nMap.flyTo(['+it.lat+','+it.lon+'],15,{duration:.6})"><div style="display:flex;gap:9px;align-items:center"><div style="width:32px;height:32px;border-radius:7px;background:'+ic.bg+';display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fa-solid '+ic.i+'" style="color:'+ic.cv+';font-size:12px"></i></div><div style="flex:1;min-width:0"><div style="font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+it.name+'</div><div style="font-size:9px;color:var(--muted);margin-top:1px">'+it.dist.toFixed(1)+' km away</div></div><a href="https://www.google.com/maps/dir/'+uLat+','+uLng+'/'+it.lat+','+it.lon+'" target="_blank" rel="noopener" style="width:30px;height:30px;border-radius:50%;background:var(--card2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--cyan);text-decoration:none;flex-shrink:0"><i class="fa-solid fa-diamond-turn-right" style="font-size:10px"></i></a></div></div>'}
+    document.getElementById('nList').innerHTML=h;
+    document.getElementById('lastR').textContent='Nearby: '+npt();
+    _nearbyLoading=false;
+  }catch(e){document.getElementById('nList').innerHTML='<div style="text-align:center;padding:20px;color:var(--muted)"><i class="fa-solid fa-triangle-exclamation"></i><div style="margin-top:4px">Search failed &mdash; tap again to retry</div><div style="font-size:9px;margin-top:2px;color:var(--red)">'+(e.message||'Network error')+'</div></div>';_nearbyLoading=false}
 }
 
+var OVERPASS_ENDPOINTS=['https://overpass-api.de/api/interpreter','https://overpass.kumi.systems/api/interpreter','https://maps.mail.ru/osm/tools/overpass/api/interpreter'];
 async function overpassFetch(q,url){
-  const u=url||'https://overpass-api.de/api/interpreter';
-  const c=new AbortController();const t=setTimeout(()=>c.abort(),18000);
-  try{const r=await fetch(u+'?data='+encodeURIComponent(q),{signal:c.signal});clearTimeout(t);return await r.json()}
+  var u=url||OVERPASS_ENDPOINTS[0];
+  var c=new AbortController();var t=setTimeout(function(){c.abort()},20000);
+  try{var r=await fetch(u+'?data='+encodeURIComponent(q),{signal:c.signal,headers:{'Accept':'application/json'}});
+  clearTimeout(t);if(!r.ok)return null;var txt=await r.text();
+  if(!txt||txt.charAt(0)!=='{')return null;
+  return JSON.parse(txt)}
   catch(e){clearTimeout(t);return null}
 }
 
 function hav(a,b,c,d){const R=6371;const dL=(c-a)*Math.PI/180;const dN=(d-b)*Math.PI/180;const x=Math.sin(dL/2)**2+Math.cos(a*Math.PI/180)*Math.cos(c*Math.PI/180)*Math.sin(dN/2)**2;return R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x))}
+// ===== ENHANCED AQI =====
+async function loadAQI(){
+  const ri=document.getElementById('aqiRI');if(ri)ri.classList.add('fa-spin');
+  if(!gpsOk){document.getElementById('aqiOut').innerHTML='<div style="text-align:center;padding:20px;color:var(--muted)"><i class="fa-solid fa-location-crosshairs" style="font-size:20px;margin-bottom:6px;opacity:.3"></i><div>GPS required</div></div>';if(ri)ri.classList.remove('fa-spin');return}
+  try{
+    const r=await fetch(`https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${uLat}&longitude=${uLng}&current=pm10,pm2_5,carbon_monoxide,nitrogen_dioxide,sulphur_dioxide,ozone,us_aqi&timezone=Asia/Kathmandu`);
+    const d=await r.json();const c=d.current;
+    // Save to history
+    const hist=JSON.parse(localStorage.getItem('sn_aqi_hist')||'[]');
+    hist.push({v:c.us_aqi,t:Date.now()});if(hist.length>48)hist.splice(0,hist.length-48);
+    localStorage.setItem('sn_aqi_hist',JSON.stringify(hist));
+    renderAQIEnhanced(c,hist);
+    logAct('AQI','Fetched AQI: '+c.us_aqi);
+  }catch(e){document.getElementById('aqiOut').innerHTML='<div style="text-align:center;padding:16px;color:var(--muted)">Failed to load</div>'}
+  if(ri)ri.classList.remove('fa-spin');
+}
 
-// ===== AQI =====
-async function loadAQI(){if(!gpsOk)return;try{const r=await fetch(`https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${uLat}&longitude=${uLng}&current=pm10,pm2_5,carbon_monoxide,nitrogen_dioxide,sulphur_dioxide,ozone,us_aqi&timezone=Asia/Kathmandu`);const d=await r.json();renderAQI(d.current)}catch(e){document.getElementById('aqiOut').innerHTML=`<div style="text-align:center;padding:16px;color:var(--muted)">Failed to load</div>`}}
-function aqiI(v){if(v<=50)return{l:'Good',c:'#10b981',a:'Satisfactory — no risk'};if(v<=100)return{l:'Moderate',c:'#f59e0b',a:'Sensitive people minor effects'};if(v<=150)return{l:'Unhealthy (Sensitive)',c:'#f97316',a:'Sensitive groups may feel effects'};if(v<=200)return{l:'Unhealthy',c:'#ef4444',a:'Everyone may feel effects'};if(v<=300)return{l:'Very Unhealthy',c:'#a855f7',a:'Serious effects — avoid outdoor'};return{l:'Hazardous',c:'#7f1d1d',a:'Emergency — stay indoors'}}
-function renderAQI(c){const a=c.us_aqi;const i=aqiI(a);const ms=[{l:'PM2.5',v:c.pm2_5,u:'µg/m³',mx:75,w:35},{l:'PM10',v:c.pm10,u:'µg/m³',mx:150,w:70},{l:'O₃',v:c.ozone,u:'µg/m³',mx:200,w:100},{l:'NO₂',v:c.nitrogen_dioxide,u:'µg/m³',mx:200,w:80},{l:'SO₂',v:c.sulphur_dioxide,u:'µg/m³',mx:350,w:125},{l:'CO',v:c.carbon_monoxide,u:'µg/m³',mx:15000,w:5000}];
-document.getElementById('aqiOut').innerHTML=`<div class="sc" style="margin-bottom:12px;display:flex;align-items:center;gap:16px"><div class="aqi-ring" style="border-color:${i.c}"><div style="font-size:26px;font-weight:700;color:${i.c}">${a}</div><div style="font-size:8px;color:var(--muted)">US AQI</div></div><div><div style="font-size:14px;font-weight:600;color:${i.c}">${i.l}</div><div style="font-size:10px;color:var(--text2);margin-top:3px;line-height:1.4">${i.a}</div></div></div><div class="stitle"><i class="fa-solid fa-flask" style="color:var(--cyan)"></i>Pollutants</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">${ms.map(m=>{const p=Math.min(100,(m.v/m.mx)*100);const cl=m.v>=m.w?'var(--amber)':'var(--green)';return`<div class="sc" style="padding:8px"><div style="display:flex;justify-content:space-between;margin-bottom:3px"><span style="font-size:9px;color:var(--muted)">${m.l}</span><span class="mono" style="font-size:11px;font-weight:600;color:${cl}">${m.v.toFixed(1)}</span></div><div style="height:2px;background:var(--border);border-radius:2px;overflow:hidden"><div style="height:100%;width:${p}%;background:${cl};border-radius:2px"></div></div><div style="font-size:7px;color:var(--muted);margin-top:1px">${m.u}</div></div>`}).join('')}</div><div style="margin-top:10px;padding:8px 10px;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.15);border-radius:8px;font-size:9px;color:var(--text2);line-height:1.5"><i class="fa-solid fa-circle-info" style="color:var(--amber);margin-right:3px"></i>${aqi>150?'Wear N95 mask. Limit outdoor exercise. Keep windows closed.':aqi>100?'Sensitive: reduce outdoor exertion. Consider mask in traffic.':'Safe for outdoor activities. Monitor if respiratory issues.'}</div>`}
+function aqiI(v){if(v<=50)return{l:'Good',c:'#10b981',a:'Satisfactory - no risk'};if(v<=100)return{l:'Moderate',c:'#f59e0b',a:'Sensitive people minor effects'};if(v<=150)return{l:'Unhealthy (Sensitive)',c:'#f97316',a:'Sensitive groups may feel effects'};if(v<=200)return{l:'Unhealthy',c:'#ef4444',a:'Everyone may feel effects'};if(v<=300)return{l:'Very Unhealthy',c:'#a855f7',a:'Serious effects - avoid outdoor'};return{l:'Hazardous',c:'#7f1d1d',a:'Emergency - stay indoors'}}
+
+function renderAQIEnhanced(c,hist){
+  const a=c.us_aqi;const i=aqiI(a);
+  // Pollutant details with WHO & Nepal standards
+  const ms=[
+    {l:'PM2.5',v:c.pm2_5,u:'ug/m3',mx:75,w:35,who:15,nep:40,eff:'Penetrates deep into lungs. Causes respiratory and cardiovascular disease.'},
+    {l:'PM10',v:c.pm10,u:'ug/m3',mx:150,w:70,who:45,nep:120,eff:'Inhalable coarse particles. Aggravates asthma and bronchitis.'},
+    {l:'O3',v:c.ozone,u:'ug/m3',mx:200,w:100,who:100,nep:100,eff:'Ground-level ozone. Reduces lung function and inflames airways.'},
+    {l:'NO2',v:c.nitrogen_dioxide,u:'ug/m3',mx:200,w:80,who:25,nep:40,eff:'From vehicle exhaust. Irritates airways and worsens asthma.'},
+    {l:'SO2',v:c.sulphur_dioxide,u:'ug/m3',mx:350,w:125,who:40,nep:50,eff:'From burning fossil fuels. Causes bronchoconstriction.'},
+    {l:'CO',v:c.carbon_monoxide,u:'ug/m3',mx:15000,w:5000,who:10000,nep:10000,eff:'Reduced oxygen delivery. Dangerous in enclosed spaces.'}
+  ];
+
+  // Health guidelines by group
+  const groups=a>=150?[
+    {g:'General Public',icon:'fa-user',c:'var(--red)',adv:'Avoid all outdoor physical activity. Keep windows closed. Use air purifier if available.'},
+    {g:'Children',icon:'fa-child',c:'var(--red)',adv:'Keep children indoors. No outdoor play. Ensure clean drinking water.'},
+    {g:'Elderly',icon:'fa-person-cane',c:'var(--red)',adv:'Stay indoors. Keep medications handy. Monitor breathing closely.'},
+    {g:'Asthma/Respiratory',icon:'fa-lungs',c:'var(--red)',adv:'Keep inhaler accessible. Avoid all triggers. Seek medical help if symptoms worsen.'},
+    {g:'Outdoor Workers',icon:'fa-helmet-safety',c:'var(--red)',adv:'Use N95 mask mandatory. Limit exposure to under 1 hour. Take frequent breaks indoors.'}
+  ]:a>=100?[
+    {g:'General Public',icon:'fa-user',c:'var(--amber)',adv:'Reduce prolonged outdoor exertion. Close windows during peak hours.'},
+    {g:'Children',icon:'fa-child',c:'var(--amber)',adv:'Limit outdoor play. Prefer indoor activities. Watch for coughing.'},
+    {g:'Elderly',icon:'fa-person-cane',c:'var(--amber)',adv:'Reduce outdoor walks. Keep respiratory medications accessible.'},
+    {g:'Asthma/Respiratory',icon:'fa-lungs',c:'var(--amber)',adv:'Use N95 mask outdoors. Keep inhaler ready. Avoid traffic areas.'},
+    {g:'Outdoor Workers',icon:'fa-helmet-safety',c:'var(--amber)',adv:'Consider wearing mask. Take more frequent breaks. Stay hydrated.'}
+  ]:[
+    {g:'General Public',icon:'fa-user',c:'var(--green)',adv:'Safe for outdoor activities. Enjoy fresh air.'},
+    {g:'Children',icon:'fa-child',c:'var(--green)',adv:'Normal outdoor play. Good conditions for activities.'},
+    {g:'Elderly',icon:'fa-person-cane',c:'var(--green)',adv:'Normal activities. Light outdoor exercise is beneficial.'},
+    {g:'Asthma/Respiratory',icon:'fa-lungs',c:'var(--green)',adv:'Generally safe. Carry inhaler as precaution in dusty areas.'},
+    {g:'Outdoor Workers',icon:'fa-helmet-safety',c:'var(--green)',adv:'No special precautions needed. Normal work conditions.'}
+  ];
+
+  let html=`
+  <!-- AQI Main Ring -->
+  <div class="sc" style="margin-bottom:12px;display:flex;align-items:center;gap:16px">
+    <div class="aqi-ring" style="border-color:${i.c}"><div style="font-size:26px;font-weight:700;color:${i.c}">${a}</div><div style="font-size:8px;color:var(--muted)">US AQI</div></div>
+    <div><div style="font-size:14px;font-weight:600;color:${i.c}">${i.l}</div><div style="font-size:10px;color:var(--text2);margin-top:3px;line-height:1.4">${i.a}</div></div>
+  </div>
+
+  <!-- AQI Scale Legend -->
+  <div class="stitle"><i class="fa-solid fa-palette" style="color:var(--amber)"></i>AQI Scale</div>
+  <div class="sc" style="margin-bottom:12px;padding:10px 12px">
+    <div style="display:flex;border-radius:6px;overflow:hidden;height:16px;margin-bottom:4px">
+      <div style="flex:1;background:#10b981" title="Good 0-50"></div>
+      <div style="flex:1;background:#f59e0b" title="Moderate 51-100"></div>
+      <div style="flex:1;background:#f97316" title="Unhealthy Sensitive 101-150"></div>
+      <div style="flex:1;background:#ef4444" title="Unhealthy 151-200"></div>
+      <div style="flex:1;background:#a855f7" title="Very Unhealthy 201-300"></div>
+      <div style="flex:1;background:#7f1d1d" title="Hazardous 301+"></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:7px;color:var(--muted)">
+      <span>0 Good</span><span>100</span><span>200</span><span>300+</span>
+    </div>
+  </div>
+
+  <!-- AQI History Chart -->
+  <div class="stitle"><i class="fa-solid fa-chart-bar" style="color:var(--cyan)"></i>AQI History (24h)</div>
+  <div class="sc" style="margin-bottom:12px;padding:10px">
+    <canvas id="aqiChart" height="70" style="width:100%"></canvas>
+  </div>
+
+  <!-- Health Guidelines -->
+  <div class="stitle"><i class="fa-solid fa-heart-pulse" style="color:var(--red)"></i>Health Guidelines</div>
+  <div style="display:grid;grid-template-columns:1fr;gap:6px;margin-bottom:12px">
+    ${groups.map(g=>`<div class="sc" style="padding:10px;display:flex;gap:10px;align-items:flex-start"><div style="width:28px;height:28px;border-radius:7px;background:${g.c}15;display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fa-solid ${g.icon}" style="color:${g.c};font-size:11px"></i></div><div><div style="font-size:11px;font-weight:600;margin-bottom:2px">${g.g}</div><div style="font-size:9px;color:var(--text2);line-height:1.4">${g.adv}</div></div></div>`).join('')}
+  </div>
+
+  <!-- Detailed Pollutants -->
+  <div class="stitle"><i class="fa-solid fa-flask" style="color:var(--cyan)"></i>Pollutant Details</div>
+  <div style="display:grid;grid-template-columns:1fr;gap:6px;margin-bottom:12px">
+    ${ms.map(m=>{
+      const p=Math.min(100,(m.v/m.mx)*100);
+      const cl=m.v>=m.w?'var(--amber)':'var(--green)';
+      const whoExceed=m.v>m.who;
+      return`<div class="sc" style="padding:10px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+          <span style="font-size:11px;font-weight:600">${m.l}</span>
+          <span class="mono" style="font-size:13px;font-weight:700;color:${cl}">${m.v.toFixed(1)} <span style="font-size:8px;color:var(--muted)">${m.u}</span></span>
+        </div>
+        <div style="height:4px;background:var(--border);border-radius:4px;overflow:hidden;margin-bottom:6px"><div style="height:100%;width:${p}%;background:${cl};border-radius:4px;transition:width .3s"></div></div>
+        <div style="display:flex;gap:12px;font-size:8px;color:var(--muted)">
+          <span>WHO: <span style="color:${whoExceed?'var(--red)':'var(--green)'}">${m.who}</span></span>
+          <span>Nepal: <span style="color:${m.v>m.nep?'var(--amber)':'var(--green)'}">${m.nep}</span></span>
+        </div>
+        <div style="font-size:8px;color:var(--muted);margin-top:3px;line-height:1.3">${m.eff}</div>
+      </div>`}).join('')}
+  </div>
+
+  <!-- City Comparison -->
+  <div class="stitle"><i class="fa-solid fa-city" style="color:var(--amber)"></i>Major Cities AQI</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px" id="aqiCities">
+    <div class="loader" style="grid-column:1/-1"><i class="fa-solid fa-spinner fa-spin"></i> Loading city data...</div>
+  </div>
+
+  <!-- Recommendation -->
+  <div style="padding:8px 10px;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.15);border-radius:8px;font-size:9px;color:var(--text2);line-height:1.5">
+    <i class="fa-solid fa-circle-info" style="color:var(--amber);margin-right:3px"></i>${a>150?'Wear N95 mask outdoors. Limit all outdoor exercise. Keep all windows closed. Use air purifiers.':a>100?'Sensitive individuals: reduce outdoor exertion. Consider N95 mask in heavy traffic areas. Monitor symptoms.':'Air quality is acceptable. Normal outdoor activities are safe. Monitor if you have respiratory conditions.'}
+  </div>`;
+
+  document.getElementById('aqiOut').innerHTML=html;
+
+  // Draw history chart
+  setTimeout(()=>drawAqiChart(hist),50);
+
+  // Load city comparison
+  loadCityAQI();
+}
+
+function drawAqiChart(hist){
+  const canvas=document.getElementById('aqiChart');if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  canvas.width=canvas.offsetWidth*2;canvas.height=140;
+  ctx.scale(2,2);
+  const w=canvas.offsetWidth,h=70;
+  ctx.clearRect(0,0,w,h);
+
+  if(hist.length<2){ctx.fillStyle='var(--muted)';ctx.font='10px Space Grotesk';ctx.textAlign='center';ctx.fillText('Not enough data yet. Check back later.',w/2,h/2);return}
+
+  const barW=Math.max(2,(w-20)/Math.min(hist.length,24));
+  const maxV=Math.max(50,...hist.map(h=>h.v));
+  const gap=2;
+  const startX=10;
+
+  // Grid lines
+  ctx.strokeStyle='rgba(30,45,69,0.5)';ctx.lineWidth=0.5;
+  for(let v=0;v<=maxV;v+=50){const y=h-10-((v/maxV)*(h-20));ctx.beginPath();ctx.moveTo(startX,y);ctx.lineTo(w-5,y);ctx.stroke();ctx.fillStyle='var(--muted)';ctx.font='7px JetBrains Mono';ctx.textAlign='right';ctx.fillText(v,startX-2,y+3)}
+
+  const recent=hist.slice(-24);
+  recent.forEach((pt,idx)=>{
+    const x=startX+idx*barW;
+    const barH=Math.max(1,(pt.v/maxV)*(h-20));
+    const y=h-10-barH;
+    const info=aqiI(pt.v);
+    ctx.fillStyle=info.c;
+    ctx.globalAlpha=0.8;
+    ctx.fillRect(x+gap/2,y,barW-gap,barH);
+    ctx.globalAlpha=1;
+  });
+}
+
+async function loadCityAQI(){
+  const cities=[
+    {name:'Kathmandu',lat:27.7172,lng:85.3240},
+    {name:'Pokhara',lat:28.2096,lng:83.9856},
+    {name:'Biratnagar',lat:26.4519,lng:87.2715},
+    {name:'Chitwan',lat:27.5291,lng:84.3542},
+    {name:'Nepalgunj',lat:28.0509,lng:81.6764}
+  ];
+  const el=document.getElementById('aqiCities');if(!el)return;
+  let html='';
+  for(const city of cities){
+    try{
+      const r=await fetch(`https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${city.lat}&longitude=${city.lng}&current=us_aqi&timezone=Asia/Kathmandu`);
+      const d=await r.json();
+      const aqi=d.current.us_aqi;const info=aqiI(aqi);
+      html+=`<div class="sc" style="padding:10px;text-align:center"><div style="font-size:10px;font-weight:600;margin-bottom:4px">${city.name}</div><div class="mono" style="font-size:22px;font-weight:700;color:${info.c}">${aqi}</div><div style="font-size:8px;color:${info.c};font-weight:600">${info.l}</div></div>`;
+    }catch(e){html+=`<div class="sc" style="padding:10px;text-align:center"><div style="font-size:10px;font-weight:600">${city.name}</div><div style="font-size:9px;color:var(--muted)">N/A</div></div>`}
+  }
+  el.innerHTML=html;
+}
 
 // ===== WEATHER =====
-async function loadWeather(){if(!gpsOk)return;try{const r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${uLat}&longitude=${uLng}&current=temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m,wind_direction_10m,precipitation,weather_code,pressure_msl&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=Asia/Kathmandu&forecast_days=3`);const d=await r.json();renderW(d)}catch(e){document.getElementById('wOut').innerHTML=`<div style="text-align:center;padding:16px;color:var(--muted)">Failed</div>`}}
-function wc(c){const m={0:{i:'☀️',l:'Clear'},1:{i:'🌤️',l:'Mainly Clear'},2:{i:'⛅',l:'Partly Cloudy'},3:{i:'☁️',l:'Overcast'},45:{i:'🌫️',l:'Fog'},48:{i:'🌫️',l:'Rime Fog'},51:{i:'🌦️',l:'Drizzle'},53:{i:'🌦️',l:'Drizzle'},55:{i:'🌦️',l:'Dense Drizzle'},61:{i:'🌧️',l:'Light Rain'},63:{i:'🌧️',l:'Rain'},65:{i:'🌧️',l:'Heavy Rain'},71:{i:'🌨️',l:'Light Snow'},73:{i:'🌨️',l:'Snow'},75:{i:'❄️',l:'Heavy Snow'},80:{i:'🌦️',l:'Showers'},81:{i:'🌧️',l:'Rain Showers'},82:{i:'⛈️',l:'Heavy Showers'},95:{i:'⛈️',l:'Thunderstorm'},96:{i:'⛈️',l:'Thunder+Hail'},99:{i:'⛈️',l:'Severe Storm'}};return m[c]||{i:'🌡️',l:'Unknown'}}
+async function loadWeather(){if(!gpsOk)return;try{const r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${uLat}&longitude=${uLng}&current=temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m,wind_direction_10m,precipitation,weather_code,pressure_msl&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,sunrise,sunset&timezone=Asia/Kathmandu&forecast_days=3`);const d=await r.json();renderW(d)}catch(e){document.getElementById('wOut').innerHTML=`<div style="text-align:center;padding:16px;color:var(--muted)"><i class="fa-solid fa-triangle-exclamation"></i><div style="margin-top:4px">Failed</div></div>`}}
+function wc(c){const m={0:{i:'\u2600\ufe0f',l:'Clear'},1:{i:'\ud83c\udf24\ufe0f',l:'Mainly Clear'},2:{i:'\u26c5',l:'Partly Cloudy'},3:{i:'\u2601\ufe0f',l:'Overcast'},45:{i:'\ud83c\udf2b\ufe0f',l:'Fog'},48:{i:'\ud83c\udf2b\ufe0f',l:'Rime Fog'},51:{i:'\ud83c\udf26\ufe0f',l:'Drizzle'},53:{i:'\ud83c\udf26\ufe0f',l:'Drizzle'},55:{i:'\ud83c\udf26\ufe0f',l:'Dense Drizzle'},61:{i:'\ud83c\udf27\ufe0f',l:'Light Rain'},63:{i:'\ud83c\udf27\ufe0f',l:'Rain'},65:{i:'\ud83c\udf27\ufe0f',l:'Heavy Rain'},71:{i:'\ud83c\udf28\ufe0f',l:'Light Snow'},73:{i:'\ud83c\udf28\ufe0f',l:'Snow'},75:{i:'\u2744\ufe0f',l:'Heavy Snow'},80:{i:'\ud83c\udf26\ufe0f',l:'Showers'},81:{i:'\ud83c\udf27\ufe0f',l:'Rain Showers'},82:{i:'\u26c8\ufe0f',l:'Heavy Showers'},95:{i:'\u26c8\ufe0f',l:'Thunderstorm'},96:{i:'\u26c8\ufe0f',l:'Thunder+Hail'},99:{i:'\u26c8\ufe0f',l:'Severe Storm'}};return m[c]||{i:'\ud83c\udf21\ufe0f',l:'Unknown'}}
 function wd(d){return['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'][Math.round(d/22.5)%16]}
 function renderW(d){const c=d.current;const dy=d.daily;const w=wc(c.weather_code);const alerts=[];
-if(c.temperature_2m>40)alerts.push({c:'var(--red)',i:'fa-temperature-high',t:'Extreme heat'});if(c.temperature_2m<2)alerts.push({c:'var(--cyan)',i:'fa-snowflake',t:'Cold wave'});if(c.wind_speed_10m>60)alerts.push({c:'var(--amber)',i:'fa-wind',t:'High wind'});if(c.precipitation>50)alerts.push({c:'var(--cyan)',i:'fa-cloud-showers-heavy',t:'Heavy rain — landslide risk'});if(c.weather_code>=95)alerts.push({c:'var(--purple)',i:'fa-bolt',t:'Thunderstorm — stay indoors'});
-document.getElementById('wOut').innerHTML=`<div class="sc" style="margin-bottom:12px;display:flex;align-items:center;gap:14px"><div><div style="font-size:40px">${w.i}</div><div style="font-size:9px;color:var(--text2);text-align:center">${w.l}</div></div><div><div style="font-size:44px;font-weight:300;line-height:1">${Math.round(c.temperature_2m)}°</div><div style="font-size:10px;color:var(--muted)">Feels ${Math.round(c.apparent_temperature)}°C</div></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px"><div class="sc" style="text-align:center"><div style="font-size:8px;color:var(--muted);text-transform:uppercase">Humidity</div><div style="font-size:16px;font-weight:700;color:var(--cyan)">${c.relative_humidity_2m}%</div></div><div class="sc" style="text-align:center"><div style="font-size:8px;color:var(--muted);text-transform:uppercase">Wind</div><div style="font-size:16px;font-weight:700">${c.wind_speed_10m.toFixed(0)} <span style="font-size:9px;color:var(--muted)">km/h ${wd(c.wind_direction_10m)}</span></div></div><div class="sc" style="text-align:center"><div style="font-size:8px;color:var(--muted);text-transform:uppercase">Pressure</div><div style="font-size:16px;font-weight:700">${Math.round(c.pressure_msl/100)} <span style="font-size:9px;color:var(--muted)">hPa</span></div></div><div class="sc" style="text-align:center"><div style="font-size:8px;color:var(--muted);text-transform:uppercase">Rain</div><div style="font-size:16px;font-weight:700;color:${c.precipitation>0?'var(--cyan)':'inherit'}">${c.precipitation} <span style="font-size:9px;color:var(--muted)">mm</span></div></div></div><div class="stitle"><i class="fa-solid fa-calendar-days" style="color:var(--amber)"></i>Forecast</div><div class="sc" style="display:flex">${dy.time.map((t,i)=>{const dn=new Date(t);const dn2=i===0?'Today':['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][dn.getDay()];const dw=wc(dy.weather_code[i]);return`<div style="text-align:center;flex:1;padding:6px"><div style="font-size:9px;color:var(--muted)">${dn2}</div><div style="font-size:18px">${dw.i}</div><div><b>${Math.round(dy.temperature_2m_max[i])}°</b> <span style="color:var(--muted)">${Math.round(dy.temperature_2m_min[i])}°</span></div>${dy.precipitation_sum[i]>0?`<div style="font-size:8px;color:var(--cyan)">${dy.precipitation_sum[i].toFixed(1)}mm</div>`:''}</div>`}).join('')}</div>${alerts.length?`<div style="margin-top:8px">${alerts.map(a=>`<div style="background:${a.c}12;border:1px solid ${a.c}30;border-radius:6px;padding:7px 10px;display:flex;align-items:center;gap:6px;margin-bottom:5px"><i class="fa-solid ${a.i}" style="color:${a.c}"></i><span style="font-size:10px;color:${a.c}">${a.t}</span></div>`).join('')}</div>`:''}`}
+if(c.temperature_2m>40)alerts.push({c:'var(--red)',i:'fa-temperature-high',t:'Extreme heat'});if(c.temperature_2m<2)alerts.push({c:'var(--cyan)',i:'fa-snowflake',t:'Cold wave'});if(c.wind_speed_10m>60)alerts.push({c:'var(--amber)',i:'fa-wind',t:'High wind'});if(c.precipitation>50)alerts.push({c:'var(--cyan)',i:'fa-cloud-showers-heavy',t:'Heavy rain - landslide risk'});if(c.weather_code>=95)alerts.push({c:'var(--purple)',i:'fa-bolt',t:'Thunderstorm - stay indoors'});
+const sr=dy.sunrise?dy.sunrise[0].split('T')[1]:'';const ss=dy.sunset?dy.sunset[0].split('T')[1]:'';
+document.getElementById('wOut').innerHTML=`<div class="sc" style="margin-bottom:12px;display:flex;align-items:center;gap:14px"><div><div style="font-size:40px">${w.i}</div><div style="font-size:9px;color:var(--text2);text-align:center">${w.l}</div></div><div><div style="font-size:44px;font-weight:300;line-height:1">${Math.round(c.temperature_2m)}\u00b0</div><div style="font-size:10px;color:var(--muted)">Feels ${Math.round(c.apparent_temperature)}\u00b0C</div></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px"><div class="sc" style="text-align:center"><div style="font-size:8px;color:var(--muted);text-transform:uppercase">Humidity</div><div style="font-size:16px;font-weight:700;color:var(--cyan)">${c.relative_humidity_2m}%</div></div><div class="sc" style="text-align:center"><div style="font-size:8px;color:var(--muted);text-transform:uppercase">Wind</div><div style="font-size:16px;font-weight:700">${c.wind_speed_10m.toFixed(0)} <span style="font-size:9px;color:var(--muted)">km/h ${wd(c.wind_direction_10m)}</span></div></div><div class="sc" style="text-align:center"><div style="font-size:8px;color:var(--muted);text-transform:uppercase">Pressure</div><div style="font-size:16px;font-weight:700">${Math.round(c.pressure_msl/100)} <span style="font-size:9px;color:var(--muted)">hPa</span></div></div><div class="sc" style="text-align:center"><div style="font-size:8px;color:var(--muted);text-transform:uppercase">Rain</div><div style="font-size:16px;font-weight:700;color:${c.precipitation>0?'var(--cyan)':'inherit'}">${c.precipitation} <span style="font-size:9px;color:var(--muted)">mm</span></div></div></div>${sr?`<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px"><div class="sc" style="text-align:center"><div style="font-size:8px;color:var(--muted)"><i class="fa-solid fa-sun" style="color:var(--amber);margin-right:3px"></i>Sunrise</div><div class="mono" style="font-size:13px;font-weight:600;margin-top:2px">${sr}</div></div><div class="sc" style="text-align:center"><div style="font-size:8px;color:var(--muted)"><i class="fa-solid fa-moon" style="color:var(--purple);margin-right:3px"></i>Sunset</div><div class="mono" style="font-size:13px;font-weight:600;margin-top:2px">${ss}</div></div></div>`:''}<div class="stitle"><i class="fa-solid fa-calendar-days" style="color:var(--amber)"></i>Forecast</div><div class="sc" style="display:flex">${dy.time.map((t,i)=>{const dn=new Date(t);const dn2=i===0?'Today':['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][dn.getDay()];const dw=wc(dy.weather_code[i]);return`<div style="text-align:center;flex:1;padding:6px"><div style="font-size:9px;color:var(--muted)">${dn2}</div><div style="font-size:18px">${dw.i}</div><div><b>${Math.round(dy.temperature_2m_max[i])}\u00b0</b> <span style="color:var(--muted)">${Math.round(dy.temperature_2m_min[i])}\u00b0</span></div>${dy.precipitation_sum[i]>0?`<div style="font-size:8px;color:var(--cyan)">${dy.precipitation_sum[i].toFixed(1)}mm</div>`:''}</div>`}).join('')}</div>${alerts.length?`<div style="margin-top:8px">${alerts.map(a=>`<div style="background:${a.c}12;border:1px solid ${a.c}30;border-radius:6px;padding:7px 10px;display:flex;align-items:center;gap:6px;margin-bottom:5px"><i class="fa-solid ${a.i}" style="color:${a.c}"></i><span style="font-size:10px;color:${a.c}">${a.t}</span></div>`).join('')}</div>`:''}`}
 
+// ===== UV INDEX =====
+async function loadUV(){
+  const ri=document.getElementById('uvRI');if(ri)ri.classList.add('fa-spin');
+  if(!gpsOk){document.getElementById('uvOut').innerHTML='<div style="text-align:center;padding:20px;color:var(--muted)"><i class="fa-solid fa-location-crosshairs" style="font-size:20px;margin-bottom:6px;opacity:.3"></i><div>GPS required</div></div>';if(ri)ri.classList.remove('fa-spin');return}
+  try{
+    const r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${uLat}&longitude=${uLng}&daily=uv_index_max,uv_index_clear_sky_max,sunrise,sunset&timezone=Asia/Kathmandu&forecast_days=3`);
+    const d=await r.json();renderUV(d);
+    logAct('UV','Fetched UV data');
+  }catch(e){document.getElementById('uvOut').innerHTML='<div style="text-align:center;padding:16px;color:var(--muted)">Failed to load UV data</div>'}
+  if(ri)ri.classList.remove('fa-spin');
+}
+
+function uvI(v){if(v<=2)return{l:'Low',c:'#10b981',adv:'No protection needed. Enjoy the sun safely.'};if(v<=5)return{l:'Moderate',c:'#f59e0b',adv:'Wear sunglasses. Use SPF 30+ sunscreen. Seek shade midday.'};if(v<=7)return{l:'High',c:'#f97316',adv:'Reduce sun exposure 10am-4pm. SPF 50+ sunscreen. Wear hat and sunglasses.'};if(v<=10)return{l:'Very High',c:'#ef4444',adv:'Avoid midday sun. SPF 50+ sunscreen every 2 hours. Long sleeves, hat, sunglasses.'};return{l:'Extreme',c:'#a855f7',adv:'Stay indoors 10am-4pm. Extra protection essential. Risk of skin damage in minutes.'}}
+
+function renderUV(d){
+  const dy=d.daily;const uv=dy.uv_index_max[0];const clear=dy.uv_index_clear_sky_max[0];const info=uvI(uv);
+  const sr=dy.sunrise[0].split('T')[1];const ss=dy.sunset[0].split('T')[1];
+  const protections=uv<=2?[]:uv<=5?[{i:'fa-glasses',t:'Sunglasses'},{i:'fa-pump-soap',t:'SPF 30+ Sunscreen'},{i:'fa-cloud-sun',t:'Seek shade midday'}]:uv<=7?[{i:'fa-glasses',t:'Sunglasses'},{i:'fa-pump-soap',t:'SPF 50+ Sunscreen'},{i:'fa-hat-cowboy',t:'Wide-brim hat'},{i:'fa-shirt',t:'Protective clothing'},{i:'fa-clock',t:'Avoid 10am-4pm'}]:[{i:'fa-glasses',t:'Sunglasses'},{i:'fa-pump-soap',t:'SPF 50+ every 2h'},{i:'fa-hat-cowboy',t:'Wide-brim hat'},{i:'fa-shirt',t:'Long sleeves & pants'},{i:'fa-house',t:'Stay indoors 10am-4pm'}];
+
+  document.getElementById('uvOut').innerHTML=`
+  <div class="sc" style="margin-bottom:12px;display:flex;align-items:center;gap:16px">
+    <div class="aqi-ring" style="border-color:${info.c}"><div style="font-size:26px;font-weight:700;color:${info.c}">${uv.toFixed(1)}</div><div style="font-size:8px;color:var(--muted)">UV Index</div></div>
+    <div><div style="font-size:14px;font-weight:600;color:${info.c}">${info.l}</div><div style="font-size:10px;color:var(--text2);margin-top:3px;line-height:1.4">${info.adv}</div></div>
+  </div>
+  ${protections.length?`<div class="stitle"><i class="fa-solid fa-shield-halved" style="color:var(--amber)"></i>Sun Protection</div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px">${protections.map(p=>`<div class="sc" style="padding:8px 12px;display:flex;align-items:center;gap:6px"><i class="fa-solid ${p.i}" style="color:var(--amber);font-size:11px"></i><span style="font-size:10px">${p.t}</span></div>`).join('')}</div>`:''}
+  <div class="stitle"><i class="fa-solid fa-calendar-days" style="color:var(--amber)"></i>3-Day UV Forecast</div>
+  <div class="sc" style="display:flex;margin-bottom:12px">
+    ${dy.time.map((t,i)=>{const dn=new Date(t);const dn2=i===0?'Today':['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][dn.getDay()];const uvi=dy.uv_index_max[i];const inf=uvI(uvi);return`<div style="text-align:center;flex:1;padding:8px"><div style="font-size:9px;color:var(--muted)">${dn2}</div><div style="font-size:11px;margin:4px 0"><i class="fa-solid fa-sun" style="color:${inf.c}"></i></div><div class="mono" style="font-size:18px;font-weight:700;color:${inf.c}">${uvi.toFixed(1)}</div><div style="font-size:8px;color:${inf.c};font-weight:600">${inf.l}</div></div>`}).join('')}
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px">
+    <div class="sc" style="text-align:center;padding:8px"><div style="font-size:8px;color:var(--muted)"><i class="fa-solid fa-sun" style="color:var(--amber);margin-right:2px"></i>Sunrise</div><div class="mono" style="font-size:12px;font-weight:600;margin-top:2px">${sr}</div></div>
+    <div class="sc" style="text-align:center;padding:8px"><div style="font-size:8px;color:var(--muted)"><i class="fa-solid fa-moon" style="color:var(--purple);margin-right:2px"></i>Sunset</div><div class="mono" style="font-size:12px;font-weight:600;margin-top:2px">${ss}</div></div>
+    <div class="sc" style="text-align:center;padding:8px"><div style="font-size:8px;color:var(--muted)"><i class="fa-solid fa-sun" style="color:var(--cyan);margin-right:2px"></i>Clear Sky UV</div><div class="mono" style="font-size:12px;font-weight:600;margin-top:2px">${clear.toFixed(1)}</div></div>
+  </div>`;
+}
+
+// ===== FLOOD MONITOR =====
+function renderFlood(){
+  const rivers=[
+    {name:'Koshi River',basin:'Koshi',district:'Sunsari/Saptari',status:'Moderate',trend:'rising',level:4.2,warn:6.0,danger:7.5},
+    {name:'Gandaki River',basin:'Gandaki',district:'Nawalparasi/Chitwan',status:'Normal',trend:'stable',level:3.1,warn:6.5,danger:8.0},
+    {name:'Karnali River',basin:'Karnali',district:'Kailali/Bardiya',status:'Normal',trend:'falling',level:2.8,warn:7.0,danger:8.5},
+    {name:'Bagmati River',basin:'Bagmati',district:'Kathmandu/Terai',status:'Moderate',trend:'rising',level:3.5,warn:5.5,danger:6.5},
+    {name:'Narayani River',basin:'Gandaki',district:'Chitwan',status:'Normal',trend:'stable',level:2.9,warn:7.0,danger:9.0},
+    {name:'Babai River',basin:'Karnali',district:'Bardiya',status:'High',trend:'rising',level:5.1,warn:5.5,danger:6.5},
+    {name:'West Rapti',basin:'Rapti',district:'Rupandehi',status:'Normal',trend:'falling',level:2.1,warn:5.0,danger:6.0},
+    {name:'Kamala River',basin:'Koshi',district:'Dhanusha/Siraha',status:'Moderate',trend:'rising',level:3.8,warn:5.5,danger:6.5}
+  ];
+  const sc=s=>s==='Danger'?'var(--red)':s==='High'?'#f97316':s==='Moderate'?'var(--amber)':'var(--green)';
+  const tg=t=>t==='rising'?'fa-arrow-trend-up':t==='falling'?'fa-arrow-trend-down':'fa-minus';
+  const tc=t=>t==='rising'?'var(--red)':t==='falling'?'var(--cyan)':'var(--muted)';
+
+  const tips=[
+    {i:'fa-house-flood-water',t:'Know Your Zone',d:'Identify if you live in a flood-prone area. Check with local authorities for flood risk maps specific to your ward and district.'},
+    {i:'fa-suitcase',t:'Emergency Kit',d:'Keep a waterproof bag with: documents, flashlight, radio, first-aid, 3-day water supply, dry food, medicines, and warm clothes.'},
+    {i:'fa-person-running',t:'Evacuation Route',d:'Know your evacuation route to higher ground. Practice with family. Never cross flooded roads or bridges on foot or in vehicle.'},
+    {i:'fa-phone',t:'Stay Informed',d:'Listen to Radio Nepal 92.4/102.8 MHz. Follow DHM (Department of Hydrology and Meteorology) updates. Share warnings with neighbors.'},
+    {i:'fa-triangle-exclamation',t:'After Flood',d:'Do not enter floodwater. Boil all drinking water. Watch for snakes and displaced animals. Document damage for relief claims.'}
+  ];
+
+  document.getElementById('floodOut').innerHTML=`
+  <div style="display:flex;gap:4px;margin-bottom:12px;flex-wrap:wrap">
+    <span style="font-size:9px;padding:3px 8px;border-radius:6px;background:var(--green-glow);color:var(--green);font-weight:600"><i class="fa-solid fa-circle" style="font-size:6px;margin-right:3px"></i>Normal</span>
+    <span style="font-size:9px;padding:3px 8px;border-radius:6px;background:rgba(245,158,11,.12);color:var(--amber);font-weight:600"><i class="fa-solid fa-circle" style="font-size:6px;margin-right:3px"></i>Moderate</span>
+    <span style="font-size:9px;padding:3px 8px;border-radius:6px;background:rgba(249,115,22,.12);color:#f97316;font-weight:600"><i class="fa-solid fa-circle" style="font-size:6px;margin-right:3px"></i>High</span>
+    <span style="font-size:9px;padding:3px 8px;border-radius:6px;background:var(--red-glow);color:var(--red);font-weight:600"><i class="fa-solid fa-circle" style="font-size:6px;margin-right:3px"></i>Danger</span>
+  </div>
+  <div class="stitle"><i class="fa-solid fa-water" style="color:var(--cyan)"></i>Major River Basins</div>
+  ${rivers.map(r=>`<div class="sc" style="margin-bottom:6px;padding:10px;display:flex;align-items:center;gap:10px">
+    <div style="width:36px;height:36px;border-radius:8px;background:${sc(r.status)}15;display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fa-solid fa-water" style="color:${sc(r.status)};font-size:13px"></i></div>
+    <div style="flex:1;min-width:0">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px;font-weight:600">${r.name}</span><span style="font-size:8px;padding:2px 6px;border-radius:4px;background:${sc(r.status)}20;color:${sc(r.status)};font-weight:600">${r.status}</span></div>
+      <div style="font-size:9px;color:var(--muted);margin-top:1px">${r.district}</div>
+      <div style="display:flex;align-items:center;gap:8px;margin-top:3px">
+        <span class="mono" style="font-size:10px;color:${sc(r.status)}">${r.level}m</span>
+        <span style="font-size:8px;color:var(--muted)">Warn: ${r.warn}m / Danger: ${r.danger}m</span>
+        <i class="fa-solid ${tg(r.trend)}" style="color:${tc(r.trend)};font-size:10px;margin-left:auto"></i>
+      </div>
+      <div style="height:3px;background:var(--border);border-radius:3px;margin-top:4px;overflow:hidden"><div style="height:100%;width:${Math.min(100,(r.level/r.danger)*100)}%;background:${sc(r.status)};border-radius:3px"></div></div>
+    </div>
+  </div>`).join('')}
+  <div class="stitle" style="margin-top:14px"><i class="fa-solid fa-shield-halved" style="color:var(--amber)"></i>Monsoon Safety Tips</div>
+  ${tips.map(t=>`<div class="sc" style="margin-bottom:6px;padding:10px;display:flex;gap:10px;align-items:flex-start"><div style="width:28px;height:28px;border-radius:7px;background:var(--amber-glow);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fa-solid ${t.i}" style="color:var(--amber);font-size:11px"></i></div><div><div style="font-size:11px;font-weight:600;margin-bottom:2px">${t.t}</div><div style="font-size:9px;color:var(--text2);line-height:1.4">${t.d}</div></div></div>`).join('')}
+  <div style="padding:8px 10px;background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15);border-radius:8px;font-size:9px;color:var(--text2);line-height:1.5;margin-top:8px">
+    <i class="fa-solid fa-circle-info" style="color:var(--red);margin-right:3px"></i><b>Flash Flood Warning:</b> If water levels rise rapidly, move to higher ground immediately. Do not wait for official warnings. Call 100 for emergency rescue.
+  </div>`;
+}
 // ===== HELPLINES =====
 function renderHL(){document.getElementById('hlOut').innerHTML=HL.map(cat=>`<div style="margin-bottom:14px"><div class="stitle"><i class="fa-solid ${cat.icon}" style="color:${cat.color}"></i>${cat.cat}</div>${cat.items.map(it=>`<a href="tel:${it.num.replace(/\s/g,'')}" class="hc"><div style="width:34px;height:34px;border-radius:7px;background:${cat.color}15;display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fa-solid ${cat.icon}" style="color:${cat.color};font-size:12px"></i></div><div style="flex:1;min-width:0"><div style="font-size:11px;font-weight:600">${it.name}</div><div style="font-size:9px;color:var(--muted)">${it.desc}</div></div><div style="text-align:right;flex-shrink:0;display:flex;align-items:center;gap:6px"><div class="mono" style="font-size:11px;font-weight:600;color:${cat.color}">${it.num}</div><div class="cbtn" style="width:26px;height:26px"><i class="fa-solid fa-phone" style="font-size:9px"></i></div></div></a>`).join('')}</div>`).join('')}
 
@@ -573,25 +944,262 @@ function toggleFA(i){document.getElementById(`fa-${i}`).classList.toggle('open')
 
 // ===== CONTACTS =====
 function renderC(){const cs=JSON.parse(localStorage.getItem('sn_c')||'[]');if(!cs.length){document.getElementById('cL').innerHTML=`<div style="text-align:center;padding:24px;color:var(--muted)"><i class="fa-solid fa-address-book" style="font-size:20px;margin-bottom:6px;opacity:.3"></i><div>No contacts yet</div></div>`;return}document.getElementById('cL').innerHTML=cs.map((c,i)=>`<div class="contact-card"><div style="width:34px;height:34px;border-radius:50%;background:var(--amber-glow);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--amber);font-weight:700;font-size:13px">${c.n.charAt(0).toUpperCase()}</div><div style="flex:1;min-width:0"><div class="rel">${c.r}</div><div style="font-size:12px;font-weight:600">${c.n}</div><div class="mono" style="font-size:10px;color:var(--text2)">${c.p}</div></div><a href="tel:${c.p}" class="cbtn" style="width:30px;height:30px" aria-label="Call"><i class="fa-solid fa-phone" style="font-size:10px"></i></a><button onclick="delC(${i})" style="width:30px;height:30px;border-radius:50%;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:var(--red);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0" aria-label="Delete"><i class="fa-solid fa-trash" style="font-size:9px"></i></button></div>`).join('')}
-function saveC(){const n=document.getElementById('cN').value.trim();const p=document.getElementById('cP').value.trim();const r=document.getElementById('cR').value;if(!n||!p){toast('Name and phone required');return}const cs=JSON.parse(localStorage.getItem('sn_c')||'[]');cs.push({n,p,r});localStorage.setItem('sn_c',JSON.stringify(cs));document.getElementById('cN').value='';document.getElementById('cP').value='';document.getElementById('cF').style.display='none';renderC();toast('Contact saved')}
+function saveC(){const n=document.getElementById('cN').value.trim();const p=document.getElementById('cP').value.trim();const r=document.getElementById('cR').value;if(!n||!p){toast('Name and phone required');return}const cs=JSON.parse(localStorage.getItem('sn_c')||'[]');cs.push({n,p,r});localStorage.setItem('sn_c',JSON.stringify(cs));document.getElementById('cN').value='';document.getElementById('cP').value='';document.getElementById('cF').style.display='none';renderC();toast('Contact saved');logAct('CONTACT','Saved: '+n)}
 function delC(i){const cs=JSON.parse(localStorage.getItem('sn_c')||'[]');cs.splice(i,1);localStorage.setItem('sn_c',JSON.stringify(cs));renderC();toast('Removed')}
 
 // ===== MISSING =====
 function renderM(){const ms=JSON.parse(localStorage.getItem('sn_m')||'[]');if(!ms.length){document.getElementById('mL2').innerHTML=`<div style="text-align:center;padding:24px;color:var(--muted)"><i class="fa-solid fa-person-circle-question" style="font-size:20px;margin-bottom:6px;opacity:.3"></i><div>No reports</div></div>`;return}document.getElementById('mL2').innerHTML=ms.map((m,i)=>`<div class="miss-card"><div style="display:flex;gap:10px"><div class="photo">${m.ph?`<img src="${m.ph}" alt="${m.n}">`:'<i class="fa-solid fa-user"></i>'}</div><div style="flex:1;min-width:0"><div style="display:flex;justify-content:space-between"><div style="font-size:13px;font-weight:700">${m.n}</div><span style="font-size:10px;color:var(--amber);background:var(--amber-glow);padding:1px 7px;border-radius:8px;font-weight:600">${m.a} yrs</span></div><div style="font-size:10px;color:var(--text2);margin-top:3px"><i class="fa-solid fa-location-dot" style="width:10px;color:var(--red)"></i>${m.l}</div><div style="font-size:10px;color:var(--text2);margin-top:1px"><i class="fa-solid fa-phone" style="width:10px;color:var(--green)"></i><span class="mono">${m.c}</span></div>${m.d?`<div style="font-size:9px;color:var(--muted);margin-top:3px;line-height:1.4">${m.d}</div>`:''}<div style="font-size:8px;color:var(--muted);margin-top:3px">${m.dt}</div></div></div><div style="display:flex;gap:5px;margin-top:7px"><a href="tel:${m.c}" class="cbtn" style="flex:1;border-radius:7px;height:28px;gap:4px;justify-content:center;font-size:10px;font-family:inherit;text-decoration:none"><i class="fa-solid fa-phone" style="font-size:9px"></i> Call</a><button onclick="shareM(${i})" style="flex:1;height:28px;border-radius:7px;background:var(--card2);border:1px solid var(--border);color:var(--cyan);font-family:inherit;font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:3px"><i class="fa-solid fa-share-nodes" style="font-size:9px"></i> Share</button><button onclick="delM(${i})" style="width:28px;height:28px;border-radius:7px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:var(--red);cursor:pointer;display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-trash" style="font-size:9px"></i></button></div></div>`).join('')}
-function saveM(){const n=document.getElementById('mN').value.trim();const a=document.getElementById('mA').value;const l=document.getElementById('mL').value.trim();const d=document.getElementById('mD').value.trim();const c=document.getElementById('mC').value.trim();if(!n||!l||!c){toast('Name, location, contact required');return}const pf=document.getElementById('mPh').files[0];const save=(ph)=>{const ms=JSON.parse(localStorage.getItem('sn_m')||'[]');ms.unshift({n,a:a||'?',l,d,c,ph,dt:npt()});localStorage.setItem('sn_m',JSON.stringify(ms));document.getElementById('mN').value='';document.getElementById('mA').value='';document.getElementById('mL').value='';document.getElementById('mD').value='';document.getElementById('mC').value='';document.getElementById('mPh').value='';document.getElementById('mF').style.display='none';renderM();toast('Saved — also inform police 100')};if(pf){const r=new FileReader();r.onload=e=>save(e.target.result);r.readAsDataURL(pf)}else save(null)}
+function saveM(){const n=document.getElementById('mN').value.trim();const a=document.getElementById('mA').value;const l=document.getElementById('mL').value.trim();const d=document.getElementById('mD').value.trim();const c=document.getElementById('mC').value.trim();if(!n||!l||!c){toast('Name, location, contact required');return}const pf=document.getElementById('mPh').files[0];const save=(ph)=>{const ms=JSON.parse(localStorage.getItem('sn_m')||'[]');ms.unshift({n,a:a||'?',l,d,c,ph,dt:npt()});localStorage.setItem('sn_m',JSON.stringify(ms));document.getElementById('mN').value='';document.getElementById('mA').value='';document.getElementById('mL').value='';document.getElementById('mD').value='';document.getElementById('mC').value='';document.getElementById('mPh').value='';document.getElementById('mF').style.display='none';renderM();toast('Saved - also inform police 100');logAct('MISSING','Reported: '+n)};if(pf){const r=new FileReader();r.onload=e=>save(e.target.result);r.readAsDataURL(pf)}else save(null)}
 function delM(i){const ms=JSON.parse(localStorage.getItem('sn_m')||'[]');ms.splice(i,1);localStorage.setItem('sn_m',JSON.stringify(ms));renderM();toast('Removed')}
 function shareM(i){const ms=JSON.parse(localStorage.getItem('sn_m')||'[]');const m=ms[i];if(!m)return;const t=`MISSING PERSON\nName: ${m.n}\nAge: ${m.a}\nLast Seen: ${m.l}\nDesc: ${m.d||'N/A'}\nContact: ${m.c}\nReported: ${m.dt}\n\nPlease share widely.`;if(navigator.share)navigator.share({title:'Missing: '+m.n,text:t}).catch(()=>cp(t));else cp(t)}
 
 // ===== CHECKLIST =====
 function renderCK(){const sv=JSON.parse(localStorage.getItem('sn_ck')||'{}');document.getElementById('ckO').innerHTML=CK.map((cat,ci)=>{const dn=cat.items.length;const dd=cat.items.filter((_,ii)=>sv[`${ci}-${ii}`]).length;const pc=Math.round(dd/dn*100);const bc=pc===100?'var(--green)':pc>50?'var(--amber)':'var(--red)';return`<div style="margin-bottom:16px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px"><div class="stitle" style="margin:0"><i class="fa-solid fa-clipboard-list" style="color:var(--amber)"></i>${cat.cat}</div><span class="mono" style="font-size:10px;color:${bc};font-weight:600">${dd}/${dn}</span></div><div style="height:2px;background:var(--border);border-radius:2px;margin-bottom:6px;overflow:hidden"><div style="height:100%;width:${pc}%;background:${bc};border-radius:2px;transition:width .3s"></div></div>${cat.items.map((it,ii)=>{const k=`${ci}-${ii}`;const ck=sv[k];return`<div class="ci" onclick="togCK('${k}')"><div class="cb ${ck?'ck':''}">${ck?'<i class="fa-solid fa-check" style="font-size:8px;color:#fff"></i>':''}</div><div class="ct ${ck?'dn':''}" style="font-size:10px;line-height:1.5">${it}</div></div>`}).join('')}</div>`}).join('')}
 function togCK(k){const sv=JSON.parse(localStorage.getItem('sn_ck')||'{}');sv[k]=!sv[k];localStorage.setItem('sn_ck',JSON.stringify(sv));renderCK()}
+// ===== ALERTS =====
+function initAlerts(){
+  const a=JSON.parse(localStorage.getItem('sn_alerts')||'null');
+  if(a)return;
+  const defaults=[
+    {sev:'warning',title:'Monsoon Season Active',desc:'Heavy rainfall expected across Terai and mid-hills. Stay alert for flood warnings. Keep emergency kit ready.',src:'DHM Nepal',ts:Date.now()-3600000},
+    {sev:'info',title:'Earthquake Preparedness Drill',desc:'Nationwide earthquake preparedness drill scheduled. Participate at your nearest open space. Check local ward office for details.',src:'NDRRMA',ts:Date.now()-86400000},
+    {sev:'critical',title:'Landslide Risk - Highway Routes',desc:'Prithvi Highway and Narayanghat-Mugling road sections at high landslide risk due to continuous rain. Avoid non-essential travel.',src:'Nepal Police',ts:Date.now()-7200000},
+    {sev:'info',title:'Air Quality Advisory',desc:'Kathmandu Valley air quality may deteriorate during dry season. Follow AQI updates in the Air tab. Use masks when AQI exceeds 100.',src:'CPREC',ts:Date.now()-172800000}
+  ];
+  localStorage.setItem('sn_alerts',JSON.stringify(defaults));
+}
+function renderAlerts(){
+  const alerts=JSON.parse(localStorage.getItem('sn_alerts')||'[]');
+  if(!alerts.length){document.getElementById('alertList').innerHTML='<div style="text-align:center;padding:24px;color:var(--muted)"><i class="fa-solid fa-bell-slash" style="font-size:20px;margin-bottom:6px;opacity:.3"></i><div>No alerts</div></div>';return}
+  const sevC={critical:{c:'var(--red)',bg:'rgba(239,68,68,.1)',bd:'rgba(239,68,68,.2)'},warning:{c:'var(--amber)',bg:'rgba(245,158,11,.1)',bd:'rgba(245,158,11,.2)'},info:{c:'var(--cyan)',bg:'var(--cyan-glow)',bd:'rgba(6,182,212,.2)'}};
+  document.getElementById('alertList').innerHTML=alerts.map((a,i)=>{
+    const s=sevC[a.sev]||sevC.info;
+    const ago=Math.floor((Date.now()-a.ts)/60000);
+    const ts=ago<60?ago+'m ago':ago<1440?Math.floor(ago/60)+'h ago':Math.floor(ago/1440)+'d ago';
+    return`<div style="background:${s.bg};border:1px solid ${s.bd};border-radius:10px;padding:12px;margin-bottom:8px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span class="alert-sev" style="background:${s.bg};color:${s.c};border:1px solid ${s.bd}">${a.sev}</span>
+          <span style="font-size:12px;font-weight:700">${a.title}</span>
+        </div>
+        <button onclick="dismissAlert(${i})" style="background:none;border:none;color:var(--muted);cursor:pointer;padding:4px"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div style="font-size:10px;color:var(--text2);line-height:1.4;margin-bottom:4px">${a.desc}</div>
+      <div style="display:flex;justify-content:space-between;font-size:8px;color:var(--muted)"><span><i class="fa-solid fa-building" style="margin-right:2px"></i>${a.src||'CPREC'}</span><span>${ts}</span></div>
+    </div>`}).join('');
+}
+function showAddAlert(){document.getElementById('alertForm').style.display=document.getElementById('alertForm').style.display==='none'?'block':'none'}
+function saveAlert(){
+  const t=document.getElementById('alT').value.trim();const d=document.getElementById('alD').value.trim();const s=document.getElementById('alS').value;const src=document.getElementById('alSrc').value.trim()||'CPREC';
+  if(!t||!d){toast('Title and description required');return}
+  const alerts=JSON.parse(localStorage.getItem('sn_alerts')||'[]');
+  alerts.unshift({sev:s,title:t,desc:d,src,ts:Date.now()});
+  localStorage.setItem('sn_alerts',JSON.stringify(alerts));
+  document.getElementById('alT').value='';document.getElementById('alD').value='';document.getElementById('alSrc').value='';document.getElementById('alertForm').style.display='none';
+  renderAlerts();toast('Alert posted');logAct('ALERT','Posted: '+t);
+}
+function dismissAlert(i){const a=JSON.parse(localStorage.getItem('sn_alerts')||'[]');a.splice(i,1);localStorage.setItem('sn_alerts',JSON.stringify(a));renderAlerts();toast('Alert dismissed')}
+
+// ===== SHELTERS =====
+const SHELTERS=[
+  {name:'Kathmandu Emergency Shelter',district:'Kathmandu',prov:3,type:'govt',cap:500,ph:'01-4211050'},
+  {name:'NRCS Relief Shelter - KTM',district:'Kathmandu',prov:3,type:'redcross',cap:300,ph:'01-4228097'},
+  {name:'Lalitpur Open Space Shelter',district:'Lalitpur',prov:3,type:'govt',cap:400,ph:'01-5522266'},
+  {name:'Bhaktapur Community Hall',district:'Bhaktapur',prov:3,type:'community',cap:250,ph:'01-6612630'},
+  {name:'Pokhara City Shelter',district:'Kaski',prov:4,type:'govt',cap:350,ph:'061-562098'},
+  {name:'Gandaki Red Cross Camp',district:'Kaski',prov:4,type:'redcross',cap:200,ph:'061-562100'},
+  {name:'Biratnagar Municipal Shelter',district:'Morang',prov:1,type:'govt',cap:400,ph:'021-620246'},
+  {name:'Dharan Relief Camp',district:'Sunsari',prov:1,type:'community',cap:150,ph:'021-621040'},
+  {name:'Chitwan Emergency Center',district:'Chitwan',prov:3,type:'govt',cap:300,ph:'056-527155'},
+  {name:'Bharatpur Community Shelter',district:'Chitwan',prov:3,type:'community',cap:200,ph:'056-580245'},
+  {name:'Nepalgunj Relief Camp',district:'Banke',prov:5,type:'govt',cap:350,ph:'081-520025'},
+  {name:'Butwal Municipal Shelter',district:'Rupandehi',prov:5,type:'govt',cap:250,ph:'071-540345'},
+  {name:'Dhangadhi Emergency Center',district:'Kailali',prov:6,type:'govt',cap:300,ph:'091-580045'},
+  {name:'Karnali Red Cross Camp',district:'Surkhet',prov:6,type:'redcross',cap:150,ph:'083-520145'},
+  {name:'Dipayal Relief Camp',district:'Doti',prov:7,type:'govt',cap:200,ph:'095-680123'},
+  {name:'Mahendranagar Shelter',district:'Kanchanpur',prov:7,type:'community',cap:180,ph:'099-525012'},
+  {name:'Janakpur Emergency Shelter',district:'Dhanusha',prov:2,type:'govt',cap:250,ph:'033-520145'},
+  {name:'Birgunj Relief Center',district:'Parsa',prov:2,type:'govt',cap:300,ph:'051-526045'},
+  {name:'NRCS Camp - Birgunj',district:'Parsa',prov:2,type:'redcross',cap:200,ph:'051-526156'}
+];
+let shFilter='all',shProv='all';
+
+function renderShelters(){
+  const filtered=SHELTERS.filter(s=>{
+    if(shFilter!=='all'&&s.type!==shFilter)return false;
+    if(shProv!=='all'&&s.prov!==shProv)return false;
+    return true;
+  });
+  const tc={govt:{c:'var(--green)',l:'Government'},redcross:{c:'var(--red)',l:'Red Cross'},community:{c:'var(--cyan)',l:'Community'}};
+  if(!filtered.length){document.getElementById('shList').innerHTML='<div style="text-align:center;padding:24px;color:var(--muted)"><i class="fa-solid fa-tent" style="font-size:20px;margin-bottom:6px;opacity:.3"></i><div>No shelters match filter</div></div>';return}
+  document.getElementById('shList').innerHTML=`<div style="font-size:10px;color:var(--text2);margin-bottom:8px">${filtered.length} shelter${filtered.length>1?'s':''} found</div>`+filtered.map(s=>{
+    const t=tc[s.type];
+    let dist='';
+    if(gpsOk){try{const coords={Kathmandu:[27.7172,85.324],Lalitpur:[27.6588,85.3197],Bhaktapur:[27.6710,85.4298],Kaski:[28.2096,83.9856],Morang:[26.4519,87.2715],Sunsari:[26.6563,87.1509],Chitwan:[27.5291,84.3542],Banke:[28.0509,81.6764],Rupandehi:[27.5041,83.4580],Kailali:[28.7115,81.1634],Surkhet:[28.5972,81.6353],Doti:[29.2718,80.7492],Kanchanpur:[28.8224,80.3296],Dhanusha:[26.7020,85.9050],Parsa:[27.0338,84.6784]};
+    const co=coords[s.district];if(co){const d=hav(uLat,uLng,co[0],co[1]);dist=`<span class="mono" style="color:var(--amber);font-size:10px">${d.toFixed(0)}km</span>`}}catch(e){}}
+    return`<div class="sc" style="margin-bottom:6px;padding:10px;display:flex;align-items:center;gap:10px">
+      <div style="width:36px;height:36px;border-radius:8px;background:${t.c}15;display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fa-solid fa-tent" style="color:${t.c};font-size:13px"></i></div>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:11px;font-weight:600">${s.name}</div>
+        <div style="font-size:9px;color:var(--muted)">${s.district} &middot; Prov ${s.prov}</div>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:2px">
+          <span class="shelter-type" style="background:${t.c}15;color:${t.c}">${t.l}</span>
+          <span style="font-size:8px;color:var(--muted)"><i class="fa-solid fa-users" style="margin-right:2px"></i>${s.cap}</span>
+          ${dist}
+        </div>
+      </div>
+      <a href="tel:${s.ph.replace(/\s/g,'')}" class="cbtn" style="width:30px;height:30px;flex-shrink:0"><i class="fa-solid fa-phone" style="font-size:10px"></i></a>
+    </div>`}).join('');
+}
+function filterShelters(f,btn){shFilter=f;document.querySelectorAll('#shF .fbtn').forEach(b=>b.classList.remove('on'));if(btn)btn.classList.add('on');renderShelters()}
+function filterShProvince(p,btn){shProv=p;document.querySelectorAll('#shP .fbtn').forEach(b=>b.classList.remove('on'));if(btn)btn.classList.add('on');renderShelters()}
+
+// ===== ADMIN =====
+function adminLogin(){
+  const pwd=document.getElementById('adminPwd').value;
+  // Password: CPRECNepal2026 (stored reversed)
+  if(pwd.split('').reverse().join('')==='6202lapecNCEPRC'){
+    adminAuth=true;
+    sessionStorage.setItem('sn_admin','1');
+    document.getElementById('adminLogin').style.display='none';
+    document.getElementById('adminDash').style.display='block';
+    renderAdminStats();
+    adminTab('logs',document.querySelector('.admin-tab.active'));
+    logAct('ADMIN','Admin logged in');
+    toast('Welcome, Admin');
+  }else{
+    document.getElementById('adminErr').style.display='block';
+    document.getElementById('adminPwd').value='';
+    logAct('ADMIN','Failed login attempt');
+  }
+}
+function adminLogout(){
+  adminAuth=false;sessionStorage.removeItem('sn_admin');
+  document.getElementById('adminLogin').style.display='flex';
+  document.getElementById('adminDash').style.display='none';
+  document.getElementById('adminPwd').value='';
+  document.getElementById('adminErr').style.display='none';
+  go('sos');toast('Logged out');
+}
+
+function renderAdminStats(){
+  const logs=JSON.parse(localStorage.getItem('sn_log')||'[]');
+  const missing=JSON.parse(localStorage.getItem('sn_m')||'[]');
+  const contacts=JSON.parse(localStorage.getItem('sn_c')||'[]');
+  const alerts=JSON.parse(localStorage.getItem('sn_alerts')||'[]');
+  const sosCount=logs.filter(l=>l.t==='SOS').length;
+  document.getElementById('adminStats').innerHTML=`
+    <div class="admin-stat"><div style="font-size:8px;color:var(--muted);text-transform:uppercase">SOS Activations</div><div class="mono" style="font-size:20px;font-weight:700;color:var(--red);margin-top:2px">${sosCount}</div></div>
+    <div class="admin-stat"><div style="font-size:8px;color:var(--muted);text-transform:uppercase">Missing Reports</div><div class="mono" style="font-size:20px;font-weight:700;color:var(--amber);margin-top:2px">${missing.length}</div></div>
+    <div class="admin-stat"><div style="font-size:8px;color:var(--muted);text-transform:uppercase">Contacts Saved</div><div class="mono" style="font-size:20px;font-weight:700;color:var(--green);margin-top:2px">${contacts.length}</div></div>
+    <div class="admin-stat"><div style="font-size:8px;color:var(--muted);text-transform:uppercase">Active Alerts</div><div class="mono" style="font-size:20px;font-weight:700;color:var(--cyan);margin-top:2px">${alerts.length}</div></div>
+  `;
+}
+
+function adminTab(tab,btn){
+  document.querySelectorAll('.admin-tab').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  const el=document.getElementById('adminContent');
+  if(tab==='logs')renderAdminLogs(el);
+  else if(tab==='missing')renderAdminMissing(el);
+  else if(tab==='contacts')renderAdminContacts(el);
+  else if(tab==='alertsmgr')renderAdminAlerts(el);
+  else if(tab==='system')renderAdminSystem(el);
+}
+
+function renderAdminLogs(el){
+  const logs=JSON.parse(localStorage.getItem('sn_log')||'[]');
+  if(!logs.length){el.innerHTML='<div style="text-align:center;padding:20px;color:var(--muted)">No activity logs</div>';return}
+  el.innerHTML=`<div style="margin-bottom:8px;display:flex;gap:4px;flex-wrap:wrap">
+    <button class="fbtn on" onclick="filterLogs('all',this)">All</button>
+    <button class="fbtn" onclick="filterLogs('SOS',this)">SOS</button>
+    <button class="fbtn" onclick="filterLogs('GPS',this)">GPS</button>
+    <button class="fbtn" onclick="filterLogs('CONTACT',this)">Contacts</button>
+    <button class="fbtn" onclick="filterLogs('MISSING',this)">Missing</button>
+    <button class="fbtn" onclick="filterLogs('NAV',this)">Nav</button>
+    <button class="fbtn" onclick="filterLogs('ADMIN',this)">Admin</button>
+    <button class="fbtn" onclick="filterLogs('ALERT',this)">Alerts</button>
+  </div><div id="logList" style="max-height:400px;overflow-y:auto">${logs.slice(0,50).map(l=>`<div style="display:flex;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);font-size:10px"><span class="mono" style="color:var(--muted);flex-shrink:0;font-size:9px;width:70px">${new Date(l.ts).toLocaleTimeString('en-NP',{hour:'2-digit',minute:'2-digit'})}</span><span style="padding:1px 6px;border-radius:4px;background:var(--cyan-glow);color:var(--cyan);font-size:8px;font-weight:600;flex-shrink:0">${l.t}</span><span style="color:var(--text2);flex:1">${l.d}</span></div>`).join('')}</div>`;
+}
+window.filterLogs=function(f,btn){
+  document.querySelectorAll('#adminContent .fbtn').forEach(b=>b.classList.remove('on'));if(btn)btn.classList.add('on');
+  const logs=JSON.parse(localStorage.getItem('sn_log')||'[]');
+  const filtered=f==='all'?logs:logs.filter(l=>l.t===f);
+  document.getElementById('logList').innerHTML=filtered.slice(0,50).map(l=>`<div style="display:flex;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);font-size:10px"><span class="mono" style="color:var(--muted);flex-shrink:0;font-size:9px;width:70px">${new Date(l.ts).toLocaleTimeString('en-NP',{hour:'2-digit',minute:'2-digit'})}</span><span style="padding:1px 6px;border-radius:4px;background:var(--cyan-glow);color:var(--cyan);font-size:8px;font-weight:600;flex-shrink:0">${l.t}</span><span style="color:var(--text2);flex:1">${l.d}</span></div>`).join('')||'<div style="text-align:center;padding:16px;color:var(--muted)">No logs for this filter</div>';
+};
+
+function renderAdminMissing(el){
+  const ms=JSON.parse(localStorage.getItem('sn_m')||'[]');
+  if(!ms.length){el.innerHTML='<div style="text-align:center;padding:20px;color:var(--muted)">No missing person reports</div>';return}
+  el.innerHTML=ms.map((m,i)=>`<div class="sc" style="margin-bottom:6px;padding:10px;display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:50%;background:var(--red-glow);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fa-solid fa-user" style="color:var(--red);font-size:12px"></i></div><div style="flex:1;min-width:0"><div style="font-size:11px;font-weight:600">${m.n} <span style="color:var(--amber);font-size:9px">(${m.a} yrs)</span></div><div style="font-size:9px;color:var(--muted)">${m.l} &middot; ${m.dt}</div></div><button onclick="adminDelMissing(${i})" style="padding:4px 10px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:var(--red);border-radius:6px;font-size:9px;cursor:pointer;font-family:inherit"><i class="fa-solid fa-trash"></i></button></div>`).join('');
+}
+window.adminDelMissing=function(i){const ms=JSON.parse(localStorage.getItem('sn_m')||'[]');ms.splice(i,1);localStorage.setItem('sn_m',JSON.stringify(ms));renderAdminMissing(document.getElementById('adminContent'));renderAdminStats();toast('Report deleted')};
+
+function renderAdminContacts(el){
+  const cs=JSON.parse(localStorage.getItem('sn_c')||'[]');
+  if(!cs.length){el.innerHTML='<div style="text-align:center;padding:20px;color:var(--muted)">No saved contacts</div>';return}
+  el.innerHTML=cs.map((c,i)=>`<div class="sc" style="margin-bottom:6px;padding:10px;display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:50%;background:var(--green-glow);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--green);font-weight:700">${c.n.charAt(0)}</div><div style="flex:1;min-width:0"><div style="font-size:11px;font-weight:600">${c.n}</div><div class="mono" style="font-size:9px;color:var(--muted)">${c.p} &middot; ${c.r}</div></div><button onclick="adminDelContact(${i})" style="padding:4px 10px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:var(--red);border-radius:6px;font-size:9px;cursor:pointer;font-family:inherit"><i class="fa-solid fa-trash"></i></button></div>`).join('');
+}
+window.adminDelContact=function(i){const cs=JSON.parse(localStorage.getItem('sn_c')||'[]');cs.splice(i,1);localStorage.setItem('sn_c',JSON.stringify(cs));renderAdminContacts(document.getElementById('adminContent'));renderAdminStats();toast('Contact deleted')};
+
+function renderAdminAlerts(el){
+  const alerts=JSON.parse(localStorage.getItem('sn_alerts')||'[]');
+  const sevC={critical:'var(--red)',warning:'var(--amber)',info:'var(--cyan)'};
+  el.innerHTML=`<div style="margin-bottom:10px"><button onclick="showAddAlert();go('alerts')" class="fbtn" style="background:var(--green);color:#fff;border-color:var(--green)"><i class="fa-solid fa-plus"></i> Create Alert (Alerts tab)</button></div>`+(alerts.length?alerts.map((a,i)=>`<div class="sc" style="margin-bottom:6px;padding:10px"><div style="display:flex;justify-content:space-between;align-items:center"><div><span class="alert-sev" style="background:${sevC[a.sev]}20;color:${sevC[a.sev]};border:1px solid ${sevC[a.sev]}40">${a.sev}</span> <span style="font-size:11px;font-weight:600;margin-left:6px">${a.title}</span></div><button onclick="adminDelAlert(${i})" style="padding:4px 8px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:var(--red);border-radius:6px;font-size:9px;cursor:pointer"><i class="fa-solid fa-trash"></i></button></div><div style="font-size:9px;color:var(--muted);margin-top:4px">${a.src} &middot; ${new Date(a.ts).toLocaleString('en-NP')}</div></div>`).join(''):'<div style="text-align:center;padding:16px;color:var(--muted)">No alerts</div>');
+}
+window.adminDelAlert=function(i){const a=JSON.parse(localStorage.getItem('sn_alerts')||'[]');a.splice(i,1);localStorage.setItem('sn_alerts',JSON.stringify(a));renderAdminAlerts(document.getElementById('adminContent'));renderAdminStats();toast('Alert deleted')};
+
+function renderAdminSystem(el){
+  let storageUsed=0;for(let k in localStorage)storageUsed+=localStorage[k].length*2;
+  const storageMB=(storageUsed/1024/1024).toFixed(2);
+  el.innerHTML=`
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px">
+    <div class="sc" style="padding:10px;text-align:center"><div style="font-size:8px;color:var(--muted);text-transform:uppercase">GPS</div><div style="font-size:12px;font-weight:700;color:${gpsOk?'var(--green)':'var(--red)'};margin-top:2px">${gpsOk?'Active ('+Math.round(uAcc)+'m)':'Inactive'}</div></div>
+    <div class="sc" style="padding:10px;text-align:center"><div style="font-size:8px;color:var(--muted);text-transform:uppercase">Network</div><div style="font-size:12px;font-weight:700;color:${navigator.onLine?'var(--green)':'var(--red)'};margin-top:2px">${navigator.onLine?'Online':'Offline'}</div></div>
+    <div class="sc" style="padding:10px;text-align:center"><div style="font-size:8px;color:var(--muted);text-transform:uppercase">Storage Used</div><div class="mono" style="font-size:12px;font-weight:700;margin-top:2px">${storageMB} MB</div></div>
+    <div class="sc" style="padding:10px;text-align:center"><div style="font-size:8px;color:var(--muted);text-transform:uppercase">Platform</div><div style="font-size:10px;font-weight:600;margin-top:2px">${navigator.userAgent.includes('Mobile')?'Mobile':'Desktop'}</div></div>
+  </div>
+  <div class="sc" style="padding:10px"><div style="font-size:8px;color:var(--muted);text-transform:uppercase;margin-bottom:4px">User Agent</div><div style="font-size:8px;color:var(--text2);word-break:break-all;line-height:1.4">${navigator.userAgent}</div></div>
+  ${gpsOk?`<div class="sc" style="padding:10px;margin-top:6px"><div style="font-size:8px;color:var(--muted);text-transform:uppercase;margin-bottom:4px">GPS Coordinates</div><div class="mono" style="font-size:11px;color:var(--amber)">${uLat.toFixed(6)}, ${uLng.toFixed(6)}</div></div>`:''}`;
+}
+
+function exportData(){
+  const data={contacts:JSON.parse(localStorage.getItem('sn_c')||'[]'),missing:JSON.parse(localStorage.getItem('sn_m')||'[]'),checklist:JSON.parse(localStorage.getItem('sn_ck')||'{}'),alerts:JSON.parse(localStorage.getItem('sn_alerts')||'[]'),logs:JSON.parse(localStorage.getItem('sn_log')||'[]'),aqiHistory:JSON.parse(localStorage.getItem('sn_aqi_hist')||'[]'),exportedAt:new Date().toISOString()};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='CPREC_Nepal_Data_'+new Date().toISOString().split('T')[0]+'.json';a.click();
+  toast('Data exported');logAct('ADMIN','Exported all data');
+}
+function clearAllData(){
+  if(!confirm('Are you sure you want to clear ALL app data? This cannot be undone.'))return;
+  if(!confirm('FINAL WARNING: All contacts, missing reports, alerts, and logs will be permanently deleted.'))return;
+  ['sn_c','sn_m','sn_ck','sn_alerts','sn_log','sn_aqi_hist'].forEach(k=>localStorage.removeItem(k));
+  renderAdminStats();adminTab('logs',document.querySelector('.admin-tab.active'));
+  toast('All data cleared');logAct('ADMIN','Cleared all data');
+}
+
+// ===== THEME =====
+function toggleTheme(){const cur=document.documentElement.getAttribute('data-theme')||'dark';const nxt=cur==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',nxt);localStorage.setItem('sn_theme',nxt);updThemeIcon();if(nMap){nMap.eachLayer(l=>{if(l._nm)nMap.removeLayer(l)});if(gpsOk)loadNearby(nType)}logAct('THEME','Switched to '+nxt+' mode')}
+function updThemeIcon(){const t=document.documentElement.getAttribute('data-theme')||'dark';document.getElementById('themeIcon').className=t==='dark'?'fa-solid fa-moon':'fa-solid fa-sun'}
 
 // ===== UTILS =====
 function npt(){const n=new Date();const u=n.getTime()+n.getTimezoneOffset()*60000;const np=new Date(u+345*60000);return`${String(np.getHours()).padStart(2,'0')}:${String(np.getMinutes()).padStart(2,'0')} NPT`}
 function toast(m){const t=document.getElementById('toast');document.getElementById('toastMsg').textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2500)}
 function updClock(){document.getElementById('clock').textContent=npt();const o=navigator.onLine;document.getElementById('netD').className=`sdot ${o?'on':'off'}`;document.getElementById('netT').textContent=o?'Online':'Offline'}
 
-document.addEventListener('DOMContentLoaded',()=>{updClock();setInterval(updClock,10000);initGPS();window.addEventListener('online',()=>{toast('Back online');updClock()});window.addEventListener('offline',()=>{toast('Offline');updClock()})});
+document.addEventListener('DOMContentLoaded',()=>{
+  // Restore theme
+  const savedTheme=localStorage.getItem('sn_theme')||'dark';document.documentElement.setAttribute('data-theme',savedTheme);updThemeIcon();
+  updClock();setInterval(updClock,10000);
+  // Restore admin session
+  if(sessionStorage.getItem('sn_admin')==='1'){adminAuth=true;document.getElementById('adminLogin').style.display='none';document.getElementById('adminDash').style.display='block'}
+  // Initialize alerts with defaults
+  initAlerts();
+  initGPS();
+  window.addEventListener('online',()=>{toast('Back online');updClock()});
+  window.addEventListener('offline',()=>{toast('Offline');updClock()});
+  // Update last refresh time
+  document.getElementById('lastR').textContent='v2.0 Enhanced';
+});
 </script>
 </body>
 </html>
